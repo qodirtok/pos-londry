@@ -16,7 +16,7 @@ touch database/database.sqlite
 php artisan migrate --force
 php artisan db:seed --force            # dev: ProductionSeeder + DemoSeeder (full, idempotent)
 php artisan serve --host=127.0.0.1 --port=8010
-# buka http://127.0.0.1:8010/login  (hanya akun DEMO tampil di halaman login)
+# buka http://127.0.0.1:8010/login  (form login bersih, tanpa info akun demo — login manual username/email + password)
 ```
 
 **Akun seed (idempotent, `firstOrCreate`):**
@@ -27,13 +27,13 @@ php artisan serve --host=127.0.0.1 --port=8010
 | Admin toko 1 | `admin` / `admin@londry.test` | `password` | LONDRY-001 | MLG | Owner toko 1 |
 | Kasir toko 1 | `kasir` | `password` | LONDRY-001 | MLG | |
 | Admin toko 2 | `admin_toko2` / `admin2@londry.test` | `password` | TOKO-002 | SBY2 | Owner toko 2 |
-| Demo Admin | `demo_admin` / `demo.admin@londry.test` | `demo123` | LONDRY-001 | DEMO | `is_demo=1`, tampil di login |
+| Demo Admin | `demo_admin` / `demo.admin@londry.test` | `demo123` | LONDRY-001 | DEMO | `is_demo=1` |
 | Demo Kasir | `demo_kasir` | `demo123` | LONDRY-001 | DEMO | `is_demo=1` |
 | Walk-in prod | `CUST-000000` Walk-in Customer | - | LONDRY-001 | MLG | |
 | Walk-in demo | `DEMO-000000` Walk-in DEMO | - | LONDRY-001 | DEMO | |
 | Walk-in toko2 | `CUST-TOKO2-001` Customer Toko2 | - | TOKO-002 | SBY2 | |
 
-Login page **hanya tampil akun DEMO** (`resources/views/auth/login.blade.php` card amber) + tombol `Isi Demo Admin/Kasir` auto-fill. Akun produksi & super admin tidak ditampilkan, login manual ketik `super_admin / password`.
+Halaman login **bersih tanpa info akun demo** (`resources/views/auth/login.blade.php` hanya form username/email + password). Akun demo tetap ada di DB untuk testing, tapi tidak ditampilkan di UI — login manual ketik username + password (mis. `demo_admin / demo123`, `super_admin / password`).
 
 **Seeder untuk push ke home server (PENTING — data dummy tidak ikut prod):**
 
@@ -54,7 +54,7 @@ Order dummy via `verify_*.php` manual **bukan dari seeder** — tidak ada seeder
 
 **Ganti ke PostgreSQL (prod):** di `.env` set `DB_CONNECTION=pgsql`, `DB_HOST`, `DB_PORT=5432`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`. Schema sudah kompatibel (DECIMAL, FK, JSON, `merchant_id` FK, unique per merchant). Tidak perlu ubah migration.
 
-**View cache:** habis edit Blade jalankan `php artisan view:clear`.
+**View/config/route cache (production):** `php artisan optimize` (config+routes), `php artisan view:cache` + `php artisan event:cache`. Habis edit Blade/config/routes di production wajib re-cache; di dev cukup `php artisan view:clear` / `php artisan optimize:clear`.
 
 **Merchant switch:** `GET /switch-merchant/{id}` (hanya Admin). Sidebar tampil `Merchant / Toko` dropdown jika >1 merchant (super admin lihat semua, admin toko difilter), `Cabang Aktif` difilter per merchant.
 
@@ -122,7 +122,7 @@ londry/
 ├── resources/views/
 │   ├── layouts/app.blade.php      # sidebar lg:flex, drawer mobile; Merchant/Toko switch + Cabang Aktif per merchant
 │   ├── layouts/guest.blade.php    # guest
-│   ├── auth/login.blade.php       # HANYA card DEMO (amber) + fillLogin() — prod/super tidak tampil
+│   ├── auth/login.blade.php       # form login bersih (tanpa card demo)
 │   ├── merchants/{index,create,edit}.blade.php  # CRUD merchant
 │   ├── pos/index.blade.php        # POS utama + panel Rincian Laundry collapsed (list vertical) + status Baru/Selesai
 │   ├── orders/show.blade.php      # detail order + rincian dinamis + bar Aksi Struk (Cetak/WA/Close/Cetak&WA)
@@ -130,7 +130,7 @@ londry/
 │   ├── orders/print.blade.php     # sync dari receipt
 │   ├── laundry-types/index.blade.php # kelola jenis rincian
 │   ├── dashboard.blade.php, products/*, customers/*, branches/*, users/*, cash/*, shifts/*, reports/*, settings/*
-├── routes/web.php                 # ~80 routes (lihat §5)
+├── routes/web.php                 # ~80 routes (lihat §5) — uri customers-search/products-search sebelum resource customers agar tidak shadowing; /customers/{customer}/show dihapus (duplikat resource)
 └── config/app.php                 # timezone Asia/Jakarta
 ```
 
@@ -380,7 +380,7 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 - Demo order `DEMO-... is_demo=1`, prod `MLG-... is_demo=0`, cross 403 ✅
 - POS status Baru `received` vs Selesai `ready` ✅
 - WA `https://web.whatsapp.com/send?phone=62...&text=Halo... STRUK LAUNDRY ... TOTAL` via `web.whatsapp.com` ✅
-- Login hanya DEMO, button `Isi Demo Admin/Kasir` ada ✅
+- Login form bersih tanpa card demo (`resources/views/auth/login.blade.php` hanya form) ✅ (sebelumnya card amber demo)
 - Receipt tanpa cabang: hanya `Company name` + `No/Tgl/Kasir/Cust` ✅
 - `GET /login 200`, `GET /pos 200`, `GET /dashboard 200` (serve :8010) ✅
 - `php -l` semua seeders/controllers/models OK, `view:clear` OK.
@@ -394,7 +394,7 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 3. `app/Services/OrderService.php` — inti transaksi (laundry_details + order_status + merchant_id)
 4. `app/Models/Merchant.php` + `Order.php` + `LaundryItemType.php` + `Category.php` + `Product.php`
 5. `resources/views/pos/index.blade.php` — POS (list vertical + Baru/Selesai button + dropdown rincian per merchant)
-6. `resources/views/auth/login.blade.php` — hanya DEMO
+6. `resources/views/auth/login.blade.php` — form login bersih (tanpa card demo)
 7. `resources/views/orders/receipt.blade.php` — struk tanpa cabang + RINCIAN LAUNDRY dinamis
 8. `app/Services/WhatsappService.php` + `OrderController@sendWhatsapp` — direk web.whatsapp.com
 9. `database/seeders/ProductionSeeder.php` + `DemoSeeder.php` + `MerchantSeeder.php`
@@ -414,7 +414,7 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 | View tidak update habis edit | `php artisan view:clear` + hard refresh `Cmd+Shift+R` |
 | Port 8010 bentrok | `lsof -i :8010` kill atau `php artisan serve --port=8011` |
 | Seeder demo ikut ke produksi | Di server prod jangan `db:seed` (full), pakai `db:seed --class=ProductionSeeder` saja |
-| Login tidak ada akun prod | Memang disembunyikan — prod login manual ketik `admin/password`, `kasir/password`, `super_admin/password` |
+| Login tidak ada akun prod | Login manual ketik `admin/password`, `kasir/password`, `super_admin/password` — login tidak tampilkan info akun |
 | Struk masih tampil cabang | `receipt.blade.php` sudah hapus — `view:clear`, cek bukan cache `print.blade.php` |
 | `UNIQUE constraint failed: categories.code` | Sudah diperbaiki 000023: unique jadi `(code,merchant_id)` — `php artisan migrate --force` |
 | Toko baru tidak ada produk/kategori | Merchant baru auto-seed via `MerchantController@store`; untuk tinker lama jalankan `php artisan migrate` akan backfill TOKO-002 |
@@ -423,4 +423,4 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 
 ---
 
-*Last updated: 2026-08-31 (merchant per toko isolasi penuh — kategori/produk/laundry/setting/cash per merchant, unique per merchant, super_admin global) — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*
+*Last updated: 2026-08-31 (hapus card demo login + fix duplikat route customers.show untuk production route:cache + optimize/view/event cache — merchant per toko isolasi penuh) — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*
