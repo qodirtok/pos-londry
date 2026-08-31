@@ -1,7 +1,7 @@
 # Handover — Londry POS Laundry (Laravel 10, PHP 8.1)
 
 > Ringkasan struktur, progress, dan guideline untuk penerus. Spec sumber: `pos-laundry.md` (55 section).
-> Stack: Laravel 10 • PHP 8.1 • SQLite (dev) / PostgreSQL (prod) • Tailwind CDN (tanpa build) • Blade
+> Stack: Laravel 10 • PHP 8.1 • SQLite (dev) / PostgreSQL (prod) • Tailwind via Vite • Blade • PWA (manifest + Service Worker + offline) — build via `nvm use 24 && npm run build`
 
 ---
 
@@ -55,6 +55,10 @@ Order dummy via `verify_*.php` manual **bukan dari seeder** — tidak ada seeder
 **Ganti ke PostgreSQL (prod):** di `.env` set `DB_CONNECTION=pgsql`, `DB_HOST`, `DB_PORT=5432`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`. Schema sudah kompatibel (DECIMAL, FK, JSON, `merchant_id` FK, unique per merchant). Tidak perlu ubah migration.
 
 **View/config/route cache (production):** `php artisan optimize` (config+routes), `php artisan view:cache` + `php artisan event:cache`. Habis edit Blade/config/routes di production wajib re-cache; di dev cukup `php artisan view:clear` / `php artisan optimize:clear`.
+
+**Build frontend (Vite + Tailwind):** `bash -lc 'source ~/.nvm/nvm.sh; nvm use 24; npm run build'` (output `public/build/assets/app-*.css` ~32KB gzip 6KB + `app-*.js` ~51KB gzip 19KB). `public/build` gitignored — build di server saat deploy. Dev: `bash -lc 'source ~/.nvm/nvm.sh; nvm use 24; npm run dev'` (HMR).
+
+**PWA:** `public/manifest.webmanifest` (icons 72-512), `public/sw.js` (cache `londry-v1`, precache offline/manifest/icons; assets cache-first, nav network-first + offline fallback), `public/icons/icon-*x*.png` + `public/apple-touch-icon.png`, `resources/views/offline.blade.php`, `resources/js/pwa.js` (register via `app.js`). Nginx `pwa.conf` + `mime.types webmanifest` sudah terpasang. Verifikasi: `curl -I https://pos.azelsq.my.id/manifest.webmanifest` → `application/manifest+json`, `/sw.js` → `application/javascript`.
 
 **Merchant switch:** `GET /switch-merchant/{id}` (hanya Admin). Sidebar tampil `Merchant / Toko` dropdown jika >1 merchant (super admin lihat semua, admin toko difilter), `Cabang Aktif` difilter per merchant.
 
@@ -120,9 +124,10 @@ londry/
 │       ├── SettingsSeeder.php     # payment_methods + cash_categories + laundry defaults + settings (per merchant)
 │       └── LaundryItemTypeSeeder.php
 ├── resources/views/
-│   ├── layouts/app.blade.php      # sidebar lg:flex, drawer mobile; Merchant/Toko switch + Cabang Aktif per merchant
-│   ├── layouts/guest.blade.php    # guest
+│   ├── layouts/app.blade.php      # sidebar lg:flex, drawer mobile; Merchant/Toko switch + Cabang Aktif per merchant; @vite + manifest/apple-touch-icon
+│   ├── layouts/guest.blade.php    # guest; @vite + manifest/apple-touch-icon
 │   ├── auth/login.blade.php       # form login bersih (tanpa card demo)
+│   ├── offline.blade.php          # offline fallback untuk PWA (precached oleh sw.js)
 │   ├── merchants/{index,create,edit}.blade.php  # CRUD merchant
 │   ├── pos/index.blade.php        # POS utama + panel Rincian Laundry collapsed (list vertical) + status Baru/Selesai
 │   ├── orders/show.blade.php      # detail order + rincian dinamis + bar Aksi Struk (Cetak/WA/Close/Cetak&WA)
@@ -130,7 +135,18 @@ londry/
 │   ├── orders/print.blade.php     # sync dari receipt
 │   ├── laundry-types/index.blade.php # kelola jenis rincian
 │   ├── dashboard.blade.php, products/*, customers/*, branches/*, users/*, cash/*, shifts/*, reports/*, settings/*
-├── routes/web.php                 # ~80 routes (lihat §5) — uri customers-search/products-search sebelum resource customers agar tidak shadowing; /customers/{customer}/show dihapus (duplikat resource)
+├── routes/web.php                 # ~80 routes (lihat §5) — uri customers-search/products-search sebelum resource customers agar tidak shadowing; /customers/{customer}/show dihapus (duplikat resource); + GET /offline, /manifest.webmanifest, /sw.js untuk PWA
+├── public/
+│   ├── manifest.webmanifest       # PWA manifest (short_name Londry, icons 72-512, shortcuts POS/Orders/Dashboard, theme #4f46e5)
+│   ├── sw.js                      # Service Worker londry-v1 (assets cache-first, nav network-first + offline, api network-first)
+│   ├── icons/icon-*x*.png         # 9 PNG (72-512 + 180, PHP GD, rounded 22% #4f46e5 + L)
+│   ├── apple-touch-icon.png       # iOS
+│   └── build/assets/app-*.{css,js} # Vite build (gitignored) — css ~32KB js ~51KB
+├── resources/
+│   ├── css/app.css                # @tailwind base/components/utilities
+│   ├── js/app.js + pwa.js         # bootstrap + SW register (secure context)
+│   ├── tailwind.config.js         # content resources/**/*.{blade,js,vue}
+│   └── postcss.config.js          # tailwind + autoprefixer
 └── config/app.php                 # timezone Asia/Jakarta
 ```
 
@@ -193,6 +209,7 @@ GET  /cash, GET /cash/create, POST /cash
 GET  /shifts, POST /shifts/open, POST /shifts/{shift}/close
 GET  /reports, /reports/sales, /payments, /cash, /products, /customers, /laundry
 GET  /settings, POST /settings
+GET  /offline, GET /manifest.webmanifest, GET /sw.js  # PWA (offline page, manifest, service worker)
 GET  /api/laundry-types, POST /api/laundry-types, DELETE /api/laundry-types/{id}
 GET  /laundry-types, POST /laundry-types, DELETE /laundry-types/{id}
 ```
@@ -263,6 +280,13 @@ Verifikasi: TOKO-002 katalog tidak terlihat di LONDRY-001 dan sebaliknya; POS pr
 
 ### F. Responsive (HP/Tablet/Laptop)
 - `layouts/app.blade.php` sidebar `hidden lg:flex` 260px, drawer mobile, bottom nav 5 tab, `viewport-fit=cover`. POS `flex-col lg:flex-row`, laundry list vertical, tables `overflow-x-auto min-w-[520px]` + cards `sm:hidden`. Struk 58/80mm.
+
+### H. PWA (Installable + Offline Shell)
+- **Manifest** `public/manifest.webmanifest`: `display standalone`, `theme #4f46e5`, `background #f8fafc`, icons maskable 72-512, shortcuts POS/Orders/Dashboard.
+- **Service Worker** `public/sw.js` cache `londry-v1`: precache `offline/manifest/icons`; `build/icons/manifest` → cache-first, navigations → network-first + offline fallback, `/api/*` → network-first. Update via `skipWaiting` + `clients.claim`.
+- **Layouts** `@vite` + `<link rel=manifest>` + `apple-touch-icon` + `theme-color`; `pwa.js` register hanya `https`/`localhost`.
+- **Infra:** Vite build `nvm use 24 npm run build` (Tailwind via PostCSS), `public/build` gitignored; Nginx `pwa.conf` types `webmanifest` + `location = /sw.js` `no-cache`.
+- **Offline page** `GET /offline` (guest layout).
 
 ### G. Order / Payment / Stock / Cash
 - **NumberGenerator:** `MLG-YYYYMMDD-000001` / `SBY2-...` / `DEMO-...` per cabang, `PAY-...`, `CUST-...`.
@@ -383,6 +407,10 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 - Login form bersih tanpa card demo (`resources/views/auth/login.blade.php` hanya form) ✅ (sebelumnya card amber demo)
 - Receipt tanpa cabang: hanya `Company name` + `No/Tgl/Kasir/Cust` ✅
 - `GET /login 200`, `GET /pos 200`, `GET /dashboard 200` (serve :8010) ✅
+- PWA installable: `manifest.webmanifest` 200 `application/manifest+json`, `sw.js` 200 `application/javascript` no-cache, `/offline` 200, `login` render `@vite` + manifest/icons, `GET /offline` via guest layout ✅
+- Vite build `nvm use 24 npm run build` css 32KB gzip 6KB js 51KB gzip 19KB, `@vite` di `app/guest` layouts (hapus `cdn.tailwindcss.com`) ✅
+- Icons `public/icons/icon-*` 72-512 PNG (PHP GD, maskable) + `apple-touch-icon.png` ✅
+- Nginx `pwa.conf` + global `mime.types webmanifest`, `php artisan about` production CACHED (config/route/view/event) ✅
 - `php -l` semua seeders/controllers/models OK, `view:clear` OK.
 
 ---
@@ -390,16 +418,17 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 ## 10) File Penting untuk Dibaca Dulu
 
 1. `pos-laundry.md` — spec
-2. `routes/web.php` — peta fitur (+ merchants, switch-merchant)
+2. `routes/web.php` — peta fitur (+ merchants, switch-merchant; + PWA /offline, /manifest.webmanifest, /sw.js)
 3. `app/Services/OrderService.php` — inti transaksi (laundry_details + order_status + merchant_id)
 4. `app/Models/Merchant.php` + `Order.php` + `LaundryItemType.php` + `Category.php` + `Product.php`
 5. `resources/views/pos/index.blade.php` — POS (list vertical + Baru/Selesai button + dropdown rincian per merchant)
-6. `resources/views/auth/login.blade.php` — form login bersih (tanpa card demo)
+6. `resources/views/auth/login.blade.php` — form login bersih (tanpa card demo) + guest layout `@vite`
 7. `resources/views/orders/receipt.blade.php` — struk tanpa cabang + RINCIAN LAUNDRY dinamis
 8. `app/Services/WhatsappService.php` + `OrderController@sendWhatsapp` — direk web.whatsapp.com
-9. `database/seeders/ProductionSeeder.php` + `DemoSeeder.php` + `MerchantSeeder.php`
-10. `database/migrations/2024_01_01_000020_create_merchants_and_add_merchant_id.php` + `000021` + `000022` + `000023`
-11. `app/Http/Controllers/MerchantController.php` + `app/Http/Middleware/MerchantContext.php`
+9. `public/manifest.webmanifest` + `public/sw.js` + `public/icons/` + `resources/js/pwa.js` — PWA
+10. `database/seeders/ProductionSeeder.php` + `DemoSeeder.php` + `MerchantSeeder.php`
+11. `database/migrations/2024_01_01_000020_create_merchants_and_add_merchant_id.php` + `000021` + `000022` + `000023`
+12. `app/Http/Controllers/MerchantController.php` + `app/Http/Middleware/MerchantContext.php`
 
 ---
 
@@ -420,7 +449,11 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 | Toko baru tidak ada produk/kategori | Merchant baru auto-seed via `MerchantController@store`; untuk tinker lama jalankan `php artisan migrate` akan backfill TOKO-002 |
 | Admin toko lihat data toko lain | Seharusnya tidak — semua controller sudah `when merchant_id`; cek `auth()->user()->merchant_id` terisi, `MerchantContext` aktif di Kernel web group |
 | Tidak bisa buat merchant | Hanya `super_admin` (merchant_id NULL) bisa `+ Merchant`; admin toko (`merchant_id terisi`) akan 403 |
+| PWA tidak installable | Cek `https`, `manifest.webmanifest` `application/manifest+json`, `sw.js` ter-register di DevTools Application → Manifest/Service Workers |
+| `Vite manifest not found` | Jalankan `bash -lc 'source ~/.nvm/nvm.sh; nvm use 24; npm run build'` di server, `public/build` gitignored |
+| `sw.js` 404 atau MIME salah | Cek `public/sw.js` ada, Nginx `pwa.conf` + `mime.types webmanifest` terpasang, `curl -I https://pos.azelsq.my.id/sw.js` |
+| Offline tidak muncul | `GET /offline` harus 200 (guest), `sw.js` precache `OFFLINE_URL`, buka DevTools → offline checkbox |
 
 ---
 
-*Last updated: 2026-08-31 (hapus card demo login + fix duplikat route customers.show untuk production route:cache + optimize/view/event cache — merchant per toko isolasi penuh) — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*
+*Last updated: 2026-08-31 (PWA installable + offline shell — Tailwind via Vite, manifest + SW londry-v1, icons, @vite layouts, nginx pwa.conf — plus hapus card demo & fix route:cache) — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*

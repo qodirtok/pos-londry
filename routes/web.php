@@ -17,6 +17,9 @@ use App\Http\Controllers\LaundryItemTypeController;
 use App\Http\Controllers\MerchantController;
 
 Route::get('/', fn()=> redirect('/dashboard'));
+Route::view('/offline', 'offline')->name('offline');
+Route::get('/manifest.webmanifest', fn() => response()->file(public_path('manifest.webmanifest'), ['Content-Type'=>'application/manifest+json']))->name('pwa.manifest');
+Route::get('/sw.js', fn() => response()->file(public_path('sw.js'), ['Content-Type'=>'application/javascript','Cache-Control'=>'no-cache']))->name('pwa.sw');
 Route::get('/login', [AuthController::class,'showLogin'])->name('login');
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/logout', [AuthController::class,'logout'])->name('logout');
