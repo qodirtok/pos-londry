@@ -34,10 +34,9 @@ Route::middleware(['auth'])->group(function(){
     });
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('customers', CustomerController::class);
     Route::get('/customers-search', [CustomerController::class,'search'])->name('customers.search');
     Route::get('/products-search', [ProductController::class,'search'])->name('products.search');
-    Route::get('/customers/{customer}/show', [CustomerController::class,'show'])->name('customers.show');
+    Route::resource('customers', CustomerController::class);
 
     // POS
     Route::get('/pos', [PosController::class,'index'])->name('pos.index');
