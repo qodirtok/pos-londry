@@ -1,0 +1,8 @@
+@extends('layouts.app')
+@section('title','Merchant')
+@section('content')
+<div class="flex justify-between items-center mb-4"><h1 class="text-xl font-bold">Merchant / Toko</h1><a href="{{ route('merchants.create') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm">+ Merchant</a></div>
+@if(session('success'))<div class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl text-sm mb-3">{{ session('success') }}</div>@endif
+@if(session('error'))<div class="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-sm mb-3">{{ session('error') }}</div>@endif
+<div class="bg-white rounded-2xl border overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-slate-50 text-slate-500"><tr><th class="text-left p-3">Kode</th><th class="text-left">Nama</th><th class="text-left">Kota</th><th>Status</th><th></th></tr></thead><tbody>@foreach($merchants as $m)<tr class="border-t hover:bg-slate-50"><td class="p-3 font-mono text-xs">{{ $m->code }}</td><td class="font-medium">{{ $m->name }}<div class="text-xs text-slate-400">{{ $m->slug }}</div></td><td>{{ $m->city ?? '-' }}</td><td class="text-center"><span class="px-2 py-1 rounded-full text-xs {{ $m->status=='active'?'bg-emerald-100 text-emerald-700':'bg-slate-100' }}">{{ $m->status }}</span></td><td class="text-right p-3 flex justify-end gap-2"><a href="{{ route('merchants.edit',$m) }}" class="text-indigo-600 text-xs">Edit</a><form method="POST" action="{{ route('merchants.destroy',$m) }}" onsubmit="return confirm('Hapus merchant?')">@csrf @method('DELETE')<button class="text-rose-600 text-xs">Hapus</button></form></td></tr>@endforeach</tbody></table></div><div class="p-3">{{ $merchants->links() }}</div></div>
+@endsection
