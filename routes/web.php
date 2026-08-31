@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/orders/{order}/status', [OrderController::class,'updateStatus'])->name('orders.status');
     Route::post('/orders/{order}/cancel', [OrderController::class,'cancel'])->name('orders.cancel');
     Route::post('/orders/{order}/payment', [OrderController::class,'addPayment'])->name('orders.payment');
+    Route::post('/orders/{order}/customer', [OrderController::class,'updateCustomer'])->name('orders.customer');
 
     // Cash & Shift
     Route::get('/cash', [CashController::class,'index'])->name('cash.index');

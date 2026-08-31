@@ -31,7 +31,12 @@ class CustomerController extends Controller {
         $customer->update($r->only(['name','phone','email','address','notes','status']));
         return redirect()->route('customers.index')->with('success','Customer diupdate');
     }
-    public function destroy(Customer $customer){ $isDemo=(bool)auth()->user()->is_demo; if((bool)$customer->is_demo!==$isDemo) abort(403); $customer->delete(); return back()->with('success','Dihapus'); }
+    public function destroy(Customer $customer){
+        $isDemo=(bool)auth()->user()->is_demo; if((bool)$customer->is_demo!==$isDemo) abort(403);
+        if($customer->phone==='000000') return back()->with('error','Walk-in tidak bisa dihapus');
+        if(\App\Models\Order::where('customer_id',$customer->id)->exists()) return back()->with('error','Customer masih punya order, tidak bisa dihapus (nonaktifkan saja)');
+        $customer->delete(); return back()->with('success','Dihapus');
+    }
     // API for POS search
     public function search(Request $r){
         $branchId = session('branch_id');

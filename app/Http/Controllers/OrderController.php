@@ -52,6 +52,22 @@ class OrderController extends Controller {
         $svc->addPayment($order, $r->only(['amount','payment_method','reference_number','notes']), auth()->user());
         return back()->with('success','Pembayaran ditambahkan');
     }
+    public function updateCustomer(Request $r, Order $order){
+        $this->assertOrderAccess($order);
+        if(in_array($order->order_status, ['picked_up','cancelled'])){
+            return back()->with('error','Order sudah '.$order->order_status.' tidak bisa ganti customer');
+        }
+        $r->validate(['customer_id'=>'required|exists:customers,id']);
+        $customer = \App\Models\Customer::findOrFail($r->customer_id);
+        $isDemo = (bool)auth()->user()->is_demo;
+        if((bool)$customer->is_demo !== $isDemo) abort(403,'Customer bukan milik demo/production Anda');
+        $mid = auth()->user()->merchant_id;
+        if($mid && (int)$customer->merchant_id !== (int)$mid) abort(403,'Customer bukan merchant Anda');
+        $old = $order->customer_id;
+        $order->update(['customer_id'=>$customer->id]);
+        try{ \App\Support\AuditLogger::log('update_customer','orders','Order',$order->id, ['customer_id'=>$old], ['customer_id'=>$customer->id]); }catch(\Throwable $e){}
+        return back()->with('success','Customer diganti ke '.$customer->name);
+    }
     public function sendWhatsapp(Request $r, Order $order, WhatsappService $wa){
         $this->assertOrderAccess($order);
         $order->load(['items','customer','branch','cashier']);

@@ -3,7 +3,36 @@
 @section('content')
 <div class="flex flex-col gap-3 mb-4">
   <div class="flex flex-wrap items-start justify-between gap-3">
-    <div class="min-w-0"><h1 class="text-base sm:text-xl font-bold font-mono truncate">{{ $order->order_number }}</h1><p class="text-xs sm:text-sm text-slate-500 truncate">{{ $order->branch->name }} • {{ $order->order_date->format('d M Y') }} • Kasir: {{ $order->cashier->name }}</p><p class="text-sm mt-1">Customer: <b>{{ $order->customer->name ?? 'Walk-in' }}</b> <span class="text-slate-500">{{ $order->customer->phone ?? '' }}</span></p></div>
+    <div class="min-w-0"><h1 class="text-base sm:text-xl font-bold font-mono truncate">{{ $order->order_number }}</h1><p class="text-xs sm:text-sm text-slate-500 truncate">{{ $order->branch->name }} • {{ $order->order_date->format('d M Y') }} • Kasir: {{ $order->cashier->name }}</p>
+    <div class="mt-1 flex flex-wrap items-center gap-2 text-sm">
+      <span>Customer: <b id="orderCustName">{{ $order->customer->name ?? 'Walk-in' }}</b> <span class="text-slate-500">{{ $order->customer->phone ?? '' }} @if($order->customer) • {{ $order->customer->code }} @endif</span></span>
+      @if(!in_array($order->order_status, ['picked_up','cancelled']))
+        <button type="button" onclick="toggleOrderCustomerForm()" class="text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">✏️ Ganti</button>
+      @endif
+    </div>
+    @if(!in_array($order->order_status, ['picked_up','cancelled']))
+    <div id="orderCustomerForm" class="hidden mt-2 bg-white border border-indigo-200 rounded-xl p-3 max-w-md">
+      <form method="POST" action="{{ route('orders.customer', $order) }}" onsubmit="if(!document.getElementById('order_customer_id').value){ alert('Pilih customer dulu'); return false; } return confirm('Ganti customer ke yang dipilih?')">
+        @csrf
+        <input type="hidden" name="customer_id" id="order_customer_id" value="">
+        <label class="text-xs font-semibold text-slate-600">Cari customer (nama / HP / kode)</label>
+        <div class="relative mt-1">
+          <input id="orderCustomerSearch" type="text" placeholder="Ketik nama atau HP" autocomplete="off" class="w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+          <div id="orderCustomerResults" class="absolute z-20 w-full bg-white border border-slate-200 rounded-xl shadow-xl mt-1 hidden max-h-48 overflow-y-auto"></div>
+        </div>
+        <div id="orderCustomerSelected" class="hidden mt-2 bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2 text-sm flex justify-between items-center gap-2">
+          <span><b id="orderSelectedName">-</b> <span id="orderSelectedPhone" class="text-slate-500"></span></span>
+          <button type="button" onclick="clearOrderCustomerSel()" class="w-7 h-7 grid place-items-center rounded-full hover:bg-white text-slate-500">×</button>
+        </div>
+        <div class="mt-2 flex gap-2">
+          <button class="flex-1 bg-indigo-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold">Simpan Customer</button>
+          <button type="button" onclick="toggleOrderCustomerForm()" class="px-4 py-2.5 border border-slate-200 rounded-xl text-sm">Batal</button>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-2">Hanya bisa diganti selama status belum <b>picked_up</b> / cancelled.</p>
+      </form>
+    </div>
+    @endif
+    </div>
     <div class="flex flex-wrap gap-2 w-full sm:w-auto">
       <a href="{{ route('orders.print',$order) }}" target="_blank" class="flex-1 sm:flex-none text-center border border-slate-200 bg-white px-4 py-3 sm:py-2 rounded-xl text-sm font-medium">🖨️ Cetak</a>
       <a href="{{ route('orders.receipt',$order) }}" target="_blank" class="flex-1 sm:flex-none text-center border border-slate-200 bg-white px-4 py-3 sm:py-2 rounded-xl text-sm font-medium">🧾 Struk</a>
@@ -84,4 +113,32 @@
   <p class="text-[11px] text-slate-500 mt-2 text-center">Cetak: buka tab print • WA: kirim link wa.me (atau API jika dikonfigurasi) • Cetak & WA: buka cetak lalu kirim WA</p>
 </div>
 @endif
+@push('scripts')
+@if(!in_array($order->order_status, ['picked_up','cancelled']))
+<script>
+function toggleOrderCustomerForm(){ let el=document.getElementById('orderCustomerForm'); el.classList.toggle('hidden'); if(!el.classList.contains('hidden')) document.getElementById('orderCustomerSearch').focus(); }
+function clearOrderCustomerSel(){ document.getElementById('order_customer_id').value=''; document.getElementById('orderCustomerSelected').classList.add('hidden'); document.getElementById('orderCustomerSearch').value=''; }
+function selectOrderCustomer(id,name,phone){ document.getElementById('order_customer_id').value=id; document.getElementById('orderSelectedName').textContent=name; document.getElementById('orderSelectedPhone').textContent=phone; document.getElementById('orderCustomerSelected').classList.remove('hidden'); document.getElementById('orderCustomerResults').classList.add('hidden'); document.getElementById('orderCustomerSearch').value=''; }
+let ocTimer=null;
+let ocEl=document.getElementById('orderCustomerSearch');
+let ocBox=document.getElementById('orderCustomerResults');
+if(ocEl){
+  ocEl.addEventListener('input', function(){
+    let q=this.value.trim(); if(!q){ ocBox.classList.add('hidden'); return; }
+    clearTimeout(ocTimer);
+    ocTimer=setTimeout(()=>{
+      fetch('/customers-search?q='+encodeURIComponent(q)).then(r=>r.json()).then(data=>{
+        if(!data.length){ ocBox.innerHTML='<div class="p-3 text-sm text-slate-400">Tidak ditemukan</div>'; ocBox.classList.remove('hidden'); return; }
+        ocBox.innerHTML = data.map(c=> '<button type="button" onclick="selectOrderCustomer('+c.id+',\''+c.name.replace(/\'/g,'&#39;')+'\',\''+(c.phone||'')+'\')" class="w-full text-left px-3 py-2.5 hover:bg-slate-50 text-sm border-b last:border-0"><b>'+c.name+'</b><br><span class="text-slate-500 text-xs">'+(c.phone||'-')+' • '+c.code+'</span></button>').join('');
+        ocBox.classList.remove('hidden');
+      });
+    },250);
+  });
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('#orderCustomerSearch') && !e.target.closest('#orderCustomerResults')) ocBox.classList.add('hidden');
+  });
+}
+</script>
+@endif
+@endpush
 @endsection

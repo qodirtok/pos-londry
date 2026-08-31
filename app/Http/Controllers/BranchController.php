@@ -30,5 +30,11 @@ class BranchController extends Controller {
         $this->authorizeBranch($branch); $branch->update($r->only(['code','name','phone','email','address','city','province','postal_code','status']));
         return redirect()->route('branches.index')->with('success','Cabang diupdate');
     }
-    public function destroy(Branch $branch){ $this->authorizeBranch($branch); $branch->delete(); return back()->with('success','Dihapus'); }
+    public function destroy(Branch $branch){
+        $this->authorizeBranch($branch);
+        if(\App\Models\Order::where('branch_id',$branch->id)->exists()) return back()->with('error','Cabang masih punya order, tidak bisa dihapus');
+        if(\App\Models\Customer::where('branch_id',$branch->id)->exists()) return back()->with('error','Cabang masih punya customer');
+        if(\App\Models\User::where('branch_id',$branch->id)->exists()) return back()->with('error','Masih ada user terikat cabang ini');
+        $branch->delete(); return back()->with('success','Dihapus');
+    }
 }

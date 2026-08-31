@@ -33,19 +33,20 @@
   {{-- Keranjang kanan: di HP jadi card di bawah, di desktop fixed width --}}
   <div class="w-full lg:w-[400px] xl:w-[420px] bg-white rounded-2xl border flex flex-col overflow-hidden shrink-0">
     <div class="p-3 sm:p-4 border-b space-y-3">
-      <label class="text-[11px] font-bold uppercase tracking-widest text-slate-500">Customer</label>
+      <label class="text-[11px] font-bold uppercase tracking-widest text-slate-500">Customer <span class="text-rose-600">*</span></label>
       <div class="flex gap-2">
         <div class="flex-1 relative min-w-0">
-          <input id="customerSearch" type="text" placeholder="Cari nama / HP" class="w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+          <input id="customerSearch" type="text" placeholder="Cari nama / HP (wajib pilih) *" required class="w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
           <div id="customerResults" class="absolute z-10 w-full bg-white border border-slate-200 rounded-xl shadow-xl mt-1.5 hidden max-h-52 overflow-y-auto"></div>
         </div>
         <a href="{{ route('customers.create') }}" target="_blank" class="shrink-0 px-3 sm:px-4 py-3 bg-slate-900 text-white rounded-xl text-sm font-semibold">+ Baru</a>
       </div>
       <div id="selectedCustomer" class="bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2">
-        <span class="min-w-0 truncate"><b id="custName">Walk-in Customer</b> <span id="custPhone" class="text-slate-500">000000</span></span>
-        <button onclick="clearCustomer()" class="shrink-0 w-7 h-7 grid place-items-center rounded-full hover:bg-white text-slate-500">×</button>
+        <span class="min-w-0 truncate"><b id="custName">— Belum pilih customer —</b> <span id="custPhone" class="text-slate-500"></span></span>
+        <button type="button" onclick="clearCustomer()" class="shrink-0 w-7 h-7 grid place-items-center rounded-full hover:bg-white text-slate-500">×</button>
       </div>
-      <input type="hidden" id="customerId" value="{{ ($customers->firstWhere('phone','000000')->id ?? ($customers->first()->id ?? '')) }}">
+      <p id="customerRequiredHint" class="text-xs text-rose-600 hidden">⚠️ Pilih customer dulu sebelum bayar.</p>
+      <input type="hidden" id="customerId" value="">
     </div>
 
     {{-- Rincian Laundry DINAMIS — collapsed default, dropdown tambah, kosong default --}}
@@ -136,7 +137,15 @@ let laundryTypes = @json($laundryTypes);
 let products = @json($products);
 let productMap = {}; products.forEach(p=> productMap[p.id]=p);
 let cart = [];
-let selectedCustomerId = document.getElementById('customerId').value;
+let selectedCustomerId = document.getElementById('customerId').value || null;
+function updateCustomerRequiredUI(){
+  let hint=document.getElementById('customerRequiredHint');
+  let has = !!selectedCustomerId;
+  if(hint) hint.classList.toggle('hidden', has);
+  let box=document.getElementById('selectedCustomer');
+  if(box) box.className = has ? 'bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2' : 'bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
+}
+updateCustomerRequiredUI();
 
 function addToCart(id){
   let p = productMap[id];
@@ -231,7 +240,7 @@ document.getElementById('customerSearch').addEventListener('input', function(){
   cTimer=setTimeout(()=>{
     fetch('/customers-search?q='+encodeURIComponent(q)).then(r=>r.json()).then(data=>{
       if(!data.length){ box.innerHTML='<div class="p-3 text-sm text-slate-400">Tidak ditemukan</div>'; box.classList.remove('hidden'); return; }
-      box.innerHTML = data.map(c=> `<button onclick="selectCustomer(${c.id},'${c.name.replace(/'/g,"\'")}','${c.phone}')" class="w-full text-left px-3 py-2.5 hover:bg-slate-50 text-sm border-b last:border-0"><b>${c.name}</b><br><span class="text-slate-500 text-xs">${c.phone} • ${c.code}</span></button>`).join('');
+      box.innerHTML = data.map(c=> `<button type="button" onclick="selectCustomer(${c.id},'${c.name.replace(/'/g, "&apos;")}', '${c.phone}')" class="w-full text-left px-3 py-2.5 hover:bg-slate-50 text-sm border-b last:border-0"><b>${c.name}</b><br><span class="text-slate-500 text-xs">${c.phone} • ${c.code}</span></button>`).join('');
       box.classList.remove('hidden');
     });
   },250);
@@ -241,10 +250,16 @@ function selectCustomer(id,name,phone){
   document.getElementById('custName').textContent=name; document.getElementById('custPhone').textContent=phone;
   document.getElementById('customerResults').classList.add('hidden');
   document.getElementById('customerSearch').value='';
+  let hint=document.getElementById('customerRequiredHint'); if(hint) hint.classList.add('hidden');
+  document.getElementById('selectedCustomer').className='bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
 }
 function clearCustomer(){
-  let walkId = '{{ ($customers->firstWhere('phone','000000')->id ?? ($customers->first()->id ?? '')) }}';
-  selectCustomer(walkId,'Walk-in Customer','000000');
+  selectedCustomerId=null;
+  document.getElementById('customerId').value='';
+  document.getElementById('custName').textContent='— Belum pilih customer —';
+  document.getElementById('custPhone').textContent='';
+  document.getElementById('customerRequiredHint').classList.remove('hidden');
+  document.getElementById('selectedCustomer').className='bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
 }
 // --- Rincian Laundry: collapsed default, kosong default, dropdown tambah ---
 let selectedLaundry = new Set();
@@ -400,6 +415,7 @@ function updateLaundryTotal(){
 
 async function checkout(){
   if(cart.length===0){ alert('Keranjang kosong'); return; }
+  if(!selectedCustomerId){ updateCustomerRequiredUI(); document.getElementById('customerSearch').focus(); alert('Pilih customer dulu — wajib isi customer sebelum bayar'); return; }
   let {total,paid}=calc();
   let discType=document.getElementById('discountType').value;
   let discInput=parseFloat(document.getElementById('discount').value)||0;

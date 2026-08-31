@@ -18,7 +18,7 @@ class PosController extends Controller {
     }
     public function store(Request $r, OrderService $svc){
         $r->validate([
-            'customer_id'=>'nullable|exists:customers,id',
+            'customer_id'=>'required|exists:customers,id',
             'items'=>'required|array|min:1',
             'items.*.product_id'=>'required|exists:products,id',
             'items.*.quantity'=>'required|numeric|min:0.001',
