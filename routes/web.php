@@ -23,6 +23,7 @@ Route::get('/sw.js', fn() => response()->file(public_path('sw.js'), ['Content-Ty
 Route::get('/login', [AuthController::class,'showLogin'])->name('login');
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/logout', [AuthController::class,'logout'])->name('logout');
+Route::get('/logout', [AuthController::class,'logout']);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/switch-branch/{id}', [AuthController::class,'switchBranch'])->name('branch.switch');
@@ -86,9 +87,11 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/laundry-types/{id}', [LaundryItemTypeController::class,'destroy'])->name('laundry-types.destroy');
 
     // WA struk
-    Route::post('/orders/{order}/whatsapp', [App\Http\Controllers\OrderController::class,'sendWhatsapp'])->name('orders.whatsapp');
+    Route::get('/orders/{order}/whatsapp', [App\Http\Controllers\OrderController::class,'sendWhatsapp'])->name('orders.whatsapp');
+    Route::post('/orders/{order}/whatsapp', [App\Http\Controllers\OrderController::class,'sendWhatsapp']);
 
     // API JSON for POS
     Route::get('/api/customers', [CustomerController::class,'search']);
+    Route::post('/api/customers', [CustomerController::class,'storeApi'])->name('api.customers.store');
     Route::get('/api/products', [ProductController::class,'search']);
 });

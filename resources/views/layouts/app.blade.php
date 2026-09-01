@@ -21,8 +21,31 @@
   .no-scrollbar::-webkit-scrollbar{display:none}
   .no-scrollbar{scrollbar-width:none}
   @media(max-width:1024px){html{font-size:15px}}
+  .nav-link{display:inline-flex;align-items:center;gap:0.75rem;padding:0.625rem 0.75rem;border-radius:0.75rem;text-decoration:none;transition:background-color .15s ease}
+  .nav-icon{display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;flex-shrink:0;overflow:visible}
+  .nav-icon .emoji-icon{font-size:1.25rem;line-height:1;display:inline-block;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+  /* For nav-link and standalone icons - prevent emoji from breaking layout */
+  span.emoji-icon{display:inline-block;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
 </style>
 @stack('head')
+@php
+  $__errors = $errors ?? new \Illuminate\Support\ViewErrorBag;
+  $__flash = [];
+  if (session('success'))  $__flash[] = ['ok',   session('success')];
+  if (session('error'))    $__flash[] = ['err',  session('error')];
+  if (session('warning'))  $__flash[] = ['warn', session('warning')];
+  if (session('info'))     $__flash[] = ['info', session('info')];
+  if ($__errors->any())     $__flash[] = ['err',  $__errors->first()];
+@endphp
+@if(count($__flash))
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+@foreach($__flash as [$k,$m])
+  console.log('flash {{ $k }}:', {!! json_encode($m) !!});
+@endforeach
+});
+</script>
+@endif
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
 <div class="flex min-h-screen">
@@ -37,7 +60,6 @@
       @php
         $mid = session('merchant_id') ?? auth()->user()->merchant_id;
         $bid = session('branch_id');
-        // merchant list: super admin lihat semua, yang lain hanya miliknya
         $isSuperSide = auth()->user()->isAdmin() && auth()->user()->merchant_id === null;
         $merchantsSide = $isSuperSide ? \App\Models\Merchant::orderBy('name')->get() : \App\Models\Merchant::where('id',$mid)->get();
         $branches = auth()->user()->isAdmin()
@@ -62,27 +84,27 @@
       </div>
     </div>
     <nav class="flex-1 px-3 py-3 space-y-1 overflow-y-auto text-sm no-scrollbar">
-      <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('dashboard')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">📊 <span>Dashboard</span></a>
-      <a href="{{ route('pos.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('pos.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">🛒 <span>POS Kasir</span></a>
-      <a href="{{ route('orders.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('orders.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">📦 <span>Orders</span></a>
-      <a href="{{ route('customers.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('customers.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">👥 <span>Customers</span></a>
-      <a href="{{ route('products.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('products.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">🧴 <span>Produk</span></a>
-      <a href="{{ route('categories.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('categories.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">🏷️ <span>Kategori</span></a>
-      <a href="{{ route('cash.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('cash.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">💰 <span>Kas</span></a>
-      <a href="{{ route('shifts.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl {{ request()->routeIs('shifts.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}">🕒 <span>Shift</span></a>
+      <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('dashboard') !!}</span><span>Dashboard</span></a>
+      <a href="{{ route('pos.index') }}" class="nav-link {{ request()->routeIs('pos.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('pos') !!}</span><span>POS Kasir</span></a>
+      <a href="{{ route('orders.index') }}" class="nav-link {{ request()->routeIs('orders.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('orders') !!}</span><span>Orders</span></a>
+      <a href="{{ route('customers.index') }}" class="nav-link {{ request()->routeIs('customers.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('customers') !!}</span><span>Customers</span></a>
+      <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('products') !!}</span><span>Produk</span></a>
+      <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('categories') !!}</span><span>Kategori</span></a>
+      <a href="{{ route('cash.index') }}" class="nav-link {{ request()->routeIs('cash.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('cash') !!}</span><span>Kas</span></a>
+      <a href="{{ route('shifts.index') }}" class="nav-link {{ request()->routeIs('shifts.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('shifts') !!}</span><span>Shift</span></a>
       <div class="pt-3 mt-3 border-t border-slate-800">
         <p class="px-3 text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-1">Laporan</p>
-        <a href="{{ route('reports.sales') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">📈 Penjualan</a>
-        <a href="{{ route('reports.laundry') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">👕 Laundry</a>
-        <a href="{{ route('reports.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">📑 Semua Laporan</a>
+        <a href="{{ route('reports.sales') }}" class="nav-link {{ request()->routeIs('reports.sales')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('reports') !!}</span><span>Penjualan</span></a>
+        <a href="{{ route('reports.laundry') }}" class="nav-link {{ request()->routeIs('reports.laundry')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('laundry') !!}</span><span>Laundry</span></a>
+        <a href="{{ route('reports.index') }}" class="nav-link {{ request()->routeIs('reports.index')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('reports') !!}</span><span>Semua Laporan</span></a>
       </div>
       @if(auth()->user()->isAdmin())
       <div class="pt-3 mt-3 border-t border-slate-800">
         <p class="px-3 text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-1">Admin</p>
-        <a href="{{ route('merchants.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">🏪 Merchant</a>
-        <a href="{{ route('branches.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">🏢 Cabang</a>
-        <a href="{{ route('users.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">👤 Users</a>
-        <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-300">⚙️ Settings</a>
+        <a href="{{ route('merchants.index') }}" class="nav-link {{ request()->routeIs('merchants.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('merchants') !!}</span><span>Merchant</span></a>
+        <a href="{{ route('branches.index') }}" class="nav-link {{ request()->routeIs('branches.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('branches') !!}</span><span>Cabang</span></a>
+        <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('users') !!}</span><span>Users</span></a>
+        <a href="{{ route('settings.index') }}" class="nav-link {{ request()->routeIs('settings.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('settings') !!}</span><span>Settings</span></a>
       </div>
       @endif
     </nav>
@@ -90,7 +112,7 @@
       <div class="flex items-center gap-3">
         <div class="w-9 h-9 bg-slate-700 rounded-full flex items-center justify-center text-sm font-semibold shrink-0">{{ substr(auth()->user()->name,0,1) }}</div>
         <div class="flex-1 min-w-0"><div class="text-sm font-medium text-white truncate">{{ auth()->user()->name }}</div><div class="text-xs text-slate-400 truncate">{{ auth()->user()->roles->pluck('name')->join(', ') }}</div></div>
-        <form method="POST" action="{{ route('logout') }}">@csrf<button class="w-8 h-8 grid place-items-center rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white" title="Logout">↗</button></form>
+        <form method="POST" action="{{ route('logout') }}">@csrf<button class="w-8 h-8 grid place-items-center rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white" title="Logout">{!! icon('logout') !!}</button></form>
       </div>
     </div>
   </aside>
@@ -100,7 +122,7 @@
   <aside id="mobileDrawer" class="fixed inset-y-0 left-0 w-[84%] max-w-[320px] bg-slate-900 text-slate-200 z-50 translate-x-[-100%] transition-transform duration-300 lg:hidden flex flex-col">
     <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between">
       <div class="flex items-center gap-3"><div class="w-9 h-9 bg-indigo-500 rounded-xl flex items-center justify-center font-bold text-white">L</div><div><div class="font-semibold text-white text-sm">{{ setting('app_name','Londry POS') }}</div><div class="text-xs text-slate-400">{{ setting('company_name','Londry') }}</div></div></div>
-      <button onclick="closeDrawer()" class="w-9 h-9 grid place-items-center rounded-xl hover:bg-slate-800 text-slate-400">✕</button>
+      <button onclick="closeDrawer()" class="w-9 h-9 grid place-items-center rounded-xl hover:bg-slate-800 text-slate-400">{!! icon('close') !!}</button>
     </div>
     <div class="px-4 py-3 border-b border-slate-800">
       @php $mid2 = session('merchant_id') ?? auth()->user()->merchant_id; $bid2 = session('branch_id'); $branches2 = auth()->user()->isAdmin() ? \App\Models\Branch::when($mid2, fn($q)=>$q->where('merchant_id',$mid2))->get() : (auth()->user()->branches->merge(collect(auth()->user()->branch ? [auth()->user()->branch] : []))->unique('id')->filter(fn($b)=>!$mid2 || (int)$b->merchant_id===(int)$mid2)); $isSuper2 = auth()->user()->isAdmin() && auth()->user()->merchant_id===null; $merchants2 = $isSuper2 ? \App\Models\Merchant::orderBy('name')->get() : \App\Models\Merchant::where('id',$mid2)->get(); @endphp
@@ -116,20 +138,20 @@
       </select>
     </div>
     <nav class="flex-1 px-3 py-3 space-y-1 overflow-y-auto text-[15px] no-scrollbar">
-      <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('dashboard')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">📊 Dashboard</a>
-      <a href="{{ route('pos.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('pos.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">🛒 POS Kasir</a>
-      <a href="{{ route('orders.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('orders.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">📦 Orders</a>
-      <a href="{{ route('customers.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('customers.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">👥 Customers</a>
-      <a href="{{ route('products.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('products.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">🧴 Produk</a>
-      <a href="{{ route('categories.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('categories.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">🏷️ Kategori</a>
-      <a href="{{ route('cash.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('cash.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">💰 Kas</a>
-      <a href="{{ route('shifts.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl {{ request()->routeIs('shifts.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}">🕒 Shift</a>
-      <a href="{{ route('reports.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-slate-800">📑 Laporan</a>
+      <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('dashboard') !!}</span>Dashboard</a>
+      <a href="{{ route('pos.index') }}" class="nav-link {{ request()->routeIs('pos.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('pos') !!}</span>POS Kasir</a>
+      <a href="{{ route('orders.index') }}" class="nav-link {{ request()->routeIs('orders.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('orders') !!}</span>Orders</a>
+      <a href="{{ route('customers.index') }}" class="nav-link {{ request()->routeIs('customers.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('customers') !!}</span>Customers</a>
+      <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('products') !!}</span>Produk</a>
+      <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('categories') !!}</span>Kategori</a>
+      <a href="{{ route('cash.index') }}" class="nav-link {{ request()->routeIs('cash.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('cash') !!}</span>Kas</a>
+      <a href="{{ route('shifts.index') }}" class="nav-link {{ request()->routeIs('shifts.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('shifts') !!}</span>Shift</a>
+      <a href="{{ route('reports.index') }}" class="nav-link {{ request()->routeIs('reports.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('reports') !!}</span>Laporan</a>
       @if(auth()->user()->isAdmin())
       <div class="pt-3 mt-3 border-t border-slate-800 space-y-1">
-        <a href="{{ route('branches.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-slate-800">🏢 Cabang</a>
-        <a href="{{ route('users.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-slate-800">👤 Users</a>
-        <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-slate-800">⚙️ Settings</a>
+        <a href="{{ route('branches.index') }}" class="nav-link hover:bg-slate-800"><span class="nav-icon">{!! icon('branches') !!}</span>Cabang</a>
+        <a href="{{ route('users.index') }}" class="nav-link hover:bg-slate-800"><span class="nav-icon">{!! icon('users') !!}</span>Users</a>
+        <a href="{{ route('settings.index') }}" class="nav-link hover:bg-slate-800"><span class="nav-icon">{!! icon('settings') !!}</span>Settings</a>
       </div>
       @endif
     </nav>
@@ -137,7 +159,7 @@
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 bg-slate-700 rounded-full grid place-items-center font-semibold">{{ substr(auth()->user()->name,0,1) }}</div>
         <div class="flex-1 min-w-0"><div class="text-sm font-medium text-white truncate">{{ auth()->user()->name }}</div><div class="text-xs text-slate-400 truncate">{{ auth()->user()->roles->pluck('name')->join(', ') }}</div></div>
-        <form method="POST" action="{{ route('logout') }}">@csrf<button class="w-9 h-9 grid place-items-center rounded-xl bg-slate-800 text-slate-300">↗</button></form>
+        <form method="POST" action="{{ route('logout') }}">@csrf<button class="w-9 h-9 grid place-items-center rounded-xl bg-slate-800 text-slate-300" title="Logout">{!! icon('logout') !!}</button></form>
       </div>
     </div>
   </aside>
@@ -147,30 +169,27 @@
     {{-- Mobile topbar --}}
     <header class="lg:hidden bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-20">
       <div class="flex items-center gap-2 px-3 py-2.5">
-        <button onclick="openDrawer()" class="w-10 h-10 grid place-items-center rounded-xl bg-slate-900 text-white shrink-0" aria-label="Menu">☰</button>
+        <button onclick="openDrawer()" class="w-10 h-10 grid place-items-center rounded-xl bg-slate-900 text-white shrink-0" aria-label="Menu">{!! icon('menu') !!}</button>
         <div class="flex-1 min-w-0 flex items-center gap-2">
           <div class="w-8 h-8 bg-indigo-600 rounded-lg grid place-items-center text-white font-bold text-sm shrink-0">L</div>
           <div class="min-w-0"><div class="font-semibold text-sm leading-none truncate">{{ setting('app_name','Londry') }}</div><div class="text-[11px] text-slate-500 truncate">{{ current_branch()? current_branch()->code.' • '.current_branch()->name : 'Pilih cabang' }}</div></div>
         </div>
-        <a href="{{ route('pos.index') }}" class="shrink-0 bg-indigo-600 active:bg-indigo-700 text-white px-3.5 py-2 rounded-xl text-sm font-semibold">POS</a>
+        <a href="{{ route('pos.index') }}" class="shrink-0 bg-indigo-600 active:bg-indigo-700 text-white px-3.5 py-2 rounded-xl text-sm font-semibold flex items-center gap-1.5">{!! icon('pos', ['size' => 18]) !!} POS</a>
       </div>
     </header>
 
     <main class="flex-1 p-3 sm:p-4 lg:p-6 pb-24 lg:pb-6 w-full max-w-full overflow-x-hidden">
-      @if(session('success'))<div class="mb-3 sm:mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 sm:px-4 py-3 rounded-xl text-sm">{{ session('success') }}</div>@endif
-      @if(session('error'))<div class="mb-3 sm:mb-4 bg-rose-50 border border-rose-200 text-rose-800 px-3 sm:px-4 py-3 rounded-xl text-sm">{{ session('error') }}</div>@endif
-      @if($errors->any())<div class="mb-3 sm:mb-4 bg-rose-50 border border-rose-200 text-rose-800 px-3 sm:px-4 py-3 rounded-xl"><ul class="list-disc list-inside text-sm space-y-1">@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>@endif
       @yield('content')
     </main>
 
     {{-- Mobile bottom nav --}}
     <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 z-20 safe-pb">
       <div class="grid grid-cols-5 gap-1 px-1 py-1">
-        <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center py-2 rounded-xl {{ request()->routeIs('dashboard')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">📊</span><span class="text-[10px] font-medium mt-1">Home</span></a>
-        <a href="{{ route('pos.index') }}" class="flex flex-col items-center justify-center py-2 rounded-xl {{ request()->routeIs('pos.*')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">🛒</span><span class="text-[10px] font-medium mt-1">POS</span></a>
-        <a href="{{ route('orders.index') }}" class="flex flex-col items-center justify-center py-2 rounded-xl {{ request()->routeIs('orders.*')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">📦</span><span class="text-[10px] font-medium mt-1">Orders</span></a>
-        <a href="{{ route('customers.index') }}" class="flex flex-col items-center justify-center py-2 rounded-xl {{ request()->routeIs('customers.*')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">👥</span><span class="text-[10px] font-medium mt-1">Cust</span></a>
-        <button onclick="openDrawer()" class="flex flex-col items-center justify-center py-2 rounded-xl text-slate-500"><span class="text-[18px] leading-none">☰</span><span class="text-[10px] font-medium mt-1">Menu</span></button>
+        <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center py-2.5 rounded-xl {{ request()->routeIs('dashboard')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">{!! icon('dashboard',['size' => 20]) !!}</span><span class="text-[10px] font-medium mt-1">Home</span></a>
+        <a href="{{ route('pos.index') }}" class="flex flex-col items-center justify-center py-2.5 rounded-xl {{ request()->routeIs('pos.*')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">{!! icon('pos',['size' => 20]) !!}</span><span class="text-[10px] font-medium mt-1">POS</span></a>
+        <a href="{{ route('orders.index') }}" class="flex flex-col items-center justify-center py-2.5 rounded-xl {{ request()->routeIs('orders.*')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">{!! icon('orders',['size' => 20]) !!}</span><span class="text-[10px] font-medium mt-1">Orders</span></a>
+        <a href="{{ route('customers.index') }}" class="flex flex-col items-center justify-center py-2.5 rounded-xl {{ request()->routeIs('customers.*')?'text-indigo-600 bg-indigo-50':'text-slate-500' }}"><span class="text-[18px] leading-none">{!! icon('customers',['size' => 20]) !!}</span><span class="text-[10px] font-medium mt-1">Cust</span></a>
+        <button onclick="openDrawer()" class="flex flex-col items-center justify-center py-2.5 rounded-xl text-slate-500"><span class="text-[18px] leading-none">{!! icon('menu',['size' => 20]) !!}</span><span class="text-[10px] font-medium mt-1">Menu</span></button>
       </div>
     </nav>
   </div>

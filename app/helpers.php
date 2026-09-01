@@ -15,3 +15,39 @@ if(!function_exists('current_branch')){
         return \App\Models\Branch::find($bid);
     }
 }
+if(!function_exists('icon')){
+    function icon(string $name, array $attrs = []): string {
+        // Simple emoji/emoticon icons that work reliably on all devices
+        $icons = [
+            'dashboard' => '📊',
+            'pos' => '🧾',
+            'orders' => '📋',
+            'customers' => '👥',
+            'products' => '📦',
+            'categories' => '📁',
+            'cash' => '💰',
+            'shifts' => '⏰',
+            'reports' => '📈',
+            'laundry' => '🧺',
+            'merchants' => '🏪',
+            'branches' => '🏢',
+            'users' => '👤',
+            'settings' => '⚙️',
+            'close' => '✖️',
+            'menu' => '☰',
+            'save' => '💾',
+            'cancel' => '❌',
+            'print' => '🖨️',
+            'whatsapp' => '💬',
+            'edit' => '✏️',
+            'logout' => '🚪',
+        ];
+        $emoji = $icons[$name] ?? $icons['dashboard'];
+        $size = $attrs['size'] ?? 20;
+        $style = '';
+        if (isset($attrs['style'])) {
+            $style = ' style="' . $attrs['style'] . '"';
+        }
+        return '<span class="emoji-icon" style="font-size: ' . $size . 'px; line-height: 1;"' . $style . ' role="img" aria-label="' . $name . '">' . $emoji . '</span>';
+    }
+}

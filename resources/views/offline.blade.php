@@ -2,7 +2,7 @@
 @section('content')
 <div class="w-full max-w-md">
   <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 text-center">
-    <div class="w-14 h-14 bg-amber-500 rounded-2xl flex items-center justify-center text-white text-xl mx-auto">📶</div>
+    <div class="w-14 h-14 bg-amber-400 rounded-2xl flex items-center justify-center text-white mx-auto">{{ icon('cash', ['size':28, 'color':'#fff']) }}</div>
     <h1 class="text-xl font-bold mt-4">Kamu sedang offline</h1>
     <p class="text-sm text-slate-500 mt-2 leading-relaxed">Tidak ada koneksi internet. Periksa jaringan, lalu coba lagi. Halaman yang dibuka sebelumnya mungkin masih tersedia dari cache.</p>
     <div class="mt-6 flex gap-2 justify-center">

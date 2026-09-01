@@ -47,6 +47,27 @@ class CustomerController extends Controller {
         if($s) $q->where(fn($qq)=>$qq->where('name','like',"%$s%")->orWhere('phone','like',"%$s%")->orWhere('code','like',"%$s%"));
         return response()->json($q->limit(10)->get(['id','code','name','phone']));
     }
+    // API store for POS — returns JSON
+    public function storeApi(Request $r){
+        $r->validate(['name'=>'required','phone'=>'required']);
+        $branchId = session('branch_id') ?? auth()->user()->branch_id ?? \App\Models\Branch::first()->id;
+        $branch = \App\Models\Branch::find($branchId);
+        $isDemo = (bool)auth()->user()->is_demo;
+        $mid = auth()->user()->merchant_id ?? $branch?->merchant_id ?? \App\Models\Branch::first()?->merchant_id;
+        $c = Customer::create([
+            'code'=>NumberGenerator::customerCode(),
+            'name'=>$r->name,
+            'phone'=>$r->phone,
+            'email'=>$r->email??'',
+            'address'=>$r->address??'',
+            'notes'=>$r->notes??'',
+            'status'=>$r->status??'active',
+            'branch_id'=>$branchId,
+            'merchant_id'=>$mid,
+            'is_demo'=>$isDemo,
+        ]);
+        return response()->json($c, 201);
+    }
     public function show(Customer $customer){
         $isDemo = (bool)auth()->user()->is_demo;
         if((bool)$customer->is_demo !== $isDemo) abort(403, 'Tidak punya akses customer ini');

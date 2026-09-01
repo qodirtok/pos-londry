@@ -16,7 +16,7 @@
   <div class="font-semibold text-sm mt-2 line-clamp-2">{{ $p->name }}</div><div class="text-xs text-slate-500 truncate">{{ $p->category->name }}</div>
   <div class="font-bold text-indigo-600 mt-2 text-sm">{{ money($p->price) }}</div>
   <div class="flex gap-2 mt-3"><a href="{{ route('products.edit',$p) }}" class="flex-1 text-center text-xs bg-slate-900 text-white px-3 py-2.5 rounded-xl font-medium">Edit</a>
-  <form method="POST" action="{{ route('products.destroy',$p) }}" onsubmit="return confirm('Hapus?')" class="flex-1"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="_method" value="DELETE"><button class="w-full text-xs border border-slate-200 px-3 py-2.5 rounded-xl">Hapus</button></form></div>
+  <form method="POST" action="{{ route('products.destroy',$p) }}" onsubmit="return confirm('Hapus {{ $p->name }}?')" class="flex-1"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="_method" value="DELETE"><button class="w-full text-xs border border-slate-200 px-3 py-2.5 rounded-xl">Hapus</button></form>
 </div>
 @endforeach
 </div>
