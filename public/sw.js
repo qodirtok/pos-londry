@@ -1,5 +1,5 @@
 /* Londry POS — Service Worker | Cache shell + offline fallback */
-const CACHE = 'londry-v2';
+const CACHE = 'londry-v3';
 const OFFLINE_URL = '/offline';
 
 const PRECACHE = [

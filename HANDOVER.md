@@ -1,22 +1,36 @@
 # Handover — Londry POS Laundry (Laravel 10, PHP 8.1)
 
 > Ringkasan struktur, progress, dan guideline untuk penerus. Spec sumber: `pos-laundry.md` (55 section).
-> Stack: Laravel 10 • PHP 8.1 • SQLite (dev) / PostgreSQL (prod) • Tailwind via Vite • Blade • PWA (manifest + Service Worker + offline) — build via `nvm use 24 && npm run build`
+> Stack: **Production**: Laravel 10 • PHP 8.2-FPM • **MySQL** (`pos_londry`) • **nginx port 80** • Tailwind via Vite • Blade • PWA (manifest + Service Worker + offline)  
+> Stack: **Dev lokal**: Laravel 10 • PHP • SQLite (`database/database.sqlite`) • `php artisan serve` (default :8000)  
+> Build frontend: `nvm use 24 && npm run build` (output: `public/build/`) — `public/build` **tidak** dilacak git (gitignored)
 
 ---
 
 ## 1) Cara Jalan Cepat (5 menit)
 
+### Production (server VPS, nginx + MySQL + port 80)
 ```bash
-cd /Users/zlns/personal-www/londry
-cp .env.example .env          # jika belum ada
-php artisan key:generate      # jika APP_KEY kosong
+# nginx sudah berjalan di port 80, PHP-FPM 8.2, MySQL sudah terhubung
+cd /root/www/pos-londry
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache          # opsional, untuk performa
+# buka di browser: http://localhost atau http://<IP-server>
+```
+
+### Dev lokal (SQLite, artisan serve)
+```bash
+cd /root/www/pos-londry
+cp .env.example .env
+php artisan key:generate
 touch database/database.sqlite
+composer install --no-dev --optimize-autoloader
 # .env dev: DB_CONNECTION=sqlite, DB_DATABASE=/absolute/path/database/database.sqlite
 php artisan migrate --force
-php artisan db:seed --force            # dev: ProductionSeeder + DemoSeeder (full, idempotent)
+php artisan db:seed --force            # ProductionSeeder + DemoSeeder (idempotent)
 php artisan serve --host=127.0.0.1 --port=8010
-# buka http://127.0.0.1:8010/login  (form login bersih, tanpa info akun demo — login manual username/email + password)
+# buka http://127.0.0.1:8010/login — form login bersih, login manual username/email + password
 ```
 
 **Akun seed (idempotent, `firstOrCreate`):**
@@ -386,7 +400,52 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 
 ---
 
-## 9) Verifikasi Terakhir (real execution, 2026-08-31)
+## 9) Recent Changes (2026-09-02)
+
+- **nginx terpasang & configured** di port 80 (`sites-available/pos-londry`):
+  - `root /root/www/pos-londry/public`
+  - PHP-FPM via `unix:/run/php/php8.2-fpm.sock`
+  - Aset Vite (`/build/*`) didesamin dengan regex + Cache-Control
+  - Hapus config default
+- **MySQL setup**: user `pos_user` (native_password), DB `pos_londry`, migrasi 23 berjalan ✅
+- **open_basedir fixed** di `.user.ini` — hapus path lama `/www/wwwroot/pos.azelsq.my.id/`, ganti ke `/root/www/pos-londry/:/tmp/:/run/php/`
+- **APP_KEY** sudah di-generate, **storage permissions** dichown ke www-data
+
+### PWA & Service Worker
+- **SW disable/refresh**: code auto-unregister SW lama di `resources/js/pwa.js` (setiap page load hapus semua registered SW) agar stale cache v2 tidak menghalangi
+- **Manifest & Offline**: `manifest.webmanifest` 200 (application/manifest+json), `/offline` 200, `sw.js` 200 ✅
+
+### POS (rincian laundry → popup modal)
+- Ganti panel collapse "Rincian Laundry" → **modal popup** (`modalLaundry`)
+- `toggleLaundry()` → `openLaundryModal()` + `restoreLaundryDraft()` via localStorage
+- **localStorage persistence**: rincian laundry (items + catatan + ket. lainnya) tersimpan otomatis di `pos_laundry_draft`, restore saat buka ulang modal, clear otomatis setelah checkout sukses
+- Card kartu rapi, qty via +/- button, hapus per baris
+
+### Product List (Produk menu)
+- **Controller `ProductController@index`** tambah filter `category_id` & `status`, default cuma tampilkan `status='active'`
+- **Blade baru** (`products/index.blade.php`):
+  - Total produk di header
+  - 4 filter: cari, kategori, tipe (Produk/Jasa), status (Aktif/Nonaktif)
+  - Empty state
+  - Per-card: SKU, tipe badge, nama, kategori, harga/unit, stok (warna merah bila ≤5), badge nonaktif
+  - Tombol: Edit, Nonaktifkan/Hapus (differensiasi), Aktifkan (untuk yang nonaktif)
+- **Destroy produk**: bila sudah dipakai di order → dinonaktifkan (bukan dihapus)
+
+### Order Detail
+- **`handleSubmitForm` diperbaiki** (handle JSON redirect/session-expired):
+  - Tambah `Accept` header + `credentials: 'same-origin'`
+  - Cek content-type → kalau bukan JSON, tangani 302 ke login (419/session expired → alert + reload)
+  - Handle validation errors (422) dengan detail per field
+- **Button "Tambah Bayar"** tidak lagi error `Unexpected token '<'`; kalau session expired → redirect ke login otomatis
+
+### Build
+- `npm install --save-dev` (Vite 5.4, Tailwind) — `npm run build` menghasilkan `app-CUsHfWCX.js` (135KB) + `app-*.css` (30KB)
+- `package-lock.json` update (hapus duplicate, hanya devDependencies yang diperlukan produksi)
+- PHP syntax lint semua file yang di-edit ✅
+
+---
+
+## 10) Responsive — Konvensi
 
 ```bash
 php artisan migrate:status  # 27 Ran (2014_*:4 + 000001..000023)
@@ -415,7 +474,7 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 
 ---
 
-## 10) File Penting untuk Dibaca Dulu
+## 11) File Penting untuk Dibaca Dulu
 
 1. `pos-laundry.md` — spec
 2. `routes/web.php` — peta fitur (+ merchants, switch-merchant; + PWA /offline, /manifest.webmanifest, /sw.js)
@@ -432,7 +491,7 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 
 ---
 
-## 11) Troubleshooting
+## 12) Troubleshooting
 
 | Gejala | Solusi |
 |--------|--------|
@@ -456,4 +515,4 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 
 ---
 
-*Last updated: 2026-08-31 (PWA installable + offline shell — Tailwind via Vite, manifest + SW londry-v1, icons, @vite layouts, nginx pwa.conf — plus hapus card demo & fix route:cache) — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*
+*Last updated: 2026-09-02 (nginx production port 80, MySQL, popup laundry modal, product list UI, fix handleSubmitForm JSON, SW auto-unregister) — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*

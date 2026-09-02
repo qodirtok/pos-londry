@@ -10,6 +10,9 @@ class ProductController extends Controller {
         $q=Product::with('category')->when($mid, fn($qq)=>$qq->where('merchant_id',$mid));
         if($s=$r->search) $q->where(fn($qq)=>$qq->where('name','like',"%$s%")->orWhere('sku','like',"%$s%")->orWhere('barcode','like',"%$s%"));
         if($r->type) $q->where('type',$r->type);
+        if($r->category_id) $q->where('category_id',$r->category_id);
+        if($r->status) $q->where('status',$r->status);
+        else $q->where('status','active'); // default: hanya tampilkan produk aktif
         $products=$q->latest()->paginate(12);
         return view('products.index',compact('products'));
     }

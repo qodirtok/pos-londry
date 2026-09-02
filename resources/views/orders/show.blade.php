@@ -224,7 +224,7 @@
         <p class="text-xs text-slate-500 uppercase tracking-wider">Order {{ $order->order_number }}</p>
         <p class="text-3xl font-bold text-slate-800 mt-1">{{ money($order->total) }}</p>
       </div>
-      
+
       <div class="grid grid-cols-2 gap-2 mt-4">
         <button onclick="receiptAction('print')" class="w-full bg-indigo-600 text-white py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2">
           <svg class="order-flat-icon" viewBox="0 0 24 24" style="width:1rem;height:1rem"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
@@ -252,22 +252,62 @@
 function openModal(sel){ document.querySelector(sel).classList.add('is-open'); }
 function closeModal(sel){ document.querySelector(sel).classList.remove('is-open'); }
 
-async function handleSubmitForm(form, event, confirmMsg=false){
+async function handleSubmitForm(form, event, confirmMsg){
   if(confirmMsg){
     if(!confirm(confirmMsg === true ? 'Yakin ingin melakukan aksi ini?' : confirmMsg)) return false;
   }
   event.preventDefault();
   const fd = new FormData(form);
   try{
-    let res = await fetch(form.action, {method:'POST', body: fd, headers:{'X-Requested-With':'XMLHttpRequest'}});
+    let res = await fetch(form.action, {
+      method: 'POST',
+      body: fd,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json, text/javascript, */*; q=0.01'
+      },
+      credentials: 'same-origin'
+    });
+    let contentType = res.headers.get('content-type') || '';
+    // Tangani redirect (302) ke login atau halaman lain — biasanya berarti session expired
+    if (!contentType.includes('application/json')) {
+      // Cek apakah ini redirect ke login
+      const text = await res.text();
+      if (res.status === 302 || (res.status >= 300 && res.status < 400) || text.includes('login') || text.includes('DOCTYPE')) {
+        if (res.status === 419 || text.includes('login')) {
+          alert('⚠️ Sesi anda telah habis. Halaman akan dimuat ulang untuk login kembali.');
+          location.reload();
+          return false;
+        }
+        // Redirect lain — ikuti manual ke URL tujuan dan reload
+        const redirect = res.headers.get('Location');
+        if (redirect) {
+          window.location.href = redirect;
+          return false;
+        }
+        alert('❗ Respons tidak dikenali dari server. Coba muat ulang halaman.');
+        return false;
+      }
+      // Jika tetap bukan JSON, coba parse sebagai teks untuk pesan error
+      const textErr = text.trim().substring(0, 300);
+      alert('❗ Respons server tidak valid:\n' + (res.status) + ' ' + res.statusText + '\n\n' + textErr);
+      return false;
+    }
     let data = await res.json();
     if(res.ok){
       alert(data.message || 'Berhasil disimpan');
       location.reload();
     } else {
-      alert(data.message || 'Gagal menyimpan');
+      // Handle validation errors (422, 403, etc.)
+      let msg = data.message || 'Gagal menyimpan';
+      if (data.errors) {
+        msg += '\n\n' + Object.entries(data.errors).map(([k,v]) => k + ': ' + (Array.isArray(v) ? v.join(', ') : v)).join('\n');
+      }
+      alert(msg);
     }
-  }catch(e){ alert(e.message); }
+  } catch(e){
+    alert('❗ Error jaringan: ' + e.message);
+  }
   return false;
 }
 
@@ -275,12 +315,12 @@ function openReceiptModal(){ openModal('#receiptModal'); }
 
 async function receiptAction(act){
   const id = "{{ $order->id }}";
-  if(act==='print'){ 
-    window.open('/orders/'+id+'/print','_blank','width=400,height=600'); 
-  } else if(act==='wa'){ 
+  if(act==='print'){
+    window.open('/orders/'+id+'/print','_blank','width=400,height=600');
+  } else if(act==='wa'){
     await sendWhatsappOrder(id);
-  } else if(act==='printwa'){ 
-    window.open('/orders/'+id+'/print','_blank','width=400,height=600'); 
+  } else if(act==='printwa'){
+    window.open('/orders/'+id+'/print','_blank','width=400,height=600');
     setTimeout(()=>sendWhatsappOrder(id), 500);
   }
 }
@@ -292,20 +332,36 @@ async function sendWhatsappOrder(id){
 
 // Customer Search logic for Edit Customer Modal
 let cTimer;
-document.getElementById('custSearchInput')?.addEventListener('input', function(){
-  let q=this.value.trim(); let box=document.getElementById('custResults');
-  if(q.length < 2){ box.classList.add('hidden'); return; }
-  clearTimeout(cTimer);
-  cTimer=setTimeout(()=>{
-    fetch('/customers-search?q='+encodeURIComponent(q).title || 'Hapus?')) { r=>r.json()).then(data=>{
-      if(!data.length){ box.innerHTML='<div class="p-3 text-sm text-slate-400">Tidak ditemukan</div>'; box.classList.remove('hidden'; } return; }
-      box.innerHTML = data.map(c=> `<button type="button" onclick="selectNewCust(${c.id},'${c.name.replace(/'/g, "\\'")}','${c.phone||''}')" class="w-full text-left px-3 py-2.5 hover:bg-slate-50 text-sm border-b last:border-0"><b>${c.name}</b><br><span class="text-slate-500 text-xs">${c.phone||''} • ${c.code}</span></button>`).join('');
-      box.classList.remove('hidden');
-    });
-  },300);
-});
+const custInput = document.getElementById('custSearchInput');
+if (custInput) {
+  custInput.addEventListener('input', function(){
+    let q = this.value.trim();
+    let box = document.getElementById('custResults');
+    if (q.length < 2) { box.classList.add('hidden'); return; }
+    clearTimeout(cTimer);
+    cTimer = setTimeout(() => {
+      fetch('/customers-search?q=' + encodeURIComponent(q), { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(r => r.json())
+        .then(data => {
+          if (!data.length) {
+            box.innerHTML = '<div class="p-3 text-sm text-slate-400">Tidak ditemukan</div>';
+          } else {
+            box.innerHTML = data.map(c => {
+              const safeName = String(c.name || '').replace(/'/g, "\\'");
+              return '<button type="button" onclick="selectNewCust(' + c.id + ',\'' + safeName + '\',\'' + (c.phone || '') + '\')" class="w-full text-left px-3 py-2.5 hover:bg-slate-50 text-sm border-b last:border-0"><b>' + c.name + '</b><br><span class="text-slate-500 text-xs">' + (c.phone || '') + ' &bull; ' + c.code + '</span></button>';
+            }).join('');
+          }
+          box.classList.remove('hidden');
+        })
+        .catch(err => {
+          box.innerHTML = '<div class="p-3 text-sm text-rose-500">Error: ' + (err.message || 'gagal memuat') + '</div>';
+          box.classList.remove('hidden');
+        });
+    }, 300);
+  });
+}
 
-function selectNewCust(id,name,phone){
+function selectNewCust(id, name, phone){
   document.getElementById('newCustId').value = id;
   document.getElementById('selectedCustName').textContent = name;
   document.getElementById('selectedCustPhone').textContent = phone;

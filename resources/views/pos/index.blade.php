@@ -150,55 +150,19 @@
       <input type="hidden" id="customerId" value="">
     </div>
 
-    {{-- Rincian Laundry DINAMIS — collapsed default, dropdown tambah, kosong default --}}
-    <div class="mx-3 sm:mx-4 mb-3 bg-amber-50 border border-amber-200 rounded-xl overflow-hidden">
-      <button type="button" onclick="toggleLaundry()" class="w-full flex items-center justify-between px-3 sm:px-4 py-2.5 text-left hover:bg-amber-100/60 transition">
+    {{-- Rincian Laundry — dibuka via modal popup --}}
+    <div class="mx-3 sm:mx-4 mb-3">
+      <button type="button" onclick="openLaundryModal()" class="w-full flex items-center justify-between px-3 sm:px-4 py-3 text-left bg-amber-50 border border-amber-200 rounded-xl hover:bg-amber-100/60 transition">
         <span class="text-xs sm:text-sm font-bold text-amber-900 flex items-center gap-2">
           <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#b45309"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
           Rincian Laundry <span id="laundryBadge" class="hidden bg-amber-900 text-amber-50 text-[10px] px-2 py-0.5 rounded-full">0 pcs</span>
         </span>
-        <span class="flex items-center gap-2"><span id="laundrySummaryText" class="hidden sm:inline text-[11px] text-amber-700/70 truncate max-w-[18ch]"></span><span id="laundryChevron" class="text-amber-700 transition-transform -rotate-90">
-          <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-        </span></span>
+        <span class="flex items-center gap-2">
+          <span id="laundrySummaryText" class="hidden sm:inline text-[11px] text-amber-700/70 truncate max-w-[18ch]"></span>
+          <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#b45309;width:1.2rem;height:1.2rem"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
       </button>
-      <div id="laundryPanel" class="hidden px-3 sm:px-4 pb-3 sm:pb-4 space-y-3 border-t border-amber-200/60 pt-3">
-        <p class="text-[11px] leading-relaxed text-amber-800/80">Expand untuk isi pcs. Kosong default — pilih jenis dari dropdown lalu <b>+ Tambah</b>. Tap ✕ di card untuk hapus baris. <a href="javascript:void(0)" onclick="openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
-        <div id="laundryGrid" class="flex flex-col gap-2 min-h-[0]">
-          <!-- cards ditambah via dropdown -->
-        </div>
-        <div id="laundryEmpty" class="border border-dashed border-amber-300 rounded-xl bg-white/70 px-3 py-6 text-center">
-          <p class="text-sm text-slate-500">Belum ada rincian. Pilih jenis di bawah lalu tambah.</p>
-          <p class="text-[11px] text-slate-400 mt-1">Contoh: Baju, Celana, Sepatu, Tas — pcs akan masuk struk</p>
-        </div>
-        <div class="bg-white border border-amber-200 rounded-xl p-2.5 sm:p-3 space-y-2.5">
-          <label class="text-xs font-semibold text-slate-700">Tambah jenis ke rincian</label>
-          <div class="flex flex-col sm:flex-row gap-2">
-            <select id="laundrySelect" class="flex-1 min-w-0 border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white focus:ring-2 focus:ring-amber-400 outline-none">
-              <option value="">— Pilih jenis —</option>
-              @foreach($laundryTypes as $t)
-              <option value="{{ $t->code }}" data-name="{{ $t->name }}" data-icon="{{ $t->icon ?? '📦' }}">{{ ($t->icon ?? '📦').' '.$t->name }}</option>
-              @endforeach
-            </select>
-            <button type="button" onclick="addLaundryFromSelect()" class="shrink-0 bg-slate-900 active:bg-black text-white px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">+ Tambah</button>
-          </div>
-          <details class="group">
-            <summary class="text-xs text-slate-500 cursor-pointer list-none flex items-center gap-1"><span class="group-open:rotate-90 transition">▶</span> Jenis belum ada? Buat baru</summary>
-            <div class="mt-2 flex flex-col sm:flex-row gap-2">
-              <input id="newLaundryName" type="text" placeholder="Nama jenis baru, cth: Gorden" class="flex-1 min-w-0 border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none">
-              <input id="newLaundryIcon" type="text" placeholder="Icon 🧹" class="w-full sm:w-24 border border-slate-200 rounded-xl px-3 py-3 text-sm text-center sm:text-left">
-              <button type="button" onclick="createLaundryType()" class="shrink-0 bg-white border border-slate-200 active:bg-slate-50 text-slate-800 px-4 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">Buat</button>
-            </div>
-          </details>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-          <label class="text-xs font-medium text-slate-600">Ket. Lainnya <span class="font-normal text-slate-400">(opsional)</span><input id="laundry_lainnya_desc" type="text" placeholder="Bed cover, gorden, dll" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
-          <label class="text-xs font-medium text-slate-600">Catatan laundry <span class="font-normal text-slate-400">(masuk struk)</span><input id="laundry_catatan" type="text" placeholder="Noda di kerah, jangan pakai pewangi" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
-        </div>
-        <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-          <span class="text-[11px] text-slate-500">Total pcs: <b id="laundryTotal" class="text-slate-800">0</b></span>
-          <button type="button" onclick="clearLaundry()" class="text-xs text-slate-500 hover:text-slate-700 underline">Kosongkan rincian</button>
-        </div>
-      </div>
+      <p class="text-[11px] leading-relaxed text-amber-800/80 mt-1">Expand untuk isi pcs. Kosong default — pilih jenis dari dropdown lalu <b>+ Tambah</b>. Tap ✕ di card untuk hapus baris. <a href="javascript:void(0)" onclick="openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
     </div>
 
     <div class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-2 sm:space-y-3 min-h-[18vh] lg:min-h-0" id="cartItems">
@@ -361,7 +325,68 @@
   </div>
 </div>
 
-{{-- Modal: New Customer --}}
+{{-- Modal: Rincian Laundry --}}
+<div id="modalLaundry" class="pos-modal-backdrop is-center">
+  <div class="pos-modal" style="max-width:420px">
+    <div class="pos-modal-header">
+      <h3>
+        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#b45309"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        Rincian Laundry
+      </h3>
+      <button type="button" onclick="closeModal('modalLaundry')" class="close-btn" aria-label="Tutup">
+        <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="pos-modal-body">
+      <p class="text-[11px] leading-relaxed text-amber-800/80 mb-3">Pilih jenis dari dropdown lalu <b>+ Tambah</b>. Tap ✕ di card untuk hapus baris. <a href="javascript:void(0)" onclick="openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
+      <div id="laundryGrid" class="flex flex-col gap-2 mb-3 min-h-[0]">
+        <!-- cards ditambah via dropdown -->
+      </div>
+      <div id="laundryEmpty" class="border border-dashed border-amber-300 rounded-xl bg-white/70 px-3 py-6 text-center">
+        <p class="text-sm text-slate-500">Belum ada rincian. Pilih jenis di bawah lalu tambah.</p>
+        <p class="text-[11px] text-slate-400 mt-1">Contoh: Baju, Celana, Sepatu, Tas — pcs akan masuk struk</p>
+      </div>
+      <div class="bg-white border border-amber-200 rounded-xl p-2.5 sm:p-3 space-y-2.5">
+        <label class="text-xs font-semibold text-slate-700">Tambah jenis ke rincian</label>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <select id="laundrySelect" class="flex-1 min-w-0 border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white focus:ring-2 focus:ring-amber-400 outline-none">
+            <option value="">— Pilih jenis —</option>
+            @foreach($laundryTypes as $t)
+            <option value="{{ $t->code }}" data-name="{{ $t->name }}" data-icon="{{ $t->icon ?? '📦' }}">{{ ($t->icon ?? '📦').' '.$t->name }}</option>
+            @endforeach
+          </select>
+          <button type="button" onclick="addLaundryFromSelect()" class="shrink-0 bg-slate-900 active:bg-black text-white px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">+ Tambah</button>
+        </div>
+        <details class="group">
+          <summary class="text-xs text-slate-500 cursor-pointer list-none flex items-center gap-1"><span class="group-open:rotate-90 transition">▶</span> Jenis belum ada? Buat baru</summary>
+          <div class="mt-2 flex flex-col sm:flex-row gap-2">
+            <input id="newLaundryName" type="text" placeholder="Nama jenis baru, cth: Gorden" class="flex-1 min-w-0 border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none">
+            <input id="newLaundryIcon" type="text" placeholder="Icon 🧹" class="w-full sm:w-24 border border-slate-200 rounded-xl px-3 py-3 text-sm text-center sm:text-left">
+            <button type="button" onclick="createLaundryType()" class="shrink-0 bg-white border border-slate-200 active:bg-slate-50 text-slate-800 px-4 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">Buat</button>
+          </div>
+        </details>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+        <label class="text-xs font-medium text-slate-600">Ket. Lainnya <span class="font-normal text-slate-400">(opsional)</span><input id="laundry_lainnya_desc" type="text" placeholder="Bed cover, gorden, dll" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
+        <label class="text-xs font-medium text-slate-600">Catatan laundry <span class="font-normal text-slate-400">(masuk struk)</span><input id="laundry_catatan" type="text" placeholder="Noda di kerah, jangan pakai pewangi" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t">
+        <span class="text-[11px] text-slate-500">Total pcs: <b id="laundryTotal" class="text-slate-800">0</b></span>
+        <button type="button" onclick="clearLaundry()" class="text-xs text-slate-500 hover:text-slate-700 underline">Kosongkan rincian</button>
+      </div>
+    </div>
+    <div class="pos-modal-footer" style="grid-template-columns:1fr 1fr;row-gap:.5rem">
+      <button type="button" class="btn btn-secondary" onclick="closeModal('modalLaundry')">
+        <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        Tutup
+      </button>
+      <button type="button" class="btn btn-success" onclick="closeModal('modalLaundry')">
+        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#10b981"><path d="M5 13l4 4L19 7"/></svg>
+        Simpan
+      </button>
+    </div>
+  </div>
+</div>
 <div id="modalNewCustomer" class="pos-modal-backdrop is-center">
   <div class="pos-modal">
     <div class="pos-modal-header">
@@ -570,6 +595,10 @@ function calc(){
   return {sub,disc,tax,total,paid,change};
 }
 ['discount','discountType','tax','paidAmount'].forEach(id=> document.getElementById(id).addEventListener('input', calc));
+['laundry_lainnya_desc','laundry_catatan'].forEach(id=>{
+  let el=document.getElementById(id);
+  if(el) el.addEventListener('change', saveLaundryDraft);
+});
 function filterCat(cat){
   document.querySelectorAll('.pos-cat-pill').forEach(b=>{
     let active = b.dataset.cat===cat || (cat==='' && b.dataset.cat==='');
@@ -628,14 +657,66 @@ function clearCustomer(){
   document.getElementById('selectedCustomer').className='bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
 }
 
-// --- Rincian Laundry: collapsed default, kosong default, dropdown tambah ---
+// --- Rincian Laundry: open via modal popup, persist via localStorage ---
 let selectedLaundry = new Set();
+const LAUNDRY_KEY = 'pos_laundry_draft';
 
-function toggleLaundry(){
-  let p=document.getElementById('laundryPanel'), c=document.getElementById('laundryChevron');
-  let isHidden = p.classList.contains('hidden');
-  if(isHidden){ p.classList.remove('hidden'); c.style.transform='rotate(0deg)'; }
-  else { p.classList.add('hidden'); c.style.transform='rotate(-90deg)'; }
+function saveLaundryDraft(){
+  let d = {};
+  document.querySelectorAll('.laundryInput').forEach(el=>{
+    let v=parseInt(el.value||'0',10);
+    if(v>0) d[el.dataset.code]=v;
+  });
+  let desc = document.getElementById('laundry_lainnya_desc')?.value || '';
+  let catatan = document.getElementById('laundry_catatan')?.value || '';
+  let payload = { items: d };
+  if (desc) payload.lainnya_desc = desc;
+  if (catatan) payload.catatan = catatan;
+  try { localStorage.setItem(LAUNDRY_KEY, JSON.stringify(payload)); } catch(e){}
+}
+
+function restoreLaundryDraft(){
+  let raw = localStorage.getItem(LAUNDRY_KEY);
+  if (!raw) return;
+  let payload;
+  try { payload = JSON.parse(raw); } catch(e){ return; }
+  let items = payload.items || {};
+  selectedLaundry.clear();
+  let grid = document.getElementById('laundryGrid');
+  if (grid) grid.innerHTML = '';
+  Object.keys(items).forEach(code=>{
+    let it = items[code];
+    if (typeof it === 'number' && it > 0) {
+      let t = laundryTypes.find(x=> x.code===code);
+      createLaundryCard(code, (t && t.name) || code, (t && t.icon) || '📦', it);
+    }
+  });
+  let descEl = document.getElementById('laundry_lainnya_desc');
+  if (descEl && payload.lainnya_desc) descEl.value = payload.lainnya_desc;
+  let catEl = document.getElementById('laundry_catatan');
+  if (catEl && payload.catatan) catEl.value = payload.catatan;
+  refreshLaundrySelect();
+  updateLaundryTotal();
+}
+
+function openLaundryModal(){
+  // Hanya restore kalau modal masih kosong (pertama kali buka atau setelah clear)
+  let grid = document.getElementById('laundryGrid');
+  if (grid && grid.children.length === 0) {
+    restoreLaundryDraft();
+  }
+  openModal('modalLaundry');
+}
+
+function clearLaundry(){
+  document.getElementById('laundryGrid').innerHTML='';
+  selectedLaundry.clear();
+  ['laundry_lainnya_desc','laundry_catatan'].forEach(id=>{
+    let el=document.getElementById(id); if(el) el.value='';
+  });
+  refreshLaundrySelect();
+  updateLaundryTotal();
+  try { localStorage.removeItem(LAUNDRY_KEY); } catch(e){}
 }
 
 function refreshLaundrySelect(){
@@ -653,7 +734,7 @@ function refreshLaundrySelect(){
   if(keep && !selectedLaundry.has(keep)) sel.value=keep;
 }
 
-function createLaundryCard(code, name, icon){
+function createLaundryCard(code, name, icon, initialValue){
   if(selectedLaundry.has(code)){
     let el=document.getElementById('laundry_'+code);
     if(el) el.focus();
@@ -670,7 +751,7 @@ function createLaundryCard(code, name, icon){
     <button type="button" onclick="stepLaundry('`+code+`',-1)" class="ll-step minus" aria-label="Kurangi">
       <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M5 12h14"/></svg>
     </button>
-    <input id="laundry_`+code+`" data-code="`+code+`" type="number" min="0" inputmode="numeric" placeholder="0" class="ll-input laundryInput">
+    <input id="laundry_`+code+`" data-code="`+code+`" type="number" min="0" inputmode="numeric" placeholder="0" class="ll-input laundryInput" value="`+(initialValue||'')+`">
     <button type="button" onclick="stepLaundry('`+code+`',1)" class="ll-step plus" aria-label="Tambah">
       <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem;color:#fff"><path d="M5 12h14M12 5v14"/></svg>
     </button>
@@ -679,6 +760,7 @@ function createLaundryCard(code, name, icon){
     </button>`;
   grid.appendChild(wrap);
   wrap.querySelector('.laundryInput').addEventListener('input', updateLaundryTotal);
+  wrap.querySelector('.laundryInput').addEventListener('change', saveLaundryDraft);
   refreshLaundrySelect();
   updateLaundryTotal();
   wrap.querySelector('.laundryInput').focus();
@@ -701,6 +783,7 @@ function stepLaundry(code,delta){
   if(v<0) v=0;
   el.value = v? String(v): '';
   updateLaundryTotal();
+  saveLaundryDraft();
 }
 function removeLaundryRow(code){
   let el=document.getElementById('wrap_'+code);
@@ -708,6 +791,7 @@ function removeLaundryRow(code){
   selectedLaundry.delete(code);
   refreshLaundrySelect();
   updateLaundryTotal();
+  saveLaundryDraft();
 }
 
 async function createLaundryType(){
@@ -905,6 +989,8 @@ async function confirmCheckout(){
     lastOrderId = data.id;
     lastOrderData = data;
     closeModal('modalCheckout');
+    // Laundry draft sudah terpakai — bersihkan agar transaksi baru mulai fresh
+    try { localStorage.removeItem(LAUNDRY_KEY); selectedLaundry.clear(); document.getElementById('laundryGrid').innerHTML=''; } catch(e){}
     // Build receipt modal
     let change = paid>total ? paid-total : 0;
     document.getElementById('receiptOrderNumber').textContent = data.order_number || ('Order #'+data.id);
