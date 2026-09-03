@@ -35,12 +35,12 @@ class SettingController extends Controller {
 
         // resolve mysqldump binary path (PATH may not include brew mysql-client under web/PHP process)
         $mysqldump = null;
-        foreach (['/opt/homebrew/opt/mysql-client/bin/mysqldump','/usr/local/mysql/bin/mysqldump','/usr/bin/mysqldump'] as $c) {
-            if (file_exists($c)) { $mysqldump = $c; break; }
+        foreach (['/usr/bin/mysqldump','/usr/local/mysql/bin/mysqldump','/opt/homebrew/opt/mysql-client/bin/mysqldump'] as $c) {
+            if (@file_exists($c)) { $mysqldump = $c; break; }
         }
         if (!$mysqldump) {
             $probe = @shell_exec('command -v mysqldump 2>/dev/null');
-            if ($probe && file_exists(trim($probe))) $mysqldump = trim($probe);
+            if ($probe && @file_exists(trim($probe))) $mysqldump = trim($probe);
         }
         if (!$mysqldump) {
             return back()->with('error','Backup gagal: mysqldump binary tidak ditemukan. Pasang mysql-client atau setting path.');
