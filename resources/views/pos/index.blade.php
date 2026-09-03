@@ -840,19 +840,20 @@ function createLaundryCard(code, name, icon, initialValue){
   let wrap=document.createElement('div');
   wrap.id='wrap_'+code;
   wrap.className='pos-laundry-card';
-  wrap.innerHTML=`
-    <div class="ll-icon">`+(icon||'📦')+`</div>
-    <div class="ll-name">`+name+`</div>
-    <button type="button" onclick="stepLaundry('`+code+`',-1)" class="ll-step minus" aria-label="Kurangi">
-      <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M5 12h14"/></svg>
-    </button>
-    <input id="laundry_'+code+'" data-code="'+code+'" type="number" min="0" inputmode="numeric" placeholder="0" class="ll-input laundryInput" value="`+(initialValue||'')+`">
-    <button type="button" onclick="stepLaundry('`+code+`',1)" class="ll-step plus" aria-label="Tambah">
-      <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem;color:#fff"><path d="M5 12h14M12 5v14"/></svg>
-    </button>
-    <button type="button" onclick="removeLaundryRow('`+code+`')" class="ll-remove" aria-label="Hapus baris" title="Hapus baris">
-      <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>`;
+  var iconDisp = icon || '\u{1F4CC}';
+  wrap.innerHTML =
+    '<div class="ll-icon">'+iconDisp+'</div>'+
+    '<div class="ll-name">'+name+'</div>'+
+    '<button type="button" onclick="stepLaundry(\''+code+'\',-1)" class="ll-step minus" aria-label="Kurangi">'+
+      '<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M5 12h14"/></svg>'+
+    '</button> '+
+    '<input id="laundry_'+code+'" data-code="'+code+'" type="number" min="0" inputmode="numeric" placeholder="0" class="ll-input laundryInput" value="'+(initialValue||'')+'"> '+
+    '<button type="button" onclick="stepLaundry(\''+code+'\',1)" class="ll-step plus" aria-label="Tambah">'+
+      '<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem;color:#fff"><path d="M5 12h14M12 5v14"/></svg>'+
+    '</button> '+
+    '<button type="button" onclick="removeLaundryRow(\''+code+'\')" class="ll-remove" aria-label="Hapus baris" title="Hapus baris">'+
+      '<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M18 6 6 18M6 6l12 12"/></svg>'+
+    '</button>';
   grid.appendChild(wrap);
   wrap.querySelector('.laundryInput').addEventListener('input', updateLaundryTotal);
   wrap.querySelector('.laundryInput').addEventListener('change', saveLaundryDraft);
