@@ -5,7 +5,7 @@
 <form class="bg-white rounded-2xl border p-3 sm:p-4 mb-4">
   <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
     <input name="search" value="{{ request('search') }}" placeholder="No. order / customer" class="sm:col-span-5 border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-    <select name="status" class="sm:col-span-3 border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white"><option value="">Semua status</option>@foreach(['received','washing','drying','ironing','ready','picked_up','cancelled'] as $s)<option value="{{ $s }}" @selected(request('status')==$s)>{{ $s }}</option>@endforeach</select>
+    <select name="status" class="sm:col-span-3 border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white"><option value="">Semua status</option>@foreach(['received','ready','picked_up','complete','cancelled'] as $s)<option value="{{ $s }}" @selected(request('status')==$s)>{{ $s }}</option>@endforeach</select>
     <div class="sm:col-span-4 flex gap-2">
       <input name="from" type="date" value="{{ request('from') }}" class="flex-1 border border-slate-200 rounded-xl px-2 py-3 text-xs sm:text-sm"><input name="to" type="date" value="{{ request('to') }}" class="flex-1 border border-slate-200 rounded-xl px-2 py-3 text-xs sm:text-sm">
       <button class="bg-slate-900 text-white px-4 py-3 rounded-xl text-sm font-medium shrink-0">Filter</button>

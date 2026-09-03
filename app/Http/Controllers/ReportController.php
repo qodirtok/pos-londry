@@ -56,7 +56,7 @@ class ReportController extends Controller {
         $q=Order::when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))->where('is_demo',$isDemo);
         $summary=[
             'total'=>(clone $q)->count(),
-            'pending'=>(clone $q)->whereIn('order_status',['received','washing','drying','ironing'])->count(),
+            'pending'=>(clone $q)->whereIn('order_status',['received'])->count(),
             'ready'=>(clone $q)->where('order_status','ready')->count(),
             'picked'=>(clone $q)->where('order_status','picked_up')->count(),
             'cancelled'=>(clone $q)->where('order_status','cancelled')->count(),

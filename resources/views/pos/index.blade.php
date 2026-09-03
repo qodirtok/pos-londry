@@ -97,6 +97,12 @@
 </style>
 @endpush
 @section('content')
+@if(isset($order))
+<div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-2 mb-3">
+  <div class="text-sm"><span class="text-amber-800 font-semibold">✏️ Mode Edit</span> <span class="font-mono font-bold">{{ $order->order_number }}</span> <span class="text-slate-500">• {{ $order->customer->name ?? 'Walk-in' }} • {{ $order->order_status }}</span></div>
+  <div class="flex gap-2"><a href="{{ route('orders.show',$order) }}" class="px-3 py-1.5 bg-white border rounded-full text-xs font-semibold">← Kembali</a><a href="{{ route('pos.index') }}" class="px-3 py-1.5 bg-slate-900 text-white rounded-full text-xs font-semibold">POS Baru</a></div>
+</div>
+@endif
 <div class="flex flex-col lg:flex-row gap-3 lg:gap-4 lg:h-[calc(100vh-88px)]">
   {{-- Produk kiri --}}
   <div class="flex-1 bg-white rounded-2xl border flex flex-col overflow-hidden min-h-[42vh] lg:min-h-0">
@@ -205,9 +211,9 @@
         <input id="paidAmount" type="number" inputmode="numeric" placeholder="Bayar" class="border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
       </div>
       <div class="flex justify-between text-sm"><span class="text-slate-500">Kembalian</span><span id="change" class="font-semibold">Rp 0</span></div>
-      <button onclick="openCheckoutModal()" id="payBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold py-3.5 sm:py-3 rounded-xl text-[15px] shadow flex items-center justify-center gap-2">
+            <button onclick="isEditMode ? submitEditOrder() : openCheckoutModal()" id="payBtn" class="w-full font-bold py-3.5 sm:py-3 rounded-xl text-[15px] shadow flex items-center justify-center gap-2" :class="isEditMode?'bg-amber-500 hover:bg-amber-600 text-white':'bg-indigo-600 hover:bg-indigo-700 text-white'">
         <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
-        BAYAR & CETAK
+        <span id="payBtnText">BAYAR & CETAK</span>
       </button>
     </div>
   </div>
@@ -507,6 +513,27 @@
 <script>
 let laundryTypes = @json($laundryTypes);
 let products = @json($products);
+@php
+$__editOrderData = null;
+if(isset($order)){
+  $__editOrderData = [
+    'id' => $order->id,
+    'order_number' => $order->order_number,
+    'customer_id' => $order->customer_id,
+    'customer_name' => $order->customer->name ?? 'Walk-in',
+    'customer_phone' => $order->customer->phone ?? '',
+    'items' => $order->items->map(function($it){ return ['product_id'=>$it->product_id,'name'=>$it->product_name,'sku'=>$it->sku,'price'=>(float)$it->price,'quantity'=>(float)$it->quantity,'unit'=>$it->unit,'discount'=>(float)$it->discount,'type'=>($it->product->type ?? 'product')]; })->values(),
+    'laundry_details' => $order->laundry_details,
+    'discount' => (float)$order->discount,
+    'discount_type' => $order->discount_type ?? 'fixed',
+    'tax' => (float)$order->tax,
+    'order_status' => $order->order_status,
+    'notes' => $order->notes,
+  ];
+}
+@endphp
+const editOrder = @json($__editOrderData);
+const isEditMode = !!editOrder;
 let productMap = {}; products.forEach(p=> productMap[p.id]=p);
 let cart = [];
 let lastOrderId = null;
@@ -520,6 +547,37 @@ function updateCustomerRequiredUI(){
   if(box) box.className = has ? 'bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2' : 'bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
 }
 updateCustomerRequiredUI();
+if(isEditMode){
+  try{
+    selectedCustomerId = editOrder.customer_id || null;
+    document.getElementById('customerId').value = selectedCustomerId||'';
+    document.getElementById('custName').textContent = editOrder.customer_name||'— Belum pilih customer —';
+    document.getElementById('custPhone').textContent = editOrder.customer_phone||'';
+    updateCustomerRequiredUI();
+    cart = (editOrder.items||[]).map(function(x){return {product_id:x.product_id, name:x.name||x.sku, sku:x.sku, unit:x.unit||'pcs', price:parseFloat(x.price)||0, type:x.type||'product', quantity:parseFloat(x.quantity)||1, discount:parseFloat(x.discount)||0};});
+    renderCart();
+    // discount/tax/status
+    if(editOrder.discount_type) document.getElementById('discountType').value = editOrder.discount_type;
+    document.getElementById('discount').value = editOrder.discount||0;
+    document.getElementById('tax').value = editOrder.tax||0;
+    if(editOrder.order_status) setLaundryStatus(editOrder.order_status==='complete'?'received':editOrder.order_status);
+    // laundry_details -> rebuild cards
+    var ld = editOrder.laundry_details;
+    if(ld && typeof ld==='object'){
+      Object.keys(ld).forEach(function(k){
+        if(k==='catatan'||k==='lainnya_desc') return;
+        var v=parseInt(ld[k],10); if(!v) return;
+        var t=laundryTypes.find(function(x){return x.code===k;});
+        createLaundryCard(k, (t&&t.name)||k, (t&&t.icon)||'📦', v);
+      });
+      if(ld.catatan) document.getElementById('laundry_catatan').value=ld.catatan;
+      if(ld.lainnya_desc) document.getElementById('laundry_lainnya_desc').value=ld.lainnya_desc;
+      updateLaundryTotal();
+    }
+    document.getElementById('payBtnText').textContent='SIMPAN PERUBAHAN';
+    document.getElementById('payBtn').className='w-full bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white font-bold py-3.5 sm:py-3 rounded-xl text-[15px] shadow flex items-center justify-center gap-2';
+  }catch(e){ console.error('preload edit failed', e); }
+}
 
 function addToCart(id){
   let p = productMap[id];
@@ -884,6 +942,29 @@ document.addEventListener('keydown', e=>{
     document.body.classList.remove('pos-modal-open');
   }
 });
+
+async function submitEditOrder(){
+  if(cart.length===0){ alert('Keranjang kosong'); return; }
+  let btn=document.getElementById('payBtn'); if(btn.disabled) return;
+  btn.disabled=true; let prev=btn.innerHTML; btn.innerHTML='<span>Menyimpan...</span>';
+  try{
+    let payload={
+      customer_id: selectedCustomerId||null,
+      items: cart.map(function(c){return {product_id:c.product_id, quantity:c.quantity, price:c.price, discount:c.discount};}),
+      discount: (function(){ let v=parseFloat(document.getElementById('discount').value)||0; return document.getElementById('discountType').value==='percent'?v:v; })(),
+      discount_type: document.getElementById('discountType').value,
+      tax: parseFloat(document.getElementById('tax').value)||0,
+      order_status: document.getElementById('orderStatus').value||'received',
+      laundry_details: getLaundryDetails(),
+      notes: (editOrder&&editOrder.notes)||null,
+      _token: '{{ csrf_token() }}'
+    };
+    let res=await fetch('{{ isset($order) ? route('pos.update',$order) : route('pos.store') }}', {method:'POST', headers:{'Content-Type':'application/json','X-CSRF-TOKEN':'{{ csrf_token() }}','Accept':'application/json'}, body: JSON.stringify(payload)});
+    let data=await res.json();
+    if(!res.ok){ btn.disabled=false; btn.innerHTML=prev; alert(data.message||JSON.stringify(data.errors||data)); return; }
+    window.location.href='/orders/'+data.id;
+  }catch(e){ btn.disabled=false; btn.innerHTML=prev; alert(e.message); }
+}
 
 // ============ CHECKOUT MODAL ============
 function openCheckoutModal(){

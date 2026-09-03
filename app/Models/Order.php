@@ -16,6 +16,15 @@ class Order extends Model {
     public function refunds(){ return $this->hasMany(Refund::class); }
     public function merchant(){ return $this->belongsTo(Merchant::class); }
     public function scopeForBranch($q,$branchId){ return $q->where('branch_id',$branchId); }
+    /** True if this is a laundry order (has laundry_details or at least one service item). Checked via relation load when available. */
+    public function isLaundry(): bool {
+        if(!empty($this->laundry_details)) return true;
+        if($this->relationLoaded('items')){
+            foreach($this->items as $it) if(($it->product?->type)==='service' || ($it->type??'')==='service') return true;
+        }
+        return false;
+    }
+
     public function laundrySummary(): string {
         if(empty($this->laundry_details)) return $this->notes ?? '';
         $d=$this->laundry_details;

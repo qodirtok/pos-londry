@@ -12,7 +12,7 @@ class OrderController extends Controller {
         if($mid && (int)$order->merchant_id !== (int)$mid) abort(403,'Bukan order merchant Anda');
     }
     public function index(Request $r){
-        $branchId = session('branch_id');
+        $branchId = session('branch_id') ?? auth()->user()->branch_id;
         $isDemo=(bool)auth()->user()->is_demo;
         $mid = auth()->user()->merchant_id;
         $q = Order::with(['customer','cashier','branch'])->when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))->where('is_demo',$isDemo)->latest();
@@ -36,7 +36,7 @@ class OrderController extends Controller {
     }
     public function updateStatus(Request $r, Order $order, OrderService $svc){
         $this->assertOrderAccess($order);
-        $r->validate(['order_status'=>'required|in:received,washing,drying,ironing,ready,picked_up,cancelled']);
+        $r->validate(['order_status'=>'required|in:received,ready,picked_up,complete,cancelled']);
         $svc->updateStatus($order, $r->order_status, auth()->user());
         return back()->with('success','Status diupdate ke '.$r->order_status);
     }
@@ -54,7 +54,7 @@ class OrderController extends Controller {
     }
     public function updateCustomer(Request $r, Order $order){
         $this->assertOrderAccess($order);
-        if(in_array($order->order_status, ['picked_up','cancelled'])){
+        if(in_array($order->order_status, ['picked_up','complete','cancelled'])){
             return back()->with('error','Order sudah '.$order->order_status.' tidak bisa ganti customer');
         }
         $r->validate(['customer_id'=>'required|exists:customers,id']);
@@ -68,6 +68,20 @@ class OrderController extends Controller {
         try{ \App\Support\AuditLogger::log('update_customer','orders','Order',$order->id, ['customer_id'=>$old], ['customer_id'=>$customer->id]); }catch(\Throwable $e){}
         return back()->with('success','Customer diganti ke '.$customer->name);
     }
+    public function updateItems(Request $r, Order $order, OrderService $svc){
+        $this->assertOrderAccess($order);
+        $r->validate([
+            'items'=>'required|array|min:1',
+            'items.*.product_id'=>'required|exists:products,id',
+            'items.*.quantity'=>'required|numeric|min:0.001',
+            'items.*.price'=>'nullable|numeric|min:0',
+            'items.*.discount'=>'nullable|numeric|min:0',
+        ]);
+        $svc->updateItems($order, $r->input('items'), auth()->user());
+        if($r->wantsJson()) return response()->json(['ok'=>true,'message'=>'Item diperbarui','total'=>$order->fresh()->total]);
+        return back()->with('success','Item order diperbarui');
+    }
+
     public function sendWhatsapp(Request $r, Order $order, WhatsappService $wa){
         $this->assertOrderAccess($order);
         $order->load(['items','customer','branch','cashier']);

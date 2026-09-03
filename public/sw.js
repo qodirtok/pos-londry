@@ -1,5 +1,5 @@
 /* Londry POS — Service Worker | Cache shell + offline fallback */
-const CACHE = 'londry-v3';
+const CACHE = 'londry-v4';
 const OFFLINE_URL = '/offline';
 
 const PRECACHE = [
@@ -31,6 +31,10 @@ function isApiRequest(req) {
   return url.pathname.startsWith('/api/') || url.pathname.includes('-search');
 }
 function isNavigationRequest(req) {
+  const url = new URL(req.url);
+  // Never cache dynamic/role-specific pages
+  const skip = ['/antrian','/orders','/pos','/dashboard','/cash','/shifts','/customers','/products','/categories','/reports','/settings','/users','/branches','/merchants'];
+  if (skip.some(p => url.pathname === p || url.pathname.startsWith(p + '/'))) return false;
   return req.mode === 'navigate' || req.headers.get('accept')?.includes('text/html');
 }
 

@@ -30,6 +30,34 @@
     <a href="{{ route('orders.index') }}" class="mt-4 block text-center text-sm text-indigo-600 hover:underline py-2">Lihat semua order →</a>
   </div>
 </div>
+<div class="bg-white rounded-2xl border overflow-hidden mb-4 sm:mb-6">
+  <div class="p-4 sm:p-5 border-b flex items-center justify-between">
+    <h3 class="font-semibold text-sm sm:text-base">🕒 Antrian Terlama (Status: Received)</h3>
+    <a href="{{ route('queue.index') }}" class="text-xs text-indigo-600">Lihat semua antrian</a>
+  </div>
+  @forelse($queueList as $i => $o)
+  <a href="{{ route('orders.show',$o) }}" class="flex items-center gap-3 p-3 sm:p-4 border-b last:border-0 hover:bg-slate-50 active:bg-slate-100">
+    <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 grid place-items-center text-xs font-bold shrink-0">#{{ $i+1 }}</div>
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2">
+        <span class="font-mono text-xs font-semibold truncate">{{ $o->order_number }}</span>
+        @if(!empty($o->laundry_details))
+          <span class="bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded text-[10px] font-semibold border border-amber-100">Laundry</span>
+        @else
+          <span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px] font-semibold">Produk</span>
+        @endif
+      </div>
+      <div class="text-sm truncate">{{ $o->customer->name ?? 'Walk-in' }}</div>
+      <div class="text-xs text-slate-500">{{ $o->order_date->format('d/m/Y H:i') }}</div>
+    </div>
+    <div class="text-right shrink-0">
+      <div class="font-semibold text-sm">{{ money($o->total) }}</div>
+    </div>
+  </a>
+  @empty
+    <div class="p-8 text-center text-sm text-slate-400">Tidak ada antrian. Semua order sudah diproses. ✅</div>
+  @endforelse
+</div>
 <div class="bg-white rounded-2xl border overflow-hidden">
   <div class="p-4 sm:p-5 border-b flex items-center justify-between"><h3 class="font-semibold text-sm sm:text-base">Transaksi Terbaru</h3><a href="{{ route('orders.index') }}" class="text-xs text-indigo-600">Lihat semua</a></div>
   {{-- Desktop table --}}

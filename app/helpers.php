@@ -29,6 +29,7 @@ if(!function_exists('icon')){
             'shifts' => '⏰',
             'reports' => '📈',
             'laundry' => '🧺',
+            'queue' => '🕒',
             'merchants' => '🏪',
             'branches' => '🏢',
             'users' => '👤',

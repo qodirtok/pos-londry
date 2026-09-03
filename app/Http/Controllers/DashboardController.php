@@ -20,7 +20,7 @@ class DashboardController extends Controller {
             'today_customers' => Customer::when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))->where('is_demo',$isDemo)->whereDate('created_at',$today)->count(),
             'cash_income' => CashTransaction::when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))->where('type','income')->whereDate('transaction_date',$today)->sum('amount'),
             'cash_expense' => CashTransaction::when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))->where('type','expense')->whereDate('transaction_date',$today)->sum('amount'),
-            'pending_laundry' => (clone $q)->whereIn('order_status',['received','washing','drying','ironing'])->count(),
+            'pending_laundry' => (clone $q)->whereIn('order_status',['received'])->count(),
             'ready_laundry' => (clone $q)->where('order_status','ready')->count(),
             'outstanding' => (clone $q)->where('payment_status','!=','paid')->where('order_status','!=','cancelled')->sum(\Illuminate\Support\Facades\DB::raw('total - paid_amount')),
         ];
@@ -30,6 +30,14 @@ class DashboardController extends Controller {
             ->groupBy('order_date')->orderBy('order_date')->get();
         $byStatus = Order::where('is_demo',$isDemo)->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))->when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))->selectRaw("order_status, count(*) as cnt")->groupBy('order_status')->pluck('cnt','order_status');
         $recent = Order::where('is_demo',$isDemo)->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))->when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))->with(['customer','cashier'])->latest()->limit(5)->get();
-        return view('dashboard', compact('stats','sales7','byStatus','recent'));
+        $queueList = Order::where('is_demo',$isDemo)
+            ->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))
+            ->when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))
+            ->with(['customer'])
+            ->where('order_status', 'received')
+            ->orderBy('order_date', 'asc')
+            ->limit(5)
+            ->get();
+        return view('dashboard', compact('stats','sales7','byStatus','recent','queueList'));
     }
 }

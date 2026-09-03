@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\QueueController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\SettingController;
@@ -45,16 +46,23 @@ Route::middleware(['auth'])->group(function(){
     // POS
     Route::get('/pos', [PosController::class,'index'])->name('pos.index');
     Route::post('/pos', [PosController::class,'store'])->name('pos.store');
+    Route::get('/pos/edit/{order}', [PosController::class,'edit'])->name('pos.edit');
+    Route::post('/pos/edit/{order}', [PosController::class,'update'])->name('pos.update');
 
     // Orders
     Route::get('/orders', [OrderController::class,'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class,'show'])->name('orders.show');
+
+    // Antrian (laundry status=received)
+    Route::get('/antrian', [QueueController::class,'index'])->name('queue.index');
+    Route::post('/antrian/{order}/update', [QueueController::class,'update'])->name('queue.update');
     Route::get('/orders/{order}/receipt', [OrderController::class,'receipt'])->name('orders.receipt');
     Route::get('/orders/{order}/print', [OrderController::class,'print'])->name('orders.print');
     Route::post('/orders/{order}/status', [OrderController::class,'updateStatus'])->name('orders.status');
     Route::post('/orders/{order}/cancel', [OrderController::class,'cancel'])->name('orders.cancel');
     Route::post('/orders/{order}/payment', [OrderController::class,'addPayment'])->name('orders.payment');
     Route::post('/orders/{order}/customer', [OrderController::class,'updateCustomer'])->name('orders.customer');
+    Route::post('/orders/{order}/items', [OrderController::class,'updateItems'])->name('orders.items');
 
     // Cash & Shift
     Route::get('/cash', [CashController::class,'index'])->name('cash.index');

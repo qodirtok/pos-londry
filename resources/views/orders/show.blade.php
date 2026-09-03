@@ -33,7 +33,7 @@
       <p class="text-xs sm:text-sm text-slate-500 truncate">{{ $order->branch->name }} • {{ $order->order_date->format('d M Y') }} • Kasir: {{ $order->cashier->name }}</p>
     <div class="mt-1 flex flex-wrap items-center gap-2 text-sm">
       <span>Customer: <b id="orderCustName">{{ $order->customer->name ?? 'Walk-in' }}</b> <span class="text-slate-500">{{ $order->customer->phone ?? '' }} @if($order->customer) • {{ $order->customer->code }} @endif</span></span>
-      @if(!in_array($order->order_status, ['picked_up','cancelled']))
+      @if(!in_array($order->order_status, ['ready','picked_up','complete','cancelled']))
         <button type="button" onclick="openModal('#editCustomerModal')" class="text-xs bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">
           <svg class="order-flat-icon" viewBox="0 0 24 24" style="width:.85rem;height:.85rem"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.25 4.25 0 01-1.897 1.21l-2.25.5a.75.75 0 01-.906-.906 4.25 4.25 0 011.21-1.897L16.862 4.487zm0 0L19.5 7.125"/></svg> Ganti</button>
       @endif
@@ -58,7 +58,15 @@
 <div class="grid lg:grid-cols-3 gap-3 sm:gap-4">
   <div class="lg:col-span-2 space-y-3 sm:space-y-4">
     <div class="bg-white rounded-2xl border overflow-hidden">
-      <div class="p-3 sm:p-4 border-b"><h3 class="font-semibold text-sm sm:text-base">Items</h3></div>
+      <div class="p-3 sm:p-4 border-b flex items-center justify-between">
+        <h3 class="font-semibold text-sm sm:text-base">Items</h3>
+        @if(!in_array($order->order_status, ['ready','picked_up','complete','cancelled']))
+          <div class="flex gap-1.5">
+            <a href="{{ route('pos.edit',$order) }}" class="text-xs bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white px-3 py-1.5 rounded-full font-semibold inline-flex items-center gap-1"><svg class="order-flat-icon" viewBox="0 0 24 24" style="width:.85rem;height:.85rem"><path d="M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z"/></svg> Edit di POS</a>
+            <button type="button" onclick="openModal('#editItemsModal')" class="text-xs bg-white border border-slate-200 active:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-full font-semibold">Edit Cepat</button>
+          </div>
+        @endif
+      </div>
       <div class="overflow-x-auto">
         <table class="w-full text-sm min-w-[420px]">
           <thead class="bg-slate-50 text-slate-500">
@@ -115,16 +123,18 @@
     <div class="bg-white rounded-2xl border p-3 sm:p-4">
       <h3 class="font-semibold text-sm sm:text-base mb-3">Status Laundry</h3>
       <div class="flex flex-wrap gap-1.5 mb-3">
-        @foreach(['received','washing','drying','ironing','ready','picked_up'] as $s)
-        <span class="px-2.5 py-1.5 rounded-full text-xs font-medium {{ $order->order_status==$s?'bg-indigo-600 text-white':'bg-slate-100 text-slate-600' }}">{{ $s }}</span>
+        @php $statusOpts = $order->isLaundry() ? ['received','ready','picked_up'] : ['complete','received','ready','picked_up']; if(in_array($order->order_status, ['cancelled'])) $statusOpts[] = 'cancelled'; @endphp
+        @foreach($statusOpts as $s)
+        <span class="px-2.5 py-1.5 rounded-full text-xs font-medium {{ $order->order_status==$s?'bg-indigo-600 text-white':'bg-slate-100 text-slate-600' }}">{{ str_replace('_',' ',$s) }}</span>
         @endforeach
       </div>
-      @if(!in_array($order->order_status,['picked_up','cancelled']))
+      @if(!in_array($order->order_status,['picked_up','complete','cancelled']))
       <form method="POST" action="{{ route('orders.status',$order) }}" class="flex gap-2" onsubmit="return handleSubmitForm(this, event)">
         @csrf
         <select name="order_status" class="flex-1 border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white">
-          @foreach(['received','washing','drying','ironing','ready','picked_up'] as $s)
-          <option value="{{ $s }}" @selected($order->order_status==$s)>{{ $s }}</option>
+          @php $statusFormOpts = ['received','ready','picked_up','complete','cancelled']; @endphp
+          @foreach($statusFormOpts as $s)
+          <option value="{{ $s }}" @selected($order->order_status==$s)>{{ str_replace('_',' ',$s) }}</option>
           @endforeach
         </select>
         <button type="submit" class="bg-slate-900 text-white px-4 py-3 rounded-xl text-sm font-semibold flex items-center gap-2">
@@ -245,6 +255,31 @@
     </div>
   </div>
 </div>
+
+{{-- Edit Items Modal (only when order is still editable) --}}
+@if(!in_array($order->order_status, ['ready','picked_up','complete','cancelled']))
+<div id="editItemsModal" class="order-modal-backdrop">
+  <div class="order-modal" style="max-width:480px">
+    <div class="order-modal-header">
+      <h3>Edit Item</h3>
+      <button type="button" onclick="closeModal('#editItemsModal')" class="close-btn">×</button>
+    </div>
+    <div class="order-modal-body">
+      <div id="editItemsList" class="space-y-2"></div>
+      <div class="mt-3">
+        <label class="text-xs font-semibold text-slate-500 mb-1 block">Tambah Produk</label>
+        <input type="text" id="editItemSearch" placeholder="Cari produk..." class="w-full border border-slate-200 rounded-xl px-3 py-3 text-sm">
+        <div id="editItemResults" class="hidden mt-2 bg-white border rounded-xl overflow-hidden shadow-sm max-h-40 overflow-y-auto"></div>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">Qty hanya bisa diedit saat order status <b>received</b>.</p>
+    </div>
+    <div class="order-modal-footer">
+      <button type="button" class="btn btn-secondary" onclick="closeModal('#editItemsModal')">Batal</button>
+      <button type="button" class="btn btn-primary" onclick="saveOrderItems()">Simpan Item</button>
+    </div>
+  </div>
+</div>
+@endif
 
 @push('scripts')
 
@@ -367,6 +402,111 @@ function selectNewCust(id, name, phone){
   document.getElementById('selectedCustPhone').textContent = phone;
   document.getElementById('custResults').classList.add('hidden');
   document.getElementById('custSearchInput').value = '';
+}
+
+// ===== Edit Items logic =====
+let editItemsCart = [];
+const initialItems = {!! json_encode($order->items->map(function($it){ return ['product_id'=>$it->product_id,'name'=>$it->product_name,'sku'=>$it->sku,'price'=>(float)$it->price,'quantity'=>(float)$it->quantity,'unit'=>$it->unit,'discount'=>(float)$it->discount,'notes'=>$it->notes]; })->values()) !!};
+function initEditItemsCart(){
+  editItemsCart = JSON.parse(JSON.stringify(initialItems));
+}
+function ensureEditItemsReady(){
+  if(editItemsCart.length===0 && initialItems.length>0){
+    editItemsCart = JSON.parse(JSON.stringify(initialItems));
+  }
+  renderEditItemsList();
+}
+// Wrap openModal to also handle editItemsModal
+(function(){
+  const _openModal = window.openModal;
+  window.openModal = function(sel){
+    if(typeof _openModal==='function') _openModal(sel);
+    else { const el=document.querySelector(sel); if(el) el.classList.add('is-open'); }
+    if(sel==='#editItemsModal'){
+      ensureEditItemsReady();
+    }
+  };
+})();
+document.addEventListener('DOMContentLoaded', function(){
+  const modal = document.getElementById('editItemsModal');
+  if(!modal) return;
+  initEditItemsCart();
+  const obs = new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      if(m.target.id==='editItemsModal' && m.target.classList.contains('is-open')){
+        renderEditItemsList();
+      }
+    });
+  });
+  obs.observe(modal, {attributes:true, attributeFilter:['class']});
+  modal.addEventListener('click', function(e){ if(e.target===modal) closeModal('#editItemsModal'); });
+});
+function renderEditItemsList(){
+  const box = document.getElementById('editItemsList');
+  if(!box) return;
+  if(editItemsCart.length===0){
+    box.innerHTML='<p class="text-sm text-slate-400 text-center py-3">Keranjang kosong</p>'; return;
+  }
+  let html='';
+  editItemsCart.forEach(function(it,idx){
+    html += '<div class="flex items-center gap-2 border border-slate-200 rounded-xl px-3 py-2">'+
+            '<div class="flex-1 min-w-0"><div class="text-sm font-semibold truncate">'+escapeHtml(it.name)+'</div><div class="text-xs text-slate-500">'+escapeHtml(it.sku)+' \u2022 Rp '+(Number(it.price).toLocaleString('id-ID'))+'/'+escapeHtml(it.unit)+'</div></div>'+
+            '<div class="flex items-center gap-1 shrink-0"><button type="button" onclick="editItemQty('+idx+',-1)" class="w-7 h-7 bg-slate-100 rounded-lg grid place-items-center text-sm font-bold">-</button>'+
+            '<input type="number" value="'+it.quantity+'" step="0.001" min="0.001" onchange="editItemQtySet('+idx+',this.value)" class="w-16 border border-slate-200 rounded-lg px-1 py-1 text-center text-sm font-semibold">'+
+            '<button type="button" onclick="editItemQty('+idx+',1)" class="w-7 h-7 bg-slate-900 text-white rounded-lg grid place-items-center text-sm font-bold">+</button></div>'+
+            '<button type="button" onclick="editItemRemove('+idx+')" class="w-7 h-7 bg-rose-50 text-rose-600 rounded-lg grid place-items-center">x</button>'+
+            '</div>';
+  });
+  box.innerHTML=html;
+}
+function escapeHtml(s){ return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function editItemQty(idx,delta){
+  let v = parseFloat(editItemsCart[idx].quantity) + delta;
+  if(v<=0) return editItemRemove(idx);
+  editItemsCart[idx].quantity = v;
+  renderEditItemsList();
+}
+function editItemQtySet(idx,val){
+  let v=parseFloat(val); if(!v||v<=0) v=1;
+  editItemsCart[idx].quantity=v; renderEditItemsList();
+}
+function editItemRemove(idx){ editItemsCart.splice(idx,1); renderEditItemsList(); }
+let editItemSearchTimer=null;
+document.getElementById('editItemSearch')?.addEventListener('input', function(){
+  let q=this.value.trim(); let box=document.getElementById('editItemResults');
+  if(q.length<2){ box.classList.add('hidden'); return; }
+  clearTimeout(editItemSearchTimer);
+  editItemSearchTimer=setTimeout(function(){
+    fetch('/products-search?q='+encodeURIComponent(q), {headers:{'X-Requested-With':'XMLHttpRequest'}})
+      .then(function(r){return r.json();})
+      .then(function(data){
+        if(!data.length){ box.innerHTML='<div class="p-3 text-sm text-slate-400">Tidak ditemukan</div>'; box.classList.remove('hidden'); return; }
+        box.innerHTML=data.map(function(p){
+          return '<button type="button" onclick="addProductToEdit('+p.id+')" data-prod-id="'+p.id+'" data-prod-name="'+escapeHtml(p.name)+'" data-prod-sku="'+escapeHtml(p.sku)+'" data-prod-price="'+p.price+'" data-prod-unit="'+escapeHtml(p.unit)+'" class="w-full text-left px-3 py-2.5 hover:bg-slate-50 text-sm border-b last:border-0"><b>'+escapeHtml(p.name)+'</b><br><span class="text-slate-500 text-xs">'+escapeHtml(p.sku)+' \u2022 Rp '+(Number(p.price).toLocaleString('id-ID'))+'/'+escapeHtml(p.unit)+'</span></button>';
+        }).join('');
+        box.classList.remove('hidden');
+      });
+  },300);
+});
+function addProductToEdit(pid){
+  const btn=document.querySelector('#editItemResults [data-prod-id="'+pid+'"]');
+  if(!btn) return;
+  const name=btn.dataset.prodName, sku=btn.dataset.prodSku, price=parseFloat(btn.dataset.prodPrice), unit=btn.dataset.prodUnit;
+  let existing=editItemsCart.find(function(x){return String(x.product_id)===String(pid);});
+  if(existing) existing.quantity = parseFloat(existing.quantity)+1; else editItemsCart.push({product_id:pid, name:name, sku:sku, price:price, unit:unit, quantity:1, discount:0, notes:null});
+  document.getElementById('editItemResults').classList.add('hidden');
+  document.getElementById('editItemSearch').value='';
+  renderEditItemsList();
+}
+async function saveOrderItems(){
+  if(editItemsCart.length===0){ alert('Item tidak boleh kosong'); return; }
+  const payload={ items: editItemsCart.map(function(x){return {product_id:x.product_id, quantity:x.quantity, price:x.price, discount:x.discount, notes:x.notes};}), _token: '{{ csrf_token() }}' };
+  try{
+    const res = await fetch('{{ route('orders.items',$order) }}', {method:'POST', headers:{'Content-Type':'application/json','X-CSRF-TOKEN':'{{ csrf_token() }}','Accept':'application/json'}, body: JSON.stringify(payload)});
+    const data = await res.json();
+    if(!res.ok){ let m=data.message||'Gagal'; if(data.errors) m+='\n'+Object.entries(data.errors).map(function(kv){return kv[0]+': '+(Array.isArray(kv[1])?kv[1].join(', '):kv[1]);}).join('\n'); alert(m); return; }
+    location.reload();
+  }catch(e){ alert('Error: '+e.message); }
 }
 </script>
 @endpush
