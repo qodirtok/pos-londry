@@ -538,6 +538,8 @@ let productMap = {}; products.forEach(p=> productMap[p.id]=p);
 let cart = [];
 let lastOrderId = null;
 let lastOrderData = null;
+let selectedLaundry = new Set();
+const LAUNDRY_KEY = 'pos_laundry_draft';
 let selectedCustomerId = document.getElementById('customerId').value || null;
 function updateCustomerRequiredUI(){
   let hint=document.getElementById('customerRequiredHint');
@@ -547,7 +549,6 @@ function updateCustomerRequiredUI(){
   if(box) box.className = has ? 'bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2' : 'bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
 }
 updateCustomerRequiredUI();
-clearLaundryStorage();
 if(isEditMode){
   clearLaundryStorage();
   try{
@@ -718,8 +719,7 @@ function clearCustomer(){
 }
 
 // --- Rincian Laundry: open via modal popup, persist via localStorage ---
-let selectedLaundry = new Set();
-const LAUNDRY_KEY = 'pos_laundry_draft';
+// selectedLaundry & LAUNDRY_KEY declared at top init
 
 function saveLaundryDraft(){
   let d = {};
