@@ -386,9 +386,9 @@
         <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
         Tutup
       </button>
-      <button type="button" class="btn btn-success" onclick="closeModal('modalLaundry')">
+      <button type="button" class="btn btn-success" onclick="saveLaundryAndClose()">
         <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#10b981"><path d="M5 13l4 4L19 7"/></svg>
-        Simpan
+        Simpan & Tutup
       </button>
     </div>
   </div>
@@ -547,7 +547,9 @@ function updateCustomerRequiredUI(){
   if(box) box.className = has ? 'bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2' : 'bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
 }
 updateCustomerRequiredUI();
+clearLaundryStorage();
 if(isEditMode){
+  clearLaundryStorage();
   try{
     selectedCustomerId = editOrder.customer_id || null;
     document.getElementById('customerId').value = selectedCustomerId||'';
@@ -733,7 +735,35 @@ function saveLaundryDraft(){
   try { localStorage.setItem(LAUNDRY_KEY, JSON.stringify(payload)); } catch(e){}
 }
 
+function saveLaundryAndClose(){
+  saveLaundryDraft();
+  closeModal('modalLaundry');
+}
+
 function restoreLaundryDraft(){
+  if(isEditMode && editOrder && editOrder.laundry_details){
+    let ld = editOrder.laundry_details;
+    selectedLaundry.clear();
+    let grid = document.getElementById('laundryGrid');
+    if (grid) grid.innerHTML = '';
+    Object.keys(ld).forEach(code=>{
+      if(code==='catatan'||code==='lainnya_desc') return;
+      let v = parseInt(ld[code],10);
+      if(v>0){
+        let t = laundryTypes.find(x=> x.code===code);
+        createLaundryCard(code, (t && t.name) || code, (t && t.icon) || '📦', v);
+      }
+    });
+    let descEl = document.getElementById('laundry_lainnya_desc');
+    if (descEl) descEl.value = ld.lainnya_desc || '';
+    let catEl = document.getElementById('laundry_catatan');
+    if (catEl) catEl.value = ld.catatan || '';
+    refreshLaundrySelect();
+    updateLaundryTotal();
+    return;
+  }
+  // new order: restore from localStorage draft (ignore stale draft in edit mode)
+  if(isEditMode) return;
   let raw = localStorage.getItem(LAUNDRY_KEY);
   if (!raw) return;
   let payload;
@@ -755,6 +785,13 @@ function restoreLaundryDraft(){
   if (catEl && payload.catatan) catEl.value = payload.catatan;
   refreshLaundrySelect();
   updateLaundryTotal();
+}
+// clear localStorage draft so rincian laundry jangan 'nge-cache' data order lama ketika edit
+function clearLaundryStorage(){
+  try { localStorage.removeItem(LAUNDRY_KEY); } catch(e){}
+  selectedLaundry.clear();
+  let grid = document.getElementById('laundryGrid');
+  if (grid) grid.innerHTML = '';
 }
 
 function openLaundryModal(){
@@ -809,7 +846,7 @@ function createLaundryCard(code, name, icon, initialValue){
     <button type="button" onclick="stepLaundry('`+code+`',-1)" class="ll-step minus" aria-label="Kurangi">
       <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M5 12h14"/></svg>
     </button>
-    <input id="laundry_`+code+`" data-code="`+code+`" type="number" min="0" inputmode="numeric" placeholder="0" class="ll-input laundryInput" value="`+(initialValue||'')+`">
+    <input id="laundry_'+code+'" data-code="'+code+'" type="number" min="0" inputmode="numeric" placeholder="0" class="ll-input laundryInput" value="`+(initialValue||'')+`">
     <button type="button" onclick="stepLaundry('`+code+`',1)" class="ll-step plus" aria-label="Tambah">
       <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem;color:#fff"><path d="M5 12h14M12 5v14"/></svg>
     </button>
