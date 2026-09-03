@@ -483,4 +483,22 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 
 ---
 
-*Last updated: 2026-09-03 — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*
+## 13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare)
+
+**Deploy script otomatis:** `deploy.sh` di repo root. Jalankan kapanpun setelah `git pull`:
+
+```bash
+cd /root/www/pos-londry
+./deploy.sh
+```
+
+Script melakukan: git pull latest → composer install → npm ci + build → fix permission storage/www-data → cache config+routes+views+events → migrate → reload PHP-FPM + nginx.
+
+### Troubleshooting deploy khas (lihat juga §12)
+
+|| Gejala | Akar | Solusi |
+||--------|------|--------|
+|| `500 Server Error` setelah git pull | storage/views/file cache dimilik `root` (bukan www-data); atau route cache kadaluarsa (`Route [queue.index] not defined`) | `chown -R www-data:www-data storage bootstrap/cache` lalu `php artisan route:cache` (gunakan deploy.sh) |
+||| 419 / CSRF token mismatch di login | Cloudflare CDN meng-cache halaman `/login` statis → token CSRF tidak sync dengan cookie session | Tambahkan di nginx: `location ~ ^/(login|register|logout|password|admin/login) { add_header Cache-Control "no-store, no-cache, must-revalidate, max-age=0"; }` lalu `nginx -s reload` |
+
+*Last updated: 2026-09-03 — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.
