@@ -8,5 +8,12 @@
 @endforeach
 <button class="bg-indigo-600 text-white px-6 py-2 rounded-xl">Simpan</button>
 </form>
+<div class="mt-6 pt-6 border-t">
+  <a href="{{ route('settings.backup') }}" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl font-medium">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12V3m0 0l-4 4m4-4l4 4"/></svg>
+    Backup Database (Admin)
+  </a>
+  <p class="text-xs text-slate-500 mt-2">Unduh file .zip berisi dump database MySQL lengkap.</p>
+</div>
 <p class="text-xs text-slate-500 mt-4">WhatsApp, receipt size, dsb bisa ditambah di table settings.</p>
 @endsection

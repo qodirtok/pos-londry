@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function(){
     // Settings
     Route::get('/settings', [SettingController::class,'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class,'update'])->name('settings.update');
+    Route::get('/settings/backup', [SettingController::class,'backup'])->name('settings.backup');
 
     // Laundry item types (dinamis, tersimpan)
     Route::get('/api/laundry-types', [LaundryItemTypeController::class,'apiIndex'])->name('api.laundry-types.index');
