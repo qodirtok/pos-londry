@@ -215,6 +215,7 @@ GET  /pos, POST /pos                           # PosController (products & laund
 GET  /pos/edit/{order}, POST /pos/edit/{order} # Edit order via POS (items/qty/harga/diskon/laundry/status) — POS-style full edit
 GET  /orders, GET /orders/{order}, GET /orders/{order}/receipt, GET /orders/{order}/print
 POST /orders/{order}/status, /cancel, /payment, /customer, /items, /whatsapp
+GET  /settings, POST /settings                   # SettingController (app/company/currency/struk); GET /settings/backup (Admin only) → mysqldump zip download
 GET  /antrian, POST /antrian/{order}/update    # Antrian (laundry received) — uses OrderService::updateStatus (rollback allowed)
 GET  /cash, GET /cash/create, POST /cash
 GET  /shifts, POST /shifts/open, POST /shifts/{shift}/close
@@ -301,6 +302,21 @@ Verifikasi: TOKO-002 katalog tidak terlihat di LONDRY-001 dan sebaliknya; POS pr
 - **Offline page** `GET /offline` (guest layout).
 
 ### G. Order / Payment / Stock / Cash
+### I. Database Backup (Settings → Backup Database (Admin))
+
+- **Route**: `GET /settings/backup` → `SettingController@backup` (name `settings.backup`), di dalam auth + `block.demo` middleware group.
+- **Akses**: hanya role `Admin` (`User::hasRole('Admin')`). Non-admin → `abort(403)`. Kasir melihat halaman Settings tapi tombol backup munya, klik → 403.
+- **Backend** (`SettingController@backup`):
+  - Baca `config('database.connections.mysql')` untuk host/port/db/username/password.
+  - Resolve `mysqldump` binary: path absolut brew (`/opt/homebrew/opt/mysql-client/bin/mysqldump`), fallback `/usr/bin/mysqldump` + `command -v mysqldump`.
+  - Jika tidak ketemu → redirect back dengan error *Backup gagal: mysqldump binary tidak ditemukan*.
+  - Jalankan dump via `Symfony\Component\Process\Process` → file `storage/app/backups/db_backup_<YYYY-mm-dd_His>.sql`.
+  - Zip dengan `ZipArchive` → `db_backup_<timestamp>.zip` (hapus .sql asli).
+  - Return `Storage::disk('local')->download($file)` → response `Content-Disposition: attachment; filename=...zip`, magic bytes `PK`.
+  - Guard kosong: kalau dump gagal/empty → hapus file, redirect back error.
+- **Frontend** (`resources/views/settings/index.blade.php`): tombol amber "Backup Database (Admin)" + `<p>` kecil. Tidak perlu tambahan JS; link langsung trigger download.
+- **Notes**: hanya MySQL (production & local dev). Untuk SQLite dev, dump via `sqlite3` belum di-support. Semua file backup tak dilacak git (`storage/app/backups/` gitignored).
+
 - **NumberGenerator:** `MLG-YYYYMMDD-000001` / `SBY2-...` / `DEMO-...` per cabang, `PAY-...`, `CUST-...`.
 - **OrderService** `DB::transaction`: Order → OrderItems (snapshot) → StockMovement sale → Payment → CashTransaction (merchant_id). Validasi pcs integer, discount ≤ subtotal.
 - **Cash/Shift:** `CashService` open/close dengan `merchant_id`.
@@ -408,6 +424,12 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 - **orders/show**: tombol **Edit di POS** (+ modal Edit Cepat), status dropdown semua 5 status
 - **qty check removed**: stok boleh minus (lihat memori Londry POS gotchas)
 - Verifikasi: `POST /pos/edit/2 qty=2` 200 total 14000 (revert 7000 ✓); `ready→received` rollback 200 ✓; `picked_up/complete/cancelled` still block edit 403/422 ✓; `php -l` + `view:cache` ✓; routes registered
+
+### 2026-09-03 — Fitur Backup Database (Settings → Backup Database (Admin))
+- **SettingController@backup**: `GET /settings/backup`, hanya role `Admin` (kasir → 403); dump MySQL via `mysqldump` (resolve path brew + fallback) → `.sql` → zip → `Storage::disk('local')->download`.
+- Error-safe: binary tak ketemu / dump kosong → redirect back error, bukan 500.
+- Frontend: tombol amber di `settings/index.blade.php`, download otomatis via `<a>` langsung.
+- Verifikasi: kasir → 403 ✓; admin → 200, `db_backup_<ts>.zip`, magic bytes `PK`, 10KB ✓; `php -l` + `route:list` ✓
 
 
 
