@@ -1,0 +1,17 @@
+/Users/zlns/personal-www/londry/CLAUDE.md
+/Users/zlns/personal-www/londry/HANDOVER.md
+/Users/zlns/personal-www/londry/README.md
+/Users/zlns/personal-www/londry/pos-laundry.md
+/Users/zlns/personal-www/londry/public/robots.txt
+/Users/zlns/personal-www/londry/Screenshot 2026-09-01 at 08.51.23.png
+/Users/zlns/personal-www/londry/public/apple-touch-icon.png
+/Users/zlns/personal-www/londry/public/icons/apple-touch-icon.png
+/Users/zlns/personal-www/londry/public/icons/icon-128x128.png
+/Users/zlns/personal-www/londry/public/icons/icon-144x144.png
+/Users/zlns/personal-www/londry/public/icons/icon-152x152.png
+/Users/zlns/personal-www/londry/public/icons/icon-180x180.png
+/Users/zlns/personal-www/londry/public/icons/icon-192x192.png
+/Users/zlns/personal-www/londry/public/icons/icon-384x384.png
+/Users/zlns/personal-www/londry/public/icons/icon-512x512.png
+/Users/zlns/personal-www/londry/public/icons/icon-72x72.png
+/Users/zlns/personal-www/londry/public/icons/icon-96x96.png

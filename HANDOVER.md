@@ -21,16 +21,11 @@ php artisan view:cache          # opsional, untuk performa
 
 ### Dev lokal (SQLite, artisan serve)
 ```bash
-cd /root/www/pos-londry
-cp .env.example .env
-php artisan key:generate
-touch database/database.sqlite
-composer install --no-dev --optimize-autoloader
-# .env dev: DB_CONNECTION=sqlite, DB_DATABASE=/absolute/path/database/database.sqlite
-php artisan migrate --force
-php artisan db:seed --force            # ProductionSeeder + DemoSeeder (idempotent)
-php artisan serve --host=127.0.0.1 --port=8010
-# buka http://127.0.0.1:8010/login — form login bersih, login manual username/email + password
+cd /Users/zlns/personal-www/londry   # repo lokal
+php artisan serve --host=127.0.0.1 --port=8000   # Laravel serve
+npm run dev                                       # Vite HMR port 5173 (WAJIB jalan, jangan npm run build)
+# login http://127.0.0.1:8000/login — kasir/password
+# JANGAN: npm run build (hanya prod)
 ```
 
 **Akun seed (idempotent, `firstOrCreate`):**
@@ -144,7 +139,7 @@ londry/
 │   ├── offline.blade.php          # offline fallback untuk PWA (precached oleh sw.js)
 │   ├── merchants/{index,create,edit}.blade.php  # CRUD merchant
 │   ├── pos/index.blade.php        # POS utama + panel Rincian Laundry collapsed (list vertical) + status Baru/Selesai
-│   ├── orders/show.blade.php      # detail order + rincian dinamis + bar Aksi Struk (Cetak/WA/Close/Cetak&WA)
+│   ├── orders/show.blade.php      # detail order + rincian dinamis + bar Aksi Struk (Cetak/WA/Close/Cetak&WA) + **Edit di POS** (/pos/edit/{id}) + Edit Cepat modal + status dropdown rollback ready→received
 │   ├── orders/receipt.blade.php   # struk 320px monospace, kotak RINCIAN LAUNDRY dinamis, TANPA info cabang
 │   ├── orders/print.blade.php     # sync dari receipt
 │   ├── laundry-types/index.blade.php # kelola jenis rincian
@@ -205,7 +200,7 @@ londry/
 - `Branch`/`User`/`Customer`/`Order` fillable tambah `merchant_id,is_demo`; belongsTo `merchant`.
 - `Category`/`Product`/`LaundryItemType`/`Setting` fillable tambah `merchant_id`; belongsTo `merchant`; unique per merchant (`code,merchant_id`).
 - `CashTransaction`/`CashierShift` fillable tambah `merchant_id`; belongsTo `merchant`.
-- `Order` casts `laundry_details => array`; `laundrySummary()` dinamis via `LaundryItemType`. Middleware `BranchContext` + `MerchantContext` set session.
+- `Order` casts `laundry_details => array`; **`isLaundry(): bool`** helper (true bila `laundry_details` terisi atau ada item `type=service`); `laundrySummary()` dinamis via `LaundryItemType`. Middleware `BranchContext` + `MerchantContext` set session.
 
 ---
 
@@ -216,9 +211,11 @@ GET  /, /login, POST /login, POST /logout, GET /switch-branch/{id}, GET /switch-
 GET  /dashboard
 resource merchants, branches, users (middleware block.demo — demo 403)
 resource categories, products, customers (+ /customers-search, /products-search, /api/customers, /api/products)
-GET  /pos, POST /pos                           # PosController (products & laundryTypes per merchant)
+GET  /pos, POST /pos                           # PosController (products & laundryTypes per merchant); qty check removed (stok boleh minus)
+GET  /pos/edit/{order}, POST /pos/edit/{order} # Edit order via POS (items/qty/harga/diskon/laundry/status) — POS-style full edit
 GET  /orders, GET /orders/{order}, GET /orders/{order}/receipt, GET /orders/{order}/print
-POST /orders/{order}/status, /cancel, /payment, /whatsapp
+POST /orders/{order}/status, /cancel, /payment, /customer, /items, /whatsapp
+GET  /antrian, POST /antrian/{order}/update    # Antrian (laundry received) — uses OrderService::updateStatus (rollback allowed)
 GET  /cash, GET /cash/create, POST /cash
 GET  /shifts, POST /shifts/open, POST /shifts/{shift}/close
 GET  /reports, /reports/sales, /payments, /cash, /products, /customers, /laundry
@@ -237,13 +234,14 @@ Lihat `routes/web.php` untuk daftar lengkap.
 ## 6) Fitur Kunci
 
 ### A. POS + Rincian Laundry Dinamis
-- **Panel POS** `resources/views/pos/index.blade.php`: search SKU/barcode, chips kategori horizontal, grid produk `grid-cols-2 sm:grid-cols-3 xl:grid-cols-4`; customer search; **Rincian Laundry** collapsed + badge + `laundryGrid flex flex-col gap-2` list vertical (icon+nama+−/＋+input+×), dropdown `laundrySelect` + `+ Tambah` + `Buat baru`.
+- **Panel POS** `resources/views/pos/index.blade.php`: search SKU/barcode, chips kategori; grid produk; customer search; **Rincian Laundry** modal popup + list vertical; status Baru/Selesai; **Mode Edit** (`GET /pos/edit/{order}`) pre-fills cart/customer/laundry → tombol `SIMPAN PERUBAHAN` (POS-style full edit item/qty/harga/diskon/laundry/status).
 - **Backend:** `PosController@index` kirim `products` + `laundryTypes` + `customers` semua `when($mid)` (mid dari `auth()->user()->merchant_id`). `OrderService::create()` terima `laundry_details` + `order_status` → simpan ke `orders.laundry_details` JSON + `merchant_id` dari `cashier/branch`.
 - **Struk:** `orders/receipt.blade.php` + `print.blade.php` sync, kotak **RINCIAN LAUNDRY** dinamis, tanpa info cabang.
 
-### B. Status Laundry di POS
-- **2 button:** `🟡 Baru` (received) default active, `✅ Selesai` (ready). Hidden `input#orderStatus`, helper `setLaundryStatus(v)`.
-- **Backend:** `OrderService::create` terima `order_status` (`received`..`picked_up`), default `received`.
+### B. Status Order (laundry 3, product → complete)
+|  - **Laundry flow:** `received → ready → picked_up` (3 status). `complete` otomatis untuk penjualan barang (product-only).
+|  - **POS:** btn Baru (received) / Selesai (ready), hidden `orderStatus`. Product-only auto `complete`. Stok boleh minus (qty check removed).
+|  - **Rollback:** `ready → received` **diperbolehkan** (koreksi input) di orders/show, `/antrian/{order}/update`, & POS mode edit. `picked_up/complete/cancelled` terkunci.
 
 ### C. Cetak / WA / Close
 - `orders/show` bar **Aksi Struk**: Cetak, Kirim WA, Close, Cetak & WA + POS Baru.
@@ -271,13 +269,13 @@ Lihat `routes/web.php` untuk daftar lengkap.
 | `CategoryController` | `when mid where merchant_id`, create `merchant_id` auto, code cek per merchant | 403 cross di edit/update/destroy |
 | `ProductController` | `when mid where merchant_id`, create/edit list kategori filtered, `merchant_id` on create, cek kategori milik toko | 403 cross di edit/update/destroy/show/search |
 | `CustomerController` | `when branch_id + when mid + where is_demo`, store `merchant_id` dari branch/user | 403 cross |
-| `PosController` | products + laundryTypes + customers semua `when mid` | — |
-| `OrderController` | `where merchant_id + where is_demo + when branch_id`, `assertOrderAccess` cek `merchant_id` | 403 cross di show/receipt/print/payment/whatsapp |
+| `PosController` | products + laundryTypes + customers semua `when mid`. Methods: `index()`, `edit(Order)` (preload + POS view mode edit), `store()` (qty check removed — stok boleh minus), `update()` (`POST /pos/edit/{order}` → `OrderService::updateFromPos()`). Routes: `GET|POST /pos/edit/{order}`. | — |
+| `OrderController` | `where merchant_id + where is_demo + when branch_id`, `assertOrderAccess` cek `merchant_id`. Branch fallback `session('branch_id') ?? auth()->user()->branch_id`. New: `updateItems()` (POST `/orders/{order}/items`). | 403 cross di show/receipt/print/payment/whatsapp/edit |
 | `Dashboard/Report` | `when mid` di semua query (today_customers, cash_income/expense, sales7, byStatus, recent, products, laundry weight) | — |
 | `Cash/Shift` | `where merchant_id`, openShift set `mid` dari branch, closeShift filter `when merchant_id` | — |
 | `LaundryItemTypeController` | `when mid`, create `merchant_id` auto, code unique per merchant | 403 cross di destroy |
 | `SettingController` | `when mid whereNull branch_id`, branch list filtered, update `merchant_id` | — |
-| `OrderService` | `merchant_id` dari `cashier->merchant_id ?? branch->merchant_id ?? session(merchant_id)` → `Order` + `CashTransaction` + `StockMovement` | — |
+| `OrderService` | `merchant_id` dari `cashier->merchant_id ?? branch->merchant_id ?? session(merchant_id)` → `Order` + `CashTransaction` + `StockMovement`. Methods: `create()`, `updateStatus()` (rollback `ready→received` allowed, product auto-`complete`, 3 laundry statuses), `updateItems()` (edit blocked saat ready/picked_up/complete/cancelled), `updateFromPos()` (full edit via POS), `cancel()`, `addPayment()`. Qty check removed → stok boleh minus. | — |
 
 **UI:** Sidebar `Merchant / Toko` dropdown (super admin semua, admin toko single `code — name`), `Cabang Aktif` difilter per merchant, Admin menu `🏪 Merchant`. `users/create` hint `Manager (sub admin)`.
 
@@ -400,50 +398,18 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 
 ---
 
-## 9) Recent Changes (2026-09-02)
+## 9) Recent Changes (2026-09-02/03)
 
-- **nginx terpasang & configured** di port 80 (`sites-available/pos-londry`):
-  - `root /root/www/pos-londry/public`
-  - PHP-FPM via `unix:/run/php/php8.2-fpm.sock`
-  - Aset Vite (`/build/*`) didesamin dengan regex + Cache-Control
-  - Hapus config default
-- **MySQL setup**: user `pos_user` (native_password), DB `pos_londry`, migrasi 23 berjalan ✅
-- **open_basedir fixed** di `.user.ini` — hapus path lama `/www/wwwroot/pos.azelsq.my.id/`, ganti ke `/root/www/pos-londry/:/tmp/:/run/php/`
-- **APP_KEY** sudah di-generate, **storage permissions** dichown ke www-data
+### 2026-09-03 — Edit item & qty lewat POS (full edit mode)
+- **PosController@edit**: preload order ke tampilan POS (cart/customer/rincian laundry/diskon/status), tombol jadi `SIMPAN PERUBAHAN` POST ke `pos.update`
+- **OrderService::updateFromPos**: reverse stock lama → delete items → insert baru → re-apply stock → recompute subtotal/discount/tax/total; guard ready/picked_up/complete/cancelled
+- **routes**: `GET|POST /pos/edit/{order}` (pos.edit, pos.update)
+- **Status rollback** `ready→received` diizinkan di semua path (form, antrian, POS) via OrderService::updateStatus; QueueController delegs ke service
+- **orders/show**: tombol **Edit di POS** (+ modal Edit Cepat), status dropdown semua 5 status
+- **qty check removed**: stok boleh minus (lihat memori Londry POS gotchas)
+- Verifikasi: `POST /pos/edit/2 qty=2` 200 total 14000 (revert 7000 ✓); `ready→received` rollback 200 ✓; `picked_up/complete/cancelled` still block edit 403/422 ✓; `php -l` + `view:cache` ✓; routes registered
 
-### PWA & Service Worker
-- **SW disable/refresh**: code auto-unregister SW lama di `resources/js/pwa.js` (setiap page load hapus semua registered SW) agar stale cache v2 tidak menghalangi
-- **Manifest & Offline**: `manifest.webmanifest` 200 (application/manifest+json), `/offline` 200, `sw.js` 200 ✅
 
-### POS (rincian laundry → popup modal)
-- Ganti panel collapse "Rincian Laundry" → **modal popup** (`modalLaundry`)
-- `toggleLaundry()` → `openLaundryModal()` + `restoreLaundryDraft()` via localStorage
-- **localStorage persistence**: rincian laundry (items + catatan + ket. lainnya) tersimpan otomatis di `pos_laundry_draft`, restore saat buka ulang modal, clear otomatis setelah checkout sukses
-- Card kartu rapi, qty via +/- button, hapus per baris
-
-### Product List (Produk menu)
-- **Controller `ProductController@index`** tambah filter `category_id` & `status`, default cuma tampilkan `status='active'`
-- **Blade baru** (`products/index.blade.php`):
-  - Total produk di header
-  - 4 filter: cari, kategori, tipe (Produk/Jasa), status (Aktif/Nonaktif)
-  - Empty state
-  - Per-card: SKU, tipe badge, nama, kategori, harga/unit, stok (warna merah bila ≤5), badge nonaktif
-  - Tombol: Edit, Nonaktifkan/Hapus (differensiasi), Aktifkan (untuk yang nonaktif)
-- **Destroy produk**: bila sudah dipakai di order → dinonaktifkan (bukan dihapus)
-
-### Order Detail
-- **`handleSubmitForm` diperbaiki** (handle JSON redirect/session-expired):
-  - Tambah `Accept` header + `credentials: 'same-origin'`
-  - Cek content-type → kalau bukan JSON, tangani 302 ke login (419/session expired → alert + reload)
-  - Handle validation errors (422) dengan detail per field
-- **Button "Tambah Bayar"** tidak lagi error `Unexpected token '<'`; kalau session expired → redirect ke login otomatis
-
-### Build
-- `npm install --save-dev` (Vite 5.4, Tailwind) — `npm run build` menghasilkan `app-CUsHfWCX.js` (135KB) + `app-*.css` (30KB)
-- `package-lock.json` update (hapus duplicate, hanya devDependencies yang diperlukan produksi)
-- PHP syntax lint semua file yang di-edit ✅
-
----
 
 ## 10) Responsive — Konvensi
 
@@ -499,7 +465,9 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 | `laundryTypes is not defined` di POS | Pastikan `PosController@index` kirim `laundryTypes` (`when mid`), Blade ada `let laundryTypes = @json($laundryTypes);` |
 | Struk tidak muncul rincian | Cek `Order::latest()->first()->laundry_details`, dan `receipt.blade.php` dynamic block |
 | WA tidak kirim API | Kosongkan `whatsapp_api_url` → pakai `web.whatsapp.com/send` + `wa.me` link; cek `whatsapp_logs` |
-| View tidak update habis edit | `php artisan view:clear` + hard refresh `Cmd+Shift+R` |
+|| View tidak update habis edit | `php artisan view:clear` + hard refresh `Cmd+Shift+R`; Vite dev jalan (`npm run dev`, bukan `npm run build`) |
+|| Edit item/qty tidak bisa disimpan | Order harus `received`; rollback `ready→received` via form atau `/antrian/{id}/update` |
+|| qty check stok error | Sudah dihilangkan — stok boleh minus (lihat OrderService) |
 | Port 8010 bentrok | `lsof -i :8010` kill atau `php artisan serve --port=8011` |
 | Seeder demo ikut ke produksi | Di server prod jangan `db:seed` (full), pakai `db:seed --class=ProductionSeeder` saja |
 | Login tidak ada akun prod | Login manual ketik `admin/password`, `kasir/password`, `super_admin/password` — login tidak tampilkan info akun |
@@ -515,4 +483,4 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 
 ---
 
-*Last updated: 2026-09-02 (nginx production port 80, MySQL, popup laundry modal, product list UI, fix handleSubmitForm JSON, SW auto-unregister) — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*
+*Last updated: 2026-09-03 — oleh Hermes Agent. Jangan commit `.env` & `database.sqlite` ke repo publik. Seeder Production/Demo idempotent, aman re-run.*
