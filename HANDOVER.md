@@ -316,6 +316,7 @@ Verifikasi: TOKO-002 katalog tidak terlihat di LONDRY-001 dan sebaliknya; POS pr
   - Guard kosong: kalau dump gagal/empty → hapus file, redirect back error.
 - **Frontend** (`resources/views/settings/index.blade.php`): tombol amber "Backup Database (Admin)" + `<p>` kecil. Tidak perlu tambahan JS; link langsung trigger download.
 - **Notes**: hanya MySQL (production & local dev). Untuk SQLite dev, dump via `sqlite3` belum di-support. Semua file backup tak dilacak git (`storage/app/backups/` gitignored).
+- **Production pitfall**: `file_exists()` pada candidate path (`/opt/homebrew/...`) diblokir `open_basedir`, melempar `ErrorException` → 500. Solusi: (1) tambah `/usr/bin:/bin` ke `.user.ini` `open_basedir` supaya binary bisa ditemukan & dieksekusi; (2) gunakan `@file_exists()` pada semua probe supaya open_basedir blockage return `false` bersih, bukan Exception. `mysqldump` di production server adalah symlink `/usr/bin/mysqldump → mariadb-dump`.
 
 - **NumberGenerator:** `MLG-YYYYMMDD-000001` / `SBY2-...` / `DEMO-...` per cabang, `PAY-...`, `CUST-...`.
 - **OrderService** `DB::transaction`: Order → OrderItems (snapshot) → StockMovement sale → Payment → CashTransaction (merchant_id). Validasi pcs integer, discount ≤ subtotal.
