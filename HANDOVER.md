@@ -418,6 +418,11 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 
 ## 9) Recent Changes (2026-09-02/03)
 
+### 2026-09-14 — Tombol "Tandai Lunas" (Paid) di detail order + fix bug "Sesi anda telah habis" palsu
+- **`resources/views/orders/show.blade.php`**: tombol emerald **"Tandai Lunas — Bayar Rp {sisa}"** di section Pembayaran untuk order belum `paid` & tidak `cancelled` — sekali klik submit hidden form `amount` = sisa total + `payment_method=cash` ke `orders.payment`, `OrderService::addPayment` otomatis cap → status `paid`. Form "Tambah Bayar" manual tetap ada di bawahnya.
+- **Bug fix (semua form di orders/show)**: pesan palsu "⚠️ Sesi anda telah habis" saat submit sukses. Akar: `handleSubmitForm` memakai heuristik `text.includes('login')` untuk deteksi session expired — tapi halaman orders/show **sendiri berisi kata "login"** dari kode alert itu → selalu true → false positive. `fetch` juga sudah follow redirect `back()`. Fix: cek `content-type` JSON dulu; non-JSON + `res.redirected` → cek `res.url.includes('/login')` untuk session expired, selain itu `location.reload()` (flash success tampil normal); 419 → sesi habis. Heuristik `text.includes('DOCTYPE')`/`text.includes('login')` dihapus.
+- Verifikasi browser: klik "Tandai Lunas" order partial Rp 8.000 (bayar 1.000) → **tanpa alert sesi habis**, status `paid`, Dibayar Rp 8.000 ✓. `view:cache` OK, `php artisan test` 7 passed.
+
 ### 2026-09-14 — Unit test + UI/UX test POS (mobile cart drawer)
 - **`phpunit.xml`**: aktifkan `DB_CONNECTION=sqlite` + `DB_DATABASE=:memory:` agar test tidak menyentuh DB dev/prod. (Sebelumnya commented-out → `RefreshDatabase` berbahaya.)
 - **`tests/Feature/PosPageTest.php`** (baru, 6 test): `/pos` butuh login; `/` redirect saat unauthenticated; render POS berisi `#cartDrawer/#cartFab/#cartDrawerOverlay/#cartCount` + `toggleCartDrawer/updateCartUI` + `cart-open`; CSS media queries `@media(max-width:1023.5px)` sebelum `@media(min-width:1024px)` + `#cartDrawer.cart-open` + `#cartFab.hidden`; `POST /pos` bikin order (kasir, product). Seed via `ProductionSeeder` (RefreshDatabase).

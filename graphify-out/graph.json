@@ -208,8 +208,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "authcontroller.php"
     },
     {
@@ -285,8 +285,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": "branchcontroller.php"
     },
     {
@@ -296,8 +296,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": "branchcontroller"
     },
     {
@@ -307,8 +307,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_scopequery",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".scopequery()"
     },
     {
@@ -318,8 +318,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_authorizebranch",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".authorizebranch()"
     },
     {
@@ -329,8 +329,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_index",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".index()"
     },
     {
@@ -340,8 +340,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_create",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".create()"
     },
     {
@@ -351,8 +351,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_store",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".store()"
     },
     {
@@ -362,8 +362,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_show",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".show()"
     },
     {
@@ -373,8 +373,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_edit",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".edit()"
     },
     {
@@ -384,8 +384,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_update",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".update()"
     },
     {
@@ -395,8 +395,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "app_http_controllers_branchcontroller_branchcontroller_destroy",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".destroy()"
     },
     {
@@ -406,8 +406,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "cashcontroller.php"
     },
     {
@@ -417,8 +417,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "cashcontroller"
     },
     {
@@ -428,8 +428,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_index",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".index()"
     },
     {
@@ -439,8 +439,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_create",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".create()"
     },
     {
@@ -450,8 +450,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_store",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".store()"
     },
     {
@@ -549,8 +549,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_controller",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "controller.php"
     },
     {
@@ -560,8 +560,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_http_controllers_controller_controller",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "controller"
     },
     {
@@ -692,8 +692,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_dashboardcontroller",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "dashboardcontroller.php"
     },
     {
@@ -703,8 +703,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_http_controllers_dashboardcontroller_dashboardcontroller",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "dashboardcontroller"
     },
     {
@@ -714,8 +714,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_http_controllers_dashboardcontroller_dashboardcontroller_index",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".index()"
     },
     {
@@ -1077,8 +1077,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": "poscontroller"
     },
     {
@@ -1088,8 +1088,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller_index",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": ".index()"
     },
     {
@@ -1099,8 +1099,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller_edit",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": ".edit()"
     },
     {
@@ -1110,8 +1110,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller_store",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": ".store()"
     },
     {
@@ -1132,8 +1132,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller",
-      "community": 5,
-      "community_name": "Product",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "productcontroller.php"
     },
     {
@@ -1143,7 +1143,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": "productcontroller"
     },
@@ -1154,7 +1154,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_index",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".index()"
     },
@@ -1165,7 +1165,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_create",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".create()"
     },
@@ -1176,8 +1176,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_store",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".store()"
     },
     {
@@ -1187,7 +1187,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_edit",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".edit()"
     },
@@ -1198,7 +1198,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_update",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".update()"
     },
@@ -1209,7 +1209,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_destroy",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".destroy()"
     },
@@ -1220,7 +1220,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_show",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".show()"
     },
@@ -1231,7 +1231,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_search",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".search()"
     },
@@ -1539,8 +1539,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_http_controllers_usercontroller_usercontroller_create",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".create()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_middleware_authenticate",
-      "community": 37,
-      "community_name": "Authenticate",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "authenticate.php"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_http_middleware_authenticate_authenticate",
-      "community": 37,
-      "community_name": "Authenticate",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "authenticate"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_http_middleware_authenticate_authenticate_redirectto",
-      "community": 37,
-      "community_name": "Authenticate",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".redirectto()"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_middleware_blockdemofromusermanagement",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "blockdemofromusermanagement.php"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_http_middleware_blockdemofromusermanagement_blockdemofromusermanagement",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "blockdemofromusermanagement"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_middleware_blockdemofromusermanagement_blockdemofromusermanagement_handle",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".handle()"
     },
     {
@@ -1704,8 +1704,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_middleware_branchcontext",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "branchcontext.php"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_middleware_branchcontext_branchcontext",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "branchcontext"
     },
     {
@@ -1726,8 +1726,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_middleware_branchcontext_branchcontext_handle",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".handle()"
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_middleware_checkpermission",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "checkpermission.php"
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_http_middleware_checkpermission_checkpermission",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "checkpermission"
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_middleware_checkpermission_checkpermission_handle",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".handle()"
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_middleware_merchantcontext",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "merchantcontext.php"
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_http_middleware_merchantcontext_merchantcontext",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "merchantcontext"
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_middleware_merchantcontext_merchantcontext_handle",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".handle()"
     },
     {
@@ -1847,8 +1847,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_middleware_redirectifauthenticated",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "redirectifauthenticated.php"
     },
     {
@@ -1858,8 +1858,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_http_middleware_redirectifauthenticated_redirectifauthenticated",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "redirectifauthenticated"
     },
     {
@@ -1869,8 +1869,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_http_middleware_redirectifauthenticated_redirectifauthenticated_handle",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".handle()"
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_models_branch_branch",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": "branch"
     },
     {
@@ -2100,8 +2100,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_models_branch_branch_merchant",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".merchant()"
     },
     {
@@ -2111,8 +2111,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_models_branch_branch_scopeactive",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".scopeactive()"
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_cashtransaction",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "cashtransaction.php"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "cashtransaction"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_branch",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".branch()"
     },
     {
@@ -2177,8 +2177,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_merchant",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".merchant()"
     },
     {
@@ -2188,8 +2188,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_user",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".user()"
     },
     {
@@ -2254,8 +2254,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_category",
-      "community": 5,
-      "community_name": "Product",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "category.php"
     },
     {
@@ -2496,8 +2496,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_order",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "order.php"
     },
     {
@@ -2628,8 +2628,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_orderitem",
-      "community": 1,
-      "community_name": "Order",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "orderitem.php"
     },
     {
@@ -2672,8 +2672,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_payment",
-      "community": 5,
-      "community_name": "Product",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "payment.php"
     },
     {
@@ -2683,8 +2683,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_payment_payment",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "payment"
     },
     {
@@ -2694,8 +2694,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_payment_payment_order",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".order()"
     },
     {
@@ -2705,8 +2705,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_payment_payment_cashier",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".cashier()"
     },
     {
@@ -2738,8 +2738,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_permission",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "permission.php"
     },
     {
@@ -2749,8 +2749,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_permission_permission",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "permission"
     },
     {
@@ -2760,8 +2760,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_models_permission_permission_roles",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": ".roles()"
     },
     {
@@ -2771,7 +2771,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_product",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": "product.php"
     },
@@ -2782,7 +2782,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_product_product",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": "product"
     },
@@ -2793,7 +2793,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_product_product_merchant",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".merchant()"
     },
@@ -2804,7 +2804,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_product_product_category",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".category()"
     },
@@ -2815,7 +2815,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_models_product_product_stocks",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".stocks()"
     },
@@ -2826,7 +2826,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_models_product_product_scopeactive",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".scopeactive()"
     },
@@ -2837,7 +2837,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_models_product_product_scopeforbranch",
-      "community": 5,
+      "community": 11,
       "community_name": "Product",
       "norm_label": ".scopeforbranch()"
     },
@@ -2848,8 +2848,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_productstock",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "productstock.php"
     },
     {
@@ -2936,8 +2936,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_role",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": "role.php"
     },
     {
@@ -2947,8 +2947,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_role_role",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": "role"
     },
     {
@@ -2958,8 +2958,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_models_role_role_users",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".users()"
     },
     {
@@ -2969,8 +2969,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_role_role_permissions",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".permissions()"
     },
     {
@@ -3024,8 +3024,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_setting_setting_get",
-      "community": 24,
-      "community_name": "UserFactory",
+      "community": 17,
+      "community_name": "Illuminate\\Support\\ServiceProvider",
       "norm_label": ".get()"
     },
     {
@@ -3398,8 +3398,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_providers_routeserviceprovider",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "routeserviceprovider.php"
     },
     {
@@ -3409,8 +3409,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_providers_routeserviceprovider_routeserviceprovider",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "routeserviceprovider"
     },
     {
@@ -3420,8 +3420,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "app_providers_routeserviceprovider_routeserviceprovider_boot",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": ".boot()"
     },
     {
@@ -3475,8 +3475,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_services_orderservice",
-      "community": 5,
-      "community_name": "Product",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "orderservice.php"
     },
     {
@@ -3640,8 +3640,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_support_numbergenerator",
-      "community": 5,
-      "community_name": "Product",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "numbergenerator.php"
     },
     {
@@ -3651,8 +3651,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "numbergenerator"
     },
     {
@@ -3662,8 +3662,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_ordernumber",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".ordernumber()"
     },
     {
@@ -3673,8 +3673,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_paymentnumber",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".paymentnumber()"
     },
     {
@@ -3684,8 +3684,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_customercode",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".customercode()"
     },
     {
@@ -3695,8 +3695,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_sku",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".sku()"
     },
     {
@@ -3706,8 +3706,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_refundnumber",
-      "community": 5,
-      "community_name": "Product",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".refundnumber()"
     },
     {
@@ -4399,8 +4399,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "config_auth",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "auth.php"
     },
     {
@@ -4553,8 +4553,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_factories_userfactory",
-      "community": 24,
-      "community_name": "UserFactory",
+      "community": 17,
+      "community_name": "Illuminate\\Support\\ServiceProvider",
       "norm_label": "userfactory.php"
     },
     {
@@ -4564,8 +4564,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "database_factories_userfactory_userfactory",
-      "community": 24,
-      "community_name": "UserFactory",
+      "community": 17,
+      "community_name": "Illuminate\\Support\\ServiceProvider",
       "norm_label": "userfactory"
     },
     {
@@ -4575,8 +4575,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "database_factories_userfactory_userfactory_definition",
-      "community": 24,
-      "community_name": "UserFactory",
+      "community": 17,
+      "community_name": "Illuminate\\Support\\ServiceProvider",
       "norm_label": ".definition()"
     },
     {
@@ -4586,8 +4586,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "database_factories_userfactory_userfactory_unverified",
-      "community": 24,
-      "community_name": "UserFactory",
+      "community": 17,
+      "community_name": "Illuminate\\Support\\ServiceProvider",
       "norm_label": ".unverified()"
     },
     {
@@ -4597,8 +4597,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "static",
-      "community": 24,
-      "community_name": "UserFactory",
+      "community": 17,
+      "community_name": "Illuminate\\Support\\ServiceProvider",
       "norm_label": "static"
     },
     {
@@ -5532,8 +5532,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "catalogseeder.php"
     },
     {
@@ -5543,8 +5543,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder_catalogseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "catalogseeder"
     },
     {
@@ -5554,8 +5554,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder_catalogseeder_run",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": ".run()"
     },
     {
@@ -5565,8 +5565,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_customerseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "customerseeder.php"
     },
     {
@@ -5576,8 +5576,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "database_seeders_customerseeder_customerseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "customerseeder"
     },
     {
@@ -5587,8 +5587,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "database_seeders_customerseeder_customerseeder_run",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": ".run()"
     },
     {
@@ -5598,8 +5598,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_databaseseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "databaseseeder.php"
     },
     {
@@ -5609,8 +5609,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "database_seeders_databaseseeder_databaseseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "databaseseeder"
     },
     {
@@ -5620,8 +5620,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "database_seeders_databaseseeder_databaseseeder_run",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": ".run()"
     },
     {
@@ -5631,8 +5631,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_demoseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": "demoseeder.php"
     },
     {
@@ -5642,8 +5642,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "database_seeders_demoseeder_demoseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": "demoseeder"
     },
     {
@@ -5653,8 +5653,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "database_seeders_demoseeder_demoseeder_run",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 9,
+      "community_name": "User",
       "norm_label": ".run()"
     },
     {
@@ -5730,8 +5730,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_productionseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "productionseeder.php"
     },
     {
@@ -5741,8 +5741,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "database_seeders_productionseeder_productionseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "productionseeder"
     },
     {
@@ -5752,8 +5752,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "database_seeders_productionseeder_productionseeder_run",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": ".run()"
     },
     {
@@ -5763,8 +5763,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "rolepermissionseeder.php"
     },
     {
@@ -5774,8 +5774,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder_rolepermissionseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "rolepermissionseeder"
     },
     {
@@ -5785,8 +5785,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder_rolepermissionseeder_run",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": ".run()"
     },
     {
@@ -6937,8 +6937,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_order",
-      "community": 9,
-      "community_name": "User",
+      "community": 12,
+      "community_name": "Branch",
       "norm_label": "test_order.php"
     },
     {
@@ -7569,10 +7569,21 @@
       "norm_label": "9) recent changes (2026-09-02/03)"
     },
     {
-      "label": "2026-09-14 \u2014 Unit test + UI/UX test POS (mobile cart drawer)",
+      "label": "2026-09-14 \u2014 Tombol \"Tandai Lunas\" (Paid) di detail order + fix bug \"Sesi anda telah habis\" palsu",
       "file_type": "document",
       "source_file": "HANDOVER.md",
       "source_location": "L421",
+      "_origin": "ast",
+      "id": "handover_2026_09_14_tombol_tandai_lunas_paid_di_detail_order_fix_bug_sesi_anda_telah_habis_palsu",
+      "community": 4,
+      "community_name": "Handover \u2014 Londry POS Laundry (Laravel 10, PHP 8.1)",
+      "norm_label": "2026-09-14 \u2014 tombol \"tandai lunas\" (paid) di detail order + fix bug \"sesi anda telah habis\" palsu"
+    },
+    {
+      "label": "2026-09-14 \u2014 Unit test + UI/UX test POS (mobile cart drawer)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L426",
       "_origin": "ast",
       "id": "handover_2026_09_14_unit_test_ui_ux_test_pos_mobile_cart_drawer",
       "community": 4,
@@ -7583,7 +7594,7 @@
       "label": "2026-09-14 \u2014 Mobile cart drawer di POS (responsive mobile mode)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L429",
+      "source_location": "L434",
       "_origin": "ast",
       "id": "handover_2026_09_14_mobile_cart_drawer_di_pos_responsive_mobile_mode",
       "community": 4,
@@ -7594,7 +7605,7 @@
       "label": "2026-09-03 \u2014 Edit item & qty lewat POS (full edit mode)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L436",
+      "source_location": "L441",
       "_origin": "ast",
       "id": "handover_2026_09_03_edit_item_qty_lewat_pos_full_edit_mode",
       "community": 4,
@@ -7605,7 +7616,7 @@
       "label": "2026-09-03 \u2014 Fitur Backup Database (Settings \u2192 Backup Database (Admin))",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L445",
+      "source_location": "L450",
       "_origin": "ast",
       "id": "handover_2026_09_03_fitur_backup_database_settings_backup_database_admin",
       "community": 4,
@@ -7616,7 +7627,7 @@
       "label": "10) Responsive \u2014 Konvensi",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L453",
+      "source_location": "L458",
       "_origin": "ast",
       "id": "handover_10_responsive_konvensi",
       "community": 4,
@@ -7627,7 +7638,7 @@
       "label": "11) File Penting untuk Dibaca Dulu",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L482",
+      "source_location": "L487",
       "_origin": "ast",
       "id": "handover_11_file_penting_untuk_dibaca_dulu",
       "community": 4,
@@ -7638,7 +7649,7 @@
       "label": "12) Troubleshooting",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L499",
+      "source_location": "L504",
       "_origin": "ast",
       "id": "handover_12_troubleshooting",
       "community": 4,
@@ -7649,7 +7660,7 @@
       "label": "13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L525",
+      "source_location": "L530",
       "_origin": "ast",
       "id": "handover_13_deploy_production_vps_nginx_php_fpm_cloudflare",
       "community": 4,
@@ -7660,7 +7671,7 @@
       "label": "Troubleshooting deploy khas (lihat juga \u00a712)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L536",
+      "source_location": "L541",
       "_origin": "ast",
       "id": "handover_troubleshooting_deploy_khas_lihat_juga_12",
       "community": 4,
@@ -9115,8 +9126,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_foundation_auth_access_authorizesrequests",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "illuminate\\foundation\\auth\\access\\authorizesrequests"
     },
     {
@@ -9126,8 +9137,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_foundation_validation_validatesrequests",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "illuminate\\foundation\\validation\\validatesrequests"
     },
     {
@@ -9137,8 +9148,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_routing_controller",
-      "community": 169,
-      "community_name": "Controller",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "illuminate\\routing\\controller"
     },
     {
@@ -9159,8 +9170,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_auth_middleware_authenticate",
-      "community": 37,
-      "community_name": "Authenticate",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "illuminate\\auth\\middleware\\authenticate"
     },
     {
@@ -9170,8 +9181,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "closure",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "closure"
     },
     {
@@ -9203,8 +9214,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "symfony_component_httpfoundation_response",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "symfony\\component\\httpfoundation\\response"
     },
     {
@@ -9390,8 +9401,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_foundation_support_providers_routeserviceprovider",
-      "community": 14,
-      "community_name": "RedirectIfAuthenticated.php",
+      "community": 10,
+      "community_name": "Illuminate\\Http\\Request",
       "norm_label": "illuminate\\foundation\\support\\providers\\routeserviceprovider"
     },
     {
@@ -9401,8 +9412,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_database_eloquent_factories_factory",
-      "community": 24,
-      "community_name": "UserFactory",
+      "community": 17,
+      "community_name": "Illuminate\\Support\\ServiceProvider",
       "norm_label": "illuminate\\database\\eloquent\\factories\\factory"
     },
     {
@@ -9412,8 +9423,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_database_seeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 8,
+      "community_name": "Controller",
       "norm_label": "illuminate\\database\\seeder"
     },
     {
@@ -21200,7 +21211,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L453",
+      "source_location": "L458",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21211,7 +21222,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L482",
+      "source_location": "L487",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21222,7 +21233,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L499",
+      "source_location": "L504",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21233,7 +21244,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L525",
+      "source_location": "L530",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21563,7 +21574,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L436",
+      "source_location": "L441",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21574,7 +21585,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L445",
+      "source_location": "L450",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21585,7 +21596,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L429",
+      "source_location": "L434",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21600,6 +21611,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
+      "target": "handover_2026_09_14_tombol_tandai_lunas_paid_di_detail_order_fix_bug_sesi_anda_telah_habis_palsu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L426",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "handover_9_recent_changes_2026_09_02_03",
       "target": "handover_2026_09_14_unit_test_ui_ux_test_pos_mobile_cart_drawer",
       "confidence_score": 1.0
     },
@@ -21607,7 +21629,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L536",
+      "source_location": "L541",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_13_deploy_production_vps_nginx_php_fpm_cloudflare",
@@ -22991,5 +23013,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "20c500983ae25c4c2081ad393cd5c6f341117919"
+  "built_at_commit": "6a2ea4f4f93a9e9c43445ce747e6fa38f3358bda"
 }

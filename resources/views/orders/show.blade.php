@@ -105,7 +105,20 @@
       <p class="text-sm text-slate-400 py-2">Belum ada pembayaran</p>
       @endforelse
       @if($order->payment_status!='paid' && $order->order_status!='cancelled')
-      <form method="POST" action="{{ route('orders.payment',$order) }}" class="mt-4 grid grid-cols-1 sm:flex gap-2" onsubmit="return handleSubmitForm(this, event)">
+      {{-- Tombol Paid: sekali klik lunasi sisa total --}}
+      @php $remaining = (float)$order->total - (float)$order->paid_amount; @endphp
+      @if($remaining > 0)
+      <form method="POST" action="{{ route('orders.payment',$order) }}" class="mt-4" onsubmit="return handleSubmitForm(this, event)">
+        @csrf
+        <input type="hidden" name="amount" value="{{ number_format($remaining,2,'.','') }}">
+        <input type="hidden" name="payment_method" value="cash">
+        <button type="submit" class="w-full bg-emerald-600 active:bg-emerald-700 text-white py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow">
+          <svg class="order-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="m20 6-11 11-5-5"/></svg>
+          Tandai Lunas — Bayar {{ money($remaining) }}
+        </button>
+      </form>
+      @endif
+      <form method="POST" action="{{ route('orders.payment',$order) }}" class="mt-3 grid grid-cols-1 sm:flex gap-2" onsubmit="return handleSubmitForm(this, event)">
         @csrf
         <input name="amount" type="number" step="0.01" placeholder="Nominal" required class="flex-1 border border-slate-200 rounded-xl px-3 py-3 text-sm">
         <select name="payment_method" class="border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white">
@@ -304,42 +317,40 @@ async function handleSubmitForm(form, event, confirmMsg){
       credentials: 'same-origin'
     });
     let contentType = res.headers.get('content-type') || '';
-    // Tangani redirect (302) ke login atau halaman lain — biasanya berarti session expired
-    if (!contentType.includes('application/json')) {
-      // Cek apakah ini redirect ke login
-      const text = await res.text();
-      if (res.status === 302 || (res.status >= 300 && res.status < 400) || text.includes('login') || text.includes('DOCTYPE')) {
-        if (res.status === 419 || text.includes('login')) {
-          alert('⚠️ Sesi anda telah habis. Halaman akan dimuat ulang untuk login kembali.');
-          location.reload();
-          return false;
+    if (contentType.includes('application/json')) {
+      let data = await res.json();
+      if(res.ok){
+        alert(data.message || 'Berhasil disimpan');
+        location.reload();
+      } else {
+        // Handle validation errors (422, 403, etc.)
+        let msg = data.message || 'Gagal menyimpan';
+        if (data.errors) {
+          msg += '\n\n' + Object.entries(data.errors).map(([k,v]) => k + ': ' + (Array.isArray(v) ? v.join(', ') : v)).join('\n');
         }
-        // Redirect lain — ikuti manual ke URL tujuan dan reload
-        const redirect = res.headers.get('Location');
-        if (redirect) {
-          window.location.href = redirect;
-          return false;
-        }
-        alert('❗ Respons tidak dikenali dari server. Coba muat ulang halaman.');
-        return false;
+        alert(msg);
       }
-      // Jika tetap bukan JSON, coba parse sebagai teks untuk pesan error
-      const textErr = text.trim().substring(0, 300);
-      alert('❗ Respons server tidak valid:\n' + (res.status) + ' ' + res.statusText + '\n\n' + textErr);
       return false;
     }
-    let data = await res.json();
-    if(res.ok){
-      alert(data.message || 'Berhasil disimpan');
+    // Respons non-JSON: biasanya redirect (back()) yang sudah di-follow fetch.
+    if (res.status === 419) {
+      alert('⚠️ Sesi anda telah habis. Halaman akan dimuat ulang untuk login kembali.');
       location.reload();
-    } else {
-      // Handle validation errors (422, 403, etc.)
-      let msg = data.message || 'Gagal menyimpan';
-      if (data.errors) {
-        msg += '\n\n' + Object.entries(data.errors).map(([k,v]) => k + ': ' + (Array.isArray(v) ? v.join(', ') : v)).join('\n');
-      }
-      alert(msg);
+      return false;
     }
+    if (res.redirected) {
+      // fetch sudah follow redirect; cek URL akhir untuk deteksi login (session expired)
+      if (res.url.includes('/login')) {
+        alert('⚠️ Sesi anda telah habis. Halaman akan dimuat ulang untuk login kembali.');
+      }
+      // Redirect normal (back() → halaman sama): refresh agar state terbaru + flash tampil
+      location.reload();
+      return false;
+    }
+    // HTML 200 tanpa redirect — respons tak dikenal
+    const textErr2 = res.status + ' ' + res.statusText;
+    alert('❗ Respons tidak dikenali dari server. Coba muat ulang halaman. (' + textErr2 + ')');
+    return false;
   } catch(e){
     alert('❗ Error jaringan: ' + e.message);
   }
