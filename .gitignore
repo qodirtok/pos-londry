@@ -17,3 +17,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# graphify local backup snapshots (internal, not source of truth)
+graphify-out/20*/

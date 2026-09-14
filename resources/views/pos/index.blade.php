@@ -39,6 +39,19 @@
   .pos-modal-backdrop.is-open{display:flex}
   .pos-modal-backdrop.is-center{align-items:center;padding:1rem}
   @media(min-width:640px){.pos-modal-backdrop{align-items:center;padding:1rem}}
+  /* Mobile cart drawer: hidden bottom-sheet, slide up saat .cart-open */
+  @media(max-width:1023.5px){
+    #cartDrawer{position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;max-width:none;height:82vh;max-height:82vh;z-index:60;border-radius:1.25rem 1.25rem 0 0;box-shadow:0 -8px 30px rgba(15,23,42,.18);transform:translateY(105%);transition:transform .28s cubic-bezier(.22,1,.36,1);overflow-y:auto}
+    #cartDrawer.cart-open{transform:translateY(0)}
+    #cartDrawerOverlay{position:fixed;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(2px);z-index:55;display:none}
+    #cartDrawerOverlay.show{display:block}
+    #cartFab{position:fixed;right:1rem;bottom:1rem;z-index:50;display:flex;align-items:center;gap:.5rem;background:#4f46e5;color:#fff;border:0;border-radius:9999px;padding:.8rem 1.1rem;font-weight:700;font-size:.9rem;box-shadow:0 8px 20px rgba(79,70,229,.4);cursor:pointer}
+    #cartFab.hidden{display:none}
+    #cartFab:active{transform:scale(.96)}
+    #cartFab .fab-count{background:#fff;color:#4f46e5;font-size:.75rem;font-weight:800;min-width:1.5rem;height:1.5rem;border-radius:9999px;display:grid;place-items:center;padding:0 .35rem}
+    body.cart-open{overflow:hidden}
+  }
+  @media(min-width:1024px){#cartFab,#cartDrawerOverlay{display:none!important} #cartDrawer{position:relative!important;transform:none!important;width:400px!important;max-width:420px!important;height:auto!important;max-height:none!important;border-radius:1rem!important;box-shadow:none!important;z-index:auto!important;overflow:hidden!important}}
   .pos-modal{background:#fff;width:100%;max-width:480px;max-height:90vh;border-radius:1.25rem 1.25rem 0 0;display:flex;flex-direction:column;overflow:hidden;animation:posSlideUp .25s cubic-bezier(.22,1,.36,1)}
   @media(min-width:640px){.pos-modal{border-radius:1.25rem}}
   .pos-modal-header{padding:1rem 1.1rem .75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f1f5f9;flex-shrink:0}
@@ -132,8 +145,8 @@
     <div class="lg:hidden px-3 py-2 border-t bg-slate-50 text-xs text-slate-500 text-center">Tap produk untuk tambah ke keranjang</div>
   </div>
 
-  {{-- Keranjang kanan: di HP jadi card di bawah, di desktop fixed width --}}
-  <div class="w-full lg:w-[400px] xl:w-[420px] bg-white rounded-2xl border flex flex-col overflow-hidden shrink-0">
+  {{-- Keranjang kanan: di desktop fixed width, di mobile jadi bottom-sheet drawer (#cartDrawer) --}}
+  <div id="cartDrawer" class="w-full lg:w-[400px] xl:w-[420px] bg-white rounded-2xl border flex flex-col overflow-hidden shrink-0">
     <div class="p-3 sm:p-4 border-b space-y-3">
       <label class="text-[11px] font-bold uppercase tracking-widest text-slate-500">Customer <span class="text-rose-600">*</span></label>
       <div class="flex gap-2">
@@ -218,6 +231,11 @@
     </div>
   </div>
 </div>
+
+<button id="cartFab" class="hidden" onclick="toggleCartDrawer()">
+  <span class="fab-count" id="cartCount">0</span> Keranjang
+</button>
+<div id="cartDrawerOverlay" class="hidden"></div>
 
 {{-- ===== POPUP MODALS ===== --}}
 
@@ -595,11 +613,35 @@ function addToCart(id){
   renderCart();
   if(window.navigator.vibrate) navigator.vibrate(20);
 }
+
+// ===== MOBILE CART DRAWER =====
+function updateCartUI(){
+  let count = cart.reduce((s,c)=> s + (parseFloat(c.quantity)||0), 0);
+  const countEl = document.getElementById('cartCount');
+  if(countEl) countEl.textContent = count;
+  const fab = document.getElementById('cartFab');
+  if(fab) fab.classList.toggle('hidden', count<=0);
+}
+function toggleCartDrawer(){
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartDrawerOverlay');
+  if(!drawer) return;
+  const isOpen = drawer.classList.toggle('cart-open');
+  document.body.classList.toggle('cart-open', isOpen);
+  if(overlay) overlay.classList.toggle('show', isOpen);
+  if(!isOpen){
+    // close any open modals on top of the drawer
+    document.querySelectorAll('.pos-modal-backdrop.is-open').forEach(m=> m.classList.remove('is-open'));
+    document.body.classList.remove('pos-modal-open');
+  }
+}
+const drawerOverlayEl = document.getElementById('cartDrawerOverlay');
+if(drawerOverlayEl) drawerOverlayEl.addEventListener('click', toggleCartDrawer);
 function renderCart(){
   let wrap = document.getElementById('cartItems');
   if(cart.length===0){
     wrap.innerHTML='<div class="pos-empty"><svg class="empty-icon pos-flat-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><p class="text-sm">Keranjang kosong</p><p class="text-xs">Tap produk untuk menambah</p></div>';
-    calc(); return;
+    calc(); updateCartUI(); return;
   }
   let html='';
   cart.forEach((c,i)=>{
@@ -625,6 +667,7 @@ function renderCart(){
   });
   wrap.innerHTML=html;
   calc();
+  updateCartUI();
 }
 function changeQty(i,delta){
   let c=cart[i]; let v=parseFloat((parseFloat(c.quantity)+delta*(c.type==='service'?0.5:1)).toFixed(3));

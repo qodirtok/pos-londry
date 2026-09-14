@@ -293,6 +293,7 @@ Verifikasi: TOKO-002 katalog tidak terlihat di LONDRY-001 dan sebaliknya; POS pr
 
 ### F. Responsive (HP/Tablet/Laptop)
 - `layouts/app.blade.php` sidebar `hidden lg:flex` 260px, drawer mobile, bottom nav 5 tab, `viewport-fit=cover`. POS `flex-col lg:flex-row`, laundry list vertical, tables `overflow-x-auto min-w-[520px]` + cards `sm:hidden`. Struk 58/80mm.
+- **Mobile cart drawer (POS)**: panel keranjang `#cartDrawer` di `/pos` — di desktop tetap kolom kanan 400px; di mobile (<1024px) jadi bottom-sheet tersembunyi (`position:fixed;bottom:0;height:82vh;transform:translateY(105%)`), dibuka via FAB `#cartFab` (indigo kanan-bawah + badge jumlah qty) + overlay `#cartDrawerOverlay`. Buka/tutup via `toggleCartDrawer()` (toggle `.cart-open` + `.show` + `body.cart-open` scroll lock; tutup juga membersihkan modal `is-open`), badge disinkron `updateCartUI()` di `renderCart`/`calc()`. **PENTING**: media query desktop (`min-width:1024px`) wajib reset `#cartDrawer` ke `position:relative!important;transform:none!important` dll — kalau tidak, style fixed mobile bocor ke desktop dan menghancurkan layout 2-kolom POS. Z-index drawer 60 < modal backdrop 80 → checkout/receipt modal tetap tampil di atas drawer.
 
 ### H. PWA (Installable + Offline Shell)
 - **Manifest** `public/manifest.webmanifest`: `display standalone`, `theme #4f46e5`, `background #f8fafc`, icons maskable 72-512, shortcuts POS/Orders/Dashboard.
@@ -416,6 +417,13 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 ---
 
 ## 9) Recent Changes (2026-09-02/03)
+
+### 2026-09-14 — Mobile cart drawer di POS (responsive mobile mode)
+- **`resources/views/pos/index.blade.php`**: panel keranjang diberi `id="cartDrawer"`. Di mobile (<1024px) jadi bottom-sheet drawer (`position:fixed;bottom:0;height:82vh;transform:translateY(105%)` → `.cart-open` slide-up), desktop tetap kolom 400px.
+- **FAB** `#cartFab` (indigo, kanan-bawah, badge `#cartCount` jumlah qty) + overlay `#cartDrawerOverlay` — muncul di mobile saat cart berisi item (`updateCartUI()`), tap untuk buka/tutup, scroll body terkunci saat terbuka.
+- **JS**: `updateCartUI()` (badge count + FAB visibility), `toggleCartDrawer()` (toggle `.cart-open`/`.show`/`body.cart-open`, tutup juga close semua modal `is-open`), overlay click listener. Dipanggil di `renderCart()` (kedua path: kosong & isi) — FAB hilang saat cart kosong.
+- **Pitfall diatasi**: `#cartDrawer` ID selector mengalahkan Tailwind utilities → breakpoint desktop `min-width:1024px` reset `position:relative!important;transform:none!important;width:400px!important` dll supaya layout 2-kolom POS tidak rusak. `#cartFab.hidden{display:none}` agar toggle class `.hidden` benar-benar menyembunyikan FAB (ID `display:flex` saja meng-override).
+- Verifikasi: `view:cache` OK, login curl admin/rooter@123 → `GET /pos` 200, elemen `cartDrawer/cartFab/cartDrawerOverlay/cartCount` ada di HTML render, `node --check` inline script OK. `git diff --stat` 1 file (+46/−3).
 
 ### 2026-09-03 — Edit item & qty lewat POS (full edit mode)
 - **PosController@edit**: preload order ke tampilan POS (cart/customer/rincian laundry/diskon/status), tombol jadi `SIMPAN PERUBAHAN` POST ke `pos.update`
