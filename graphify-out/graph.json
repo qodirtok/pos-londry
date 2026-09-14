@@ -406,8 +406,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashcontroller.php"
     },
     {
@@ -417,8 +417,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashcontroller"
     },
     {
@@ -428,8 +428,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_index",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".index()"
     },
     {
@@ -439,8 +439,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_create",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".create()"
     },
     {
@@ -450,8 +450,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_store",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".store()"
     },
     {
@@ -1451,8 +1451,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "shiftcontroller.php"
     },
     {
@@ -1462,8 +1462,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "shiftcontroller"
     },
     {
@@ -1473,8 +1473,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller_index",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".index()"
     },
     {
@@ -1484,8 +1484,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller_open",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".open()"
     },
     {
@@ -1495,8 +1495,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller_close",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".close()"
     },
     {
@@ -1539,8 +1539,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_http_controllers_usercontroller_usercontroller_create",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".create()"
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_cashtransaction",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashtransaction.php"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashtransaction"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_branch",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".branch()"
     },
     {
@@ -2177,8 +2177,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_merchant",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".merchant()"
     },
     {
@@ -2188,8 +2188,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_user",
-      "community": 15,
-      "community_name": "CashTransaction",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".user()"
     },
     {
@@ -2199,8 +2199,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_cashiershift",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashiershift.php"
     },
     {
@@ -2210,8 +2210,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashiershift"
     },
     {
@@ -2221,8 +2221,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift_branch",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".branch()"
     },
     {
@@ -2232,8 +2232,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift_merchant",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".merchant()"
     },
     {
@@ -2243,8 +2243,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift_cashier",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".cashier()"
     },
     {
@@ -2848,8 +2848,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_productstock",
-      "community": 5,
-      "community_name": "Product",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "productstock.php"
     },
     {
@@ -2936,8 +2936,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_role",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "role.php"
     },
     {
@@ -2947,8 +2947,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_role_role",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "role"
     },
     {
@@ -2958,8 +2958,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_models_role_role_users",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".users()"
     },
     {
@@ -2969,8 +2969,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_role_role_permissions",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".permissions()"
     },
     {
@@ -3211,8 +3211,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_whatsapplog",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": "whatsapplog.php"
     },
     {
@@ -3222,8 +3222,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_whatsapplog_whatsapplog",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": "whatsapplog"
     },
     {
@@ -3233,8 +3233,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_whatsapplog_whatsapplog_order",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": ".order()"
     },
     {
@@ -3431,8 +3431,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_services_cashservice",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashservice.php"
     },
     {
@@ -3442,8 +3442,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_services_cashservice_cashservice",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "cashservice"
     },
     {
@@ -3453,8 +3453,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_services_cashservice_cashservice_openshift",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".openshift()"
     },
     {
@@ -3464,8 +3464,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_services_cashservice_cashservice_closeshift",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".closeshift()"
     },
     {
@@ -3563,8 +3563,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_services_whatsappservice",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": "whatsappservice.php"
     },
     {
@@ -3574,8 +3574,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_services_whatsappservice_whatsappservice",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": "whatsappservice"
     },
     {
@@ -3585,8 +3585,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_services_whatsappservice_whatsappservice_buildmessage",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": ".buildmessage()"
     },
     {
@@ -3596,8 +3596,8 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "app_services_whatsappservice_whatsappservice_send",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 1,
+      "community_name": "Order",
       "norm_label": ".send()"
     },
     {
@@ -3607,8 +3607,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_support_auditlogger",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "auditlogger.php"
     },
     {
@@ -3739,8 +3739,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_helpers_money",
-      "community": 11,
-      "community_name": "CashierShift",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "money()"
     },
     {
@@ -5532,8 +5532,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder",
-      "community": 5,
-      "community_name": "Product",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "catalogseeder.php"
     },
     {
@@ -5543,8 +5543,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder_catalogseeder",
-      "community": 5,
-      "community_name": "Product",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "catalogseeder"
     },
     {
@@ -5554,8 +5554,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder_catalogseeder_run",
-      "community": 5,
-      "community_name": "Product",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5763,8 +5763,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "rolepermissionseeder.php"
     },
     {
@@ -5774,8 +5774,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder_rolepermissionseeder",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "rolepermissionseeder"
     },
     {
@@ -5785,8 +5785,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder_rolepermissionseeder_run",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5796,8 +5796,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_settingsseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "settingsseeder.php"
     },
     {
@@ -5807,8 +5807,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "database_seeders_settingsseeder_settingsseeder",
-      "community": 0,
-      "community_name": "Merchant",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "settingsseeder"
     },
     {
@@ -6978,7 +6978,7 @@
       "label": "ExampleTest",
       "file_type": "code",
       "source_file": "tests/Feature/ExampleTest.php",
-      "source_location": "L8",
+      "source_location": "L7",
       "_origin": "ast",
       "id": "tests_feature_exampletest_exampletest",
       "community": 27,
@@ -6986,15 +6986,103 @@
       "norm_label": "exampletest"
     },
     {
-      "label": ".test_the_application_returns_a_successful_response()",
+      "label": ".test_the_application_responds()",
       "file_type": "code",
       "source_file": "tests/Feature/ExampleTest.php",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "tests_feature_exampletest_exampletest_test_the_application_returns_a_successful_response",
+      "id": "tests_feature_exampletest_exampletest_test_the_application_responds",
       "community": 27,
       "community_name": "TestCase",
-      "norm_label": ".test_the_application_returns_a_successful_response()"
+      "norm_label": ".test_the_application_responds()"
+    },
+    {
+      "label": "PosPageTest.php",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": "pospagetest.php"
+    },
+    {
+      "label": "PosPageTest",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest_pospagetest",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": "pospagetest"
+    },
+    {
+      "label": ".setUp()",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest_pospagetest_setup",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": ".setup()"
+    },
+    {
+      "label": ".test_pos_requires_login()",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest_pospagetest_test_pos_requires_login",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": ".test_pos_requires_login()"
+    },
+    {
+      "label": ".test_home_redirects_away_when_unauthenticated()",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest_pospagetest_test_home_redirects_away_when_unauthenticated",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": ".test_home_redirects_away_when_unauthenticated()"
+    },
+    {
+      "label": ".test_pos_page_renders_mobile_cart_drawer_elements()",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest_pospagetest_test_pos_page_renders_mobile_cart_drawer_elements",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": ".test_pos_page_renders_mobile_cart_drawer_elements()"
+    },
+    {
+      "label": ".test_pos_page_contains_cart_drawer_css_media_queries()",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest_pospagetest_test_pos_page_contains_cart_drawer_css_media_queries",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": ".test_pos_page_contains_cart_drawer_css_media_queries()"
+    },
+    {
+      "label": ".test_pos_store_creates_order_for_kasir()",
+      "file_type": "code",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "tests_feature_pospagetest_pospagetest_test_pos_store_creates_order_for_kasir",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": ".test_pos_store_creates_order_for_kasir()"
     },
     {
       "label": "TestCase.php",
@@ -7481,10 +7569,21 @@
       "norm_label": "9) recent changes (2026-09-02/03)"
     },
     {
-      "label": "2026-09-14 \u2014 Mobile cart drawer di POS (responsive mobile mode)",
+      "label": "2026-09-14 \u2014 Unit test + UI/UX test POS (mobile cart drawer)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
       "source_location": "L421",
+      "_origin": "ast",
+      "id": "handover_2026_09_14_unit_test_ui_ux_test_pos_mobile_cart_drawer",
+      "community": 4,
+      "community_name": "Handover \u2014 Londry POS Laundry (Laravel 10, PHP 8.1)",
+      "norm_label": "2026-09-14 \u2014 unit test + ui/ux test pos (mobile cart drawer)"
+    },
+    {
+      "label": "2026-09-14 \u2014 Mobile cart drawer di POS (responsive mobile mode)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L429",
       "_origin": "ast",
       "id": "handover_2026_09_14_mobile_cart_drawer_di_pos_responsive_mobile_mode",
       "community": 4,
@@ -7495,7 +7594,7 @@
       "label": "2026-09-03 \u2014 Edit item & qty lewat POS (full edit mode)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L428",
+      "source_location": "L436",
       "_origin": "ast",
       "id": "handover_2026_09_03_edit_item_qty_lewat_pos_full_edit_mode",
       "community": 4,
@@ -7506,7 +7605,7 @@
       "label": "2026-09-03 \u2014 Fitur Backup Database (Settings \u2192 Backup Database (Admin))",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L437",
+      "source_location": "L445",
       "_origin": "ast",
       "id": "handover_2026_09_03_fitur_backup_database_settings_backup_database_admin",
       "community": 4,
@@ -7517,7 +7616,7 @@
       "label": "10) Responsive \u2014 Konvensi",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L445",
+      "source_location": "L453",
       "_origin": "ast",
       "id": "handover_10_responsive_konvensi",
       "community": 4,
@@ -7528,7 +7627,7 @@
       "label": "11) File Penting untuk Dibaca Dulu",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L474",
+      "source_location": "L482",
       "_origin": "ast",
       "id": "handover_11_file_penting_untuk_dibaca_dulu",
       "community": 4,
@@ -7539,7 +7638,7 @@
       "label": "12) Troubleshooting",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L491",
+      "source_location": "L499",
       "_origin": "ast",
       "id": "handover_12_troubleshooting",
       "community": 4,
@@ -7550,7 +7649,7 @@
       "label": "13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L517",
+      "source_location": "L525",
       "_origin": "ast",
       "id": "handover_13_deploy_production_vps_nginx_php_fpm_cloudflare",
       "community": 4,
@@ -7561,7 +7660,7 @@
       "label": "Troubleshooting deploy khas (lihat juga \u00a712)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L528",
+      "source_location": "L536",
       "_origin": "ast",
       "id": "handover_troubleshooting_deploy_khas_lihat_juga_12",
       "community": 4,
@@ -9327,6 +9426,17 @@
       "community": 79,
       "community_name": "Illuminate\\Foundation\\Application",
       "norm_label": "illuminate\\foundation\\application"
+    },
+    {
+      "label": "Illuminate\\Foundation\\Testing\\RefreshDatabase",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "illuminate_foundation_testing_refreshdatabase",
+      "community": 27,
+      "community_name": "TestCase",
+      "norm_label": "illuminate\\foundation\\testing\\refreshdatabase"
     },
     {
       "label": "Illuminate\\Foundation\\Testing\\TestCase",
@@ -17462,6 +17572,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest",
+      "target": "app_models_user",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/Models/User.php",
@@ -20097,6 +20219,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest",
+      "target": "database_seeders_productionseeder",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "database/seeders/ProductionSeeder.php",
@@ -20764,7 +20898,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/Feature/ExampleTest.php",
-      "source_location": "L8",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "tests_feature_exampletest",
@@ -20776,7 +20910,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "tests/Feature/ExampleTest.php",
-      "source_location": "L6",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "tests_feature_exampletest",
@@ -20791,17 +20925,140 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "tests_feature_exampletest_exampletest",
-      "target": "tests_feature_exampletest_exampletest_test_the_application_returns_a_successful_response",
+      "target": "tests_feature_exampletest_exampletest_test_the_application_responds",
       "confidence_score": 1.0
     },
     {
       "relation": "inherits",
       "confidence": "EXTRACTED",
       "source_file": "tests/Feature/ExampleTest.php",
-      "source_location": "L8",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "tests_feature_exampletest_exampletest",
+      "target": "tests_testcase_testcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest",
+      "target": "illuminate_foundation_testing_refreshdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest",
+      "target": "tests_feature_pospagetest_pospagetest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest",
+      "target": "tests_testcase_testcase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "mixes_in",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
+      "target": "illuminate_foundation_testing_refreshdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
+      "target": "tests_feature_pospagetest_pospagetest_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
+      "target": "tests_feature_pospagetest_pospagetest_test_home_redirects_away_when_unauthenticated",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
+      "target": "tests_feature_pospagetest_pospagetest_test_pos_page_contains_cart_drawer_css_media_queries",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
+      "target": "tests_feature_pospagetest_pospagetest_test_pos_page_renders_mobile_cart_drawer_elements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
+      "target": "tests_feature_pospagetest_pospagetest_test_pos_requires_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
+      "target": "tests_feature_pospagetest_pospagetest_test_pos_store_creates_order_for_kasir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/Feature/PosPageTest.php",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "tests_feature_pospagetest_pospagetest",
       "target": "tests_testcase_testcase",
       "confidence_score": 1.0
     },
@@ -20943,7 +21200,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L445",
+      "source_location": "L453",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -20954,7 +21211,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L474",
+      "source_location": "L482",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -20965,7 +21222,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L491",
+      "source_location": "L499",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -20976,7 +21233,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L517",
+      "source_location": "L525",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21306,7 +21563,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L428",
+      "source_location": "L436",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21317,7 +21574,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L437",
+      "source_location": "L445",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21328,7 +21585,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L421",
+      "source_location": "L429",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21339,7 +21596,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L528",
+      "source_location": "L421",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "handover_9_recent_changes_2026_09_02_03",
+      "target": "handover_2026_09_14_unit_test_ui_ux_test_pos_mobile_cart_drawer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L536",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_13_deploy_production_vps_nginx_php_fpm_cloudflare",
@@ -22723,5 +22991,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5cb2af059ad71cf87bd755e10659b6f88a29226b"
+  "built_at_commit": "20c500983ae25c4c2081ad393cd5c6f341117919"
 }

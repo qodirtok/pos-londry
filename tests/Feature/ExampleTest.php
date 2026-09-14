@@ -2,18 +2,19 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A basic smoke test: the app boots and the root route exists.
+     * (Root requires auth, so it redirects instead of returning 200.)
      */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_the_application_responds(): void
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
+        $this->assertNotEmpty($response->headers->get('Location'));
     }
 }

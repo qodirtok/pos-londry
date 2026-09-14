@@ -1153,6 +1153,14 @@ async function confirmCheckout(){
     closeModal('modalCheckout');
     // Laundry draft sudah terpakai — bersihkan agar transaksi baru mulai fresh
     try { localStorage.removeItem(LAUNDRY_KEY); selectedLaundry.clear(); document.getElementById('laundryGrid').innerHTML=''; } catch(e){}
+    // Reset mobile cart drawer & FAB setelah transaksi sukses (cart kosong)
+    try {
+      let _d=document.getElementById('cartDrawer'); if(_d) _d.classList.remove('cart-open');
+      let _o=document.getElementById('cartDrawerOverlay'); if(_o) _o.classList.remove('show');
+      document.body.classList.remove('cart-open');
+      if(document.getElementById('cartFab')) document.getElementById('cartFab').classList.add('hidden');
+      if(document.getElementById('cartCount')) document.getElementById('cartCount').textContent='0';
+    } catch(e){}
     // Build receipt modal
     let change = paid>total ? paid-total : 0;
     document.getElementById('receiptOrderNumber').textContent = data.order_number || ('Order #'+data.id);

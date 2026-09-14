@@ -418,6 +418,14 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 
 ## 9) Recent Changes (2026-09-02/03)
 
+### 2026-09-14 — Unit test + UI/UX test POS (mobile cart drawer)
+- **`phpunit.xml`**: aktifkan `DB_CONNECTION=sqlite` + `DB_DATABASE=:memory:` agar test tidak menyentuh DB dev/prod. (Sebelumnya commented-out → `RefreshDatabase` berbahaya.)
+- **`tests/Feature/PosPageTest.php`** (baru, 6 test): `/pos` butuh login; `/` redirect saat unauthenticated; render POS berisi `#cartDrawer/#cartFab/#cartDrawerOverlay/#cartCount` + `toggleCartDrawer/updateCartUI` + `cart-open`; CSS media queries `@media(max-width:1023.5px)` sebelum `@media(min-width:1024px)` + `#cartDrawer.cart-open` + `#cartFab.hidden`; `POST /pos` bikin order (kasir, product). Seed via `ProductionSeeder` (RefreshDatabase).
+- **`tests/Feature/ExampleTest.php`**: diperbaiki dari asumsi `/` 200 → 302 redirect (root butuh auth).
+- **Bug UX ditemukan & diperbaiki** (`pos/index.blade.php`): setelah checkout sukses, mobile drawer masih `cart-open` + FAB masih tampil (cart sudah dikosongkan tapi UI tidak di-reset). Fix: di `confirmCheckout()` setelah `closeModal('modalCheckout')` tambah reset `.cart-open`/`.show`/`body.cart-open` + FAB hidden + cartCount 0.
+- **Verifikasi browser (UI/UX)**: mobile 390×844 — FAB hidden saat cart kosong → muncul `flex` count 1 setelah tambah produk → tap FAB drawer slide-up (`translateY(0)`) + overlay + body scroll lock → tap overlay tutup ✓. Desktop 1440×900 — FAB none, `#cartDrawer` `position:relative;width:400px;transform:none`, item inline ✓. Checkout end-to-end dari drawer: pilih customer → BAYAR → modal checkout z-80 di atas drawer → bayar → receipt `MLG-...` muncul, drawer reset (tertutup, FAB hidden, count 0, body unlock) ✓. Test via CDP browser: 7 phpunit passed (26 assertions).
+- Catatan: alert/confirm native (sesuai preferensi Londry stabilitas) memblokir CDP automation — di-test dengan stub `window.alert/confirm`; perilaku asli tidak berubah.
+
 ### 2026-09-14 — Mobile cart drawer di POS (responsive mobile mode)
 - **`resources/views/pos/index.blade.php`**: panel keranjang diberi `id="cartDrawer"`. Di mobile (<1024px) jadi bottom-sheet drawer (`position:fixed;bottom:0;height:82vh;transform:translateY(105%)` → `.cart-open` slide-up), desktop tetap kolom 400px.
 - **FAB** `#cartFab` (indigo, kanan-bawah, badge `#cartCount` jumlah qty) + overlay `#cartDrawerOverlay` — muncul di mobile saat cart berisi item (`updateCartUI()`), tap untuk buka/tutup, scroll body terkunci saat terbuka.

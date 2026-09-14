@@ -1,16 +1,16 @@
 # Graph Report - londry  (2026-09-14)
 
 ## Corpus Check
-- 203 files · ~59,329 words
+- 204 files · ~59,815 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 849 nodes · 1170 edges · 171 communities (140 shown, 31 thin omitted)
+- 859 nodes · 1184 edges · 170 communities (138 shown, 32 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 71 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5cb2af05`
+- Built from commit: `20c50098`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -26,7 +26,6 @@
 - Controller
 - User
 - Illuminate\Http\Request
-- CashierShift
 - Branch
 - Closure
 - RedirectIfAuthenticated.php
@@ -111,19 +110,19 @@
 ## Import Cycles
 - None detected.
 
-## Communities (171 total, 31 thin omitted)
+## Communities (170 total, 32 thin omitted)
 
 ### Community 0 - "Merchant"
-Cohesion: 0.07
-Nodes (14): MerchantController, Merchant, BranchSeeder, CustomerSeeder, DatabaseSeeder, DemoSeeder, MerchantSeeder, ProductionSeeder (+6 more)
+Cohesion: 0.06
+Nodes (16): MerchantController, Merchant, Role, BranchSeeder, CatalogSeeder, CustomerSeeder, DatabaseSeeder, DemoSeeder (+8 more)
 
 ### Community 1 - "Order"
-Cohesion: 0.08
-Nodes (8): OrderController, QueueController, Order, OrderItem, ProductStock, StockMovement, OrderService, AuditLogger
+Cohesion: 0.07
+Nodes (10): OrderController, QueueController, Order, OrderItem, ProductStock, StockMovement, WhatsappLog, OrderService (+2 more)
 
 ### Community 2 - "Illuminate\Database\Eloquent\Model"
-Cohesion: 0.06
-Nodes (13): setting(), SettingController, AuditLog, CashCategory, PaymentMethod, Permission, Refund, Role (+5 more)
+Cohesion: 0.05
+Nodes (16): money(), setting(), CashController, SettingController, ShiftController, AuditLog, CashCategory, CashierShift (+8 more)
 
 ### Community 3 - "pos-laundry.md"
 Cohesion: 0.06
@@ -131,11 +130,11 @@ Nodes (34): 11. Price & Money, 13. Order Number, 14. Order Status, 17. Discount,
 
 ### Community 4 - "Handover — Londry POS Laundry (Laravel 10, PHP 8.1)"
 Cohesion: 0.05
-Nodes (38): 10) Responsive — Konvensi, 11) File Penting untuk Dibaca Dulu, 12) Troubleshooting, 13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare), 1) Cara Jalan Cepat (5 menit), 2026-09-03 — Edit item & qty lewat POS (full edit mode), 2026-09-03 — Fitur Backup Database (Settings → Backup Database (Admin)), 2026-09-14 — Mobile cart drawer di POS (responsive mobile mode) (+30 more)
+Nodes (39): 10) Responsive — Konvensi, 11) File Penting untuk Dibaca Dulu, 12) Troubleshooting, 13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare), 1) Cara Jalan Cepat (5 menit), 2026-09-03 — Edit item & qty lewat POS (full edit mode), 2026-09-03 — Fitur Backup Database (Settings → Backup Database (Admin)), 2026-09-14 — Mobile cart drawer di POS (responsive mobile mode) (+31 more)
 
 ### Community 5 - "Product"
-Cohesion: 0.06
-Nodes (8): CategoryController, ProductController, Category, Payment, Product, NumberGenerator, CatalogSeeder, canAccessCategory()
+Cohesion: 0.07
+Nodes (7): CategoryController, ProductController, Category, Payment, Product, NumberGenerator, canAccessCategory()
 
 ### Community 6 - "package.json"
 Cohesion: 0.06
@@ -153,10 +152,6 @@ Nodes (6): UserController, User, Illuminate\Database\Eloquent\Factories\HasFacto
 Cohesion: 0.20
 Nodes (3): AuthController, ReportController, Illuminate\Http\Request
 
-### Community 11 - "CashierShift"
-Cohesion: 0.18
-Nodes (4): money(), ShiftController, CashierShift, CashService
-
 ### Community 13 - "Closure"
 Cohesion: 0.21
 Nodes (5): BlockDemoFromUserManagement, BranchContext, CheckPermission, MerchantContext, Closure
@@ -164,10 +159,6 @@ Nodes (5): BlockDemoFromUserManagement, BranchContext, CheckPermission, Merchant
 ### Community 14 - "RedirectIfAuthenticated.php"
 Cohesion: 0.22
 Nodes (4): RedirectIfAuthenticated, RouteServiceProvider, Illuminate\Foundation\Support\Providers\RouteServiceProvider, Symfony\Component\HttpFoundation\Response
-
-### Community 15 - "CashTransaction"
-Cohesion: 0.18
-Nodes (3): CashController, DashboardController, CashTransaction
 
 ### Community 16 - "54. AI Agent Development Rules"
 Cohesion: 0.18
@@ -214,8 +205,8 @@ Cohesion: 0.29
 Nodes (7): autoload, files, psr-4, App\\, Database\\Factories\\, Database\\Seeders\\, app/helpers.php
 
 ### Community 27 - "TestCase"
-Cohesion: 0.33
-Nodes (4): CreatesApplication, Illuminate\Foundation\Testing\TestCase, ExampleTest, TestCase
+Cohesion: 0.15
+Nodes (6): CreatesApplication, Illuminate\Foundation\Testing\RefreshDatabase, Illuminate\Foundation\Testing\TestCase, ExampleTest, PosPageTest, TestCase
 
 ### Community 28 - "52. Testing"
 Cohesion: 0.29
@@ -262,24 +253,24 @@ Cohesion: 0.28
 Nodes (5): Controller, PosController, Illuminate\Foundation\Auth\Access\AuthorizesRequests, Illuminate\Foundation\Validation\ValidatesRequests, Illuminate\Routing\Controller
 
 ## Knowledge Gaps
-- **192 isolated node(s):** `name`, `type`, `description`, `laravel`, `framework` (+187 more)
+- **193 isolated node(s):** `name`, `type`, `description`, `laravel`, `framework` (+188 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **31 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **32 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Order` connect `Order` to `Illuminate\Database\Eloquent\Model`, `Product`, `Controller`, `Controller`, `Illuminate\Http\Request`, `CashTransaction`?**
   _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `User` connect `User` to `Product`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `Customer` connect `Customer` to `Merchant`, `Order`, `Illuminate\Database\Eloquent\Model`, `Product`, `Controller`, `Illuminate\Http\Request`, `User`, `CashTransaction`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **Why does `Merchant` connect `Merchant` to `Illuminate\Database\Eloquent\Model`, `Product`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Are the 4 inferred relationships involving `Order` (e.g. with `.index()` and `.laundry()`) actually correct?**
   _`Order` has 4 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `type`, `description` to the rest of the system?**
-  _192 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _193 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Merchant` be split into smaller, more focused modules?**
-  _Cohesion score 0.07312925170068027 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06019871420222092 - nodes in this community are weakly interconnected._
 - **Should `Order` be split into smaller, more focused modules?**
-  _Cohesion score 0.0815686274509804 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07078039927404718 - nodes in this community are weakly interconnected._
