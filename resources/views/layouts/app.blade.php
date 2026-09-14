@@ -94,10 +94,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <a href="{{ route('cash.index') }}" class="nav-link {{ request()->routeIs('cash.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('cash') !!}</span><span>Kas</span></a>
       <a href="{{ route('shifts.index') }}" class="nav-link {{ request()->routeIs('shifts.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('shifts') !!}</span><span>Shift</span></a>
       <div class="pt-3 mt-3 border-t border-slate-800">
-        <p class="px-3 text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-1">Laporan</p>
-        <a href="{{ route('reports.sales') }}" class="nav-link {{ request()->routeIs('reports.sales')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('reports') !!}</span><span>Penjualan</span></a>
-        <a href="{{ route('reports.laundry') }}" class="nav-link {{ request()->routeIs('reports.laundry')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('laundry') !!}</span><span>Laundry</span></a>
-        <a href="{{ route('reports.index') }}" class="nav-link {{ request()->routeIs('reports.index')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('reports') !!}</span><span>Semua Laporan</span></a>
+        <a href="{{ route('reports.index') }}" class="nav-link {{ request()->routeIs('reports.*')?'bg-indigo-600 text-white shadow':'hover:bg-slate-800 text-slate-300' }}"><span class="nav-icon">{!! icon('reports') !!}</span><span>Laporan</span></a>
       </div>
       @if(auth()->user()->isAdmin())
       <div class="pt-3 mt-3 border-t border-slate-800">
@@ -151,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <a href="{{ route('reports.index') }}" class="nav-link {{ request()->routeIs('reports.*')?'bg-indigo-600 text-white':'hover:bg-slate-800' }}"><span class="nav-icon">{!! icon('reports') !!}</span>Laporan</a>
       @if(auth()->user()->isAdmin())
       <div class="pt-3 mt-3 border-t border-slate-800 space-y-1">
+        <a href="{{ route('merchants.index') }}" class="nav-link hover:bg-slate-800"><span class="nav-icon">{!! icon('merchants') !!}</span>Merchant</a>
         <a href="{{ route('branches.index') }}" class="nav-link hover:bg-slate-800"><span class="nav-icon">{!! icon('branches') !!}</span>Cabang</a>
         <a href="{{ route('users.index') }}" class="nav-link hover:bg-slate-800"><span class="nav-icon">{!! icon('users') !!}</span>Users</a>
         <a href="{{ route('settings.index') }}" class="nav-link hover:bg-slate-800"><span class="nav-icon">{!! icon('settings') !!}</span>Settings</a>
