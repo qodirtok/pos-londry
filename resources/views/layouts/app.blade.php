@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function(){
         </select>
       </div>
       @elseif($merchantsSide->count()==1)
-        <div class="text-xs text-paper-on-dark truncate">{{ $merchantsSide->first()->code }} — {{ $merchantsSide->first()->name }}</div>
+        <div class="text-xs text-paper-on-dark truncate">{{ $merchantsSide->first()->code }}: {{ $merchantsSide->first()->name }}</div>
       @endif
       <div>
         <label class="text-[10px] uppercase tracking-widest text-paper-on-dark font-semibold">Cabang Aktif</label>

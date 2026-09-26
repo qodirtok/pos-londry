@@ -131,7 +131,7 @@ class WhatsappService {
             'via' => 'wa_me',
             'link' => $waLink,
             'log' => $log,
-            'message' => 'Link WhatsApp siap — langsung buka wa.me'
+            'message' => 'Link WhatsApp siap, langsung buka wa.me'
         ];
         // return ['ok'=>false,'via'=>'api','link'=>$waLink,'wa_me_link'=>$waMeLink,'log'=>$log,'message'=>'Gagal kirim via API, gunakan link WA'];
     }

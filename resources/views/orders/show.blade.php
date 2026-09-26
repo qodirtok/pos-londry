@@ -114,7 +114,7 @@
         <input type="hidden" name="payment_method" value="cash">
         <button type="submit" class="w-full bg-emerald-600 active:bg-emerald-700 text-white py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow">
           <svg class="order-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="m20 6-11 11-5-5"/></svg>
-          Tandai Lunas — Bayar {{ money($remaining) }}
+          Tandai Lunas, bayar {{ money($remaining) }}
         </button>
       </form>
       @endif
@@ -347,7 +347,7 @@ async function handleSubmitForm(form, event, confirmMsg){
       location.reload();
       return false;
     }
-    // HTML 200 tanpa redirect — respons tak dikenal
+    // HTML 200 tanpa redirect, respons tak dikenal
     const textErr2 = res.status + ' ' + res.statusText;
     alert('❗ Respons tidak dikenali dari server. Coba muat ulang halaman. (' + textErr2 + ')');
     return false;

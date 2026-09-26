@@ -126,7 +126,7 @@ class OrderService {
                     'quantity'=>$p['qty'],'unit'=>$p['unit'],'price'=>$p['price'],
                     'discount'=>$p['discount'],'subtotal'=>$p['lineSubtotal'],'notes'=>$p['notes'],
                 ]);
-                // stock handling for product type only (qty check dihilangkan — stok boleh minus)
+                // stock handling for product type only (qty check dihilangkan, stok boleh minus)
                 if($p['product']->type==='product'){
                     $stock = ProductStock::firstOrCreate(['product_id'=>$p['product']->id,'branch_id'=>$branchId], ['quantity'=>0,'minimum_stock'=>0]);
                     $old = (float)$stock->quantity;

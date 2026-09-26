@@ -186,6 +186,75 @@ class ComponentLayerTest extends TestCase
         $this->assertStringNotContainsString("\u{2014}", $html, 'Ada em dash di teks UI.');
     }
 
+    public function test_no_em_dash_anywhere_in_frontend_or_app_sources(): void
+    {
+        // Guard em dash lama hanya memindai halaman preview, padahal copy
+        // baru hampir selalu masuk lewat view dan controller. Akibatnya
+        // em dash sempat menetap di POS, order detail, sidebar, dan pesan
+        // WhatsApp tanpa ketahuan, sementara suite tetap hijau.
+        // Guard ini menyapu sumber yang benar-benar membentuk teks kasir.
+        //
+        // Dokumen markdown sengaja tidak ikut. Em dash di situ dipakai sebagai
+        // pemisah tabel dan penanda bagian, dan tidak pernah sampai ke layar
+        // kasir. Aturan R-02 soal em dash berlaku untuk copy UI, bukan dokumen.
+        $targets = [];
+
+        foreach (['views', 'css', 'js'] as $dir) {
+            $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path($dir)));
+
+            foreach ($it as $file) {
+                $name = $file->getFilename();
+
+                foreach (['.blade.php', '.css', '.js'] as $ext) {
+                    if ($file->isFile() && str_ends_with($name, $ext)) {
+                        $targets[] = $file->getPathname();
+                        break;
+                    }
+                }
+            }
+        }
+
+        foreach (['HANDOVER.md', 'DESIGN.md', 'CLAUDE.md'] as $doc) {
+            $this->assertFileExists(base_path($doc), "Dokumen {$doc} hilang, guard tidak lagi punya konteks aturan");
+        }
+
+        // Teks yang benar-benar dikirim ke kasir juga ada di controller
+        // dan service, misalnya pesan flash dan teks WhatsApp.
+        foreach (['Controllers', 'Services', 'Http/Controllers'] as $sub) {
+            $path = app_path(str_replace('/', DIRECTORY_SEPARATOR, $sub));
+
+            if (! is_dir($path)) {
+                continue;
+            }
+
+            $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
+
+            foreach ($it as $file) {
+                if ($file->isFile() && str_ends_with($file->getFilename(), '.php')) {
+                    $targets[] = $file->getPathname();
+                }
+            }
+        }
+
+        $this->assertGreaterThan(20, count($targets), 'Jumlah sumber yang diperiksa terlalu sedikit');
+
+        $offenders = [];
+
+        foreach ($targets as $file) {
+            if (! is_file($file)) {
+                continue;
+            }
+
+            foreach (file($file, FILE_IGNORE_NEW_LINES) as $number => $line) {
+                if (str_contains($line, "\u{2014}")) {
+                    $offenders[] = str_replace(base_path('').DIRECTORY_SEPARATOR, '', $file).':'.($number + 1);
+                }
+            }
+        }
+
+        $this->assertSame([], $offenders, "Em dash masih ada di:\n".implode("\n", $offenders));
+    }
+
     public function test_copy_dictionary_has_no_em_dash_and_no_english_action_labels(): void
     {
         $dict = require base_path('app/Support/Copy.php');

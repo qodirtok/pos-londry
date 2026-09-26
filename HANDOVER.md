@@ -434,6 +434,13 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 
 ---
 
+### 2026-09-26 — Rincian laundry POS untuk kasir pemula, plus guard em dash yang diperlebar
+- **Rincian laundry** (`pos/index.blade.php` + `LaundryItemTypeController`): baris laundry dirakit ulang pakai `createElement`/`textContent` (sebelumnya `innerHTML` + nama mentah, jadi tag di nama jenis jadi DOM). Nama jenis kini ditolak di server juga lewat `not_regex`, bukan cuma bergantung pada penanganan sisi klien. Tombol step dan hapus dinaikkan ke target sentuh 2.5rem, dan footer modal stack penuh di bawah 640px supaya label "Simpan dan Tutup" tidak terpotong di ponsel sempit.
+- **Copy dibetulkan sesuai aturan "label = apa yang benar-benar terjadi"**: "Simpan & Tutup" jadi "Simpan dan Tutup", "Ket. Lainnya" jadi "Keterangan lain", dan ditambahkan catatan bahwa rincian laundry hanya catatan struk, jadi tidak mengubah total.
+- **Celah guard em dash ditemukan dan ditutup**: `test_no_em_dash_in_any_rendered_ui_text` hanya memindai halaman preview, padahal copy baru masuk lewat view dan controller. Akibatnya 17 baris em dash menetap di POS, detail order, sidebar, halaman offline, form user, dan pesan WhatsApp tanpa suite complains. Semua dibersihkan, dan test baru `test_no_em_dash_anywhere_in_frontend_or_app_sources` menyapu `resources/{views,css,js}` plus `app/Controllers` dan `app/Services`. **Guard ini sudah dibuktikan menangkap bug**: em dash ditanam di `products/index.blade.php` -> test gagal, dipulihkan -> test hijau.
+- Markdown (`HANDOVER.md`, `DESIGN.md`, `CLAUDE.md`) sengaja tidak ikut sapuan itu, karena em dash di sana dipakai sebagai pemisah tabel dan tidak pernah sampai ke layar kasir. Test hanya memverifikasi dokumen itu masih ada.
+- Verifikasi: `php artisan test` **26 passed (188 assertions)**, `npm run build` OK, `php -l` bersih 5 file, `node --check` `app.js` OK, 6 route 200 lewat login HTTP, dan audit HTML ter-render: palet terlarang 0, em dash 0, CJK 0, kebocoran docblock 0.
+
 ## 9) Recent Changes (2026-09-02/03)
 
 ### 2026-09-26 — Component layer (Blade) + halaman preview, dengan guard anti-regresi

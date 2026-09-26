@@ -13,7 +13,15 @@ class LaundryItemTypeController extends Controller {
         $mid=auth()->user()->merchant_id; return response()->json(LaundryItemType::active()->when($mid, fn($q)=>$q->where('merchant_id',$mid))->orderBy('sort_order')->orderBy('name')->get());
     }
     public function store(Request $r){
-        $r->validate(['name'=>'required|string|max:30','icon'=>'nullable|string|max:10']);
+        // Nama jenis laundry dirender sebagai teks di baris rincian POS.
+        // Aturan max:30 saja tidak menahan tag HTML, jadi nama seperti
+        // "<img src=x onerror=...>" sempat tersimpan dan jadi elemen DOM
+        // di browser. Tolak karakter markup di sisi server, bukan hanya
+        // mengandalkan penanganan di sisi klien.
+        $r->validate([
+            'name'=>['required','string','max:30','not_regex:/[<>{}\[\]\\\\]/'],
+            'icon'=>['nullable','string','max:10','not_regex:/[<>{}\[\]\\\\]/'],
+        ]);
         $name = trim($r->name);
         $code = Str::slug($name, '_');
         $code = preg_replace('/[^a-z0-9_]/','', $code);

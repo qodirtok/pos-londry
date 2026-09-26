@@ -73,6 +73,18 @@
   .pos-modal-footer .btn-primary{background:#0f766e;color:#fff}
   .pos-modal-footer .btn-secondary{background:#f4efe6;color:#57503f}
   .pos-modal-footer .btn-ghost{background:#fff;color:#6b6357;border:1px solid #e7e2d9}
+  /* Footer modal laundry: dua tombol sejajar di layar lebar, tapi stack
+     penuh di bawah 640px. Versi lama memakai grid 1fr 1fr yang memotong
+     label "Simpan dan Tutup" di ponsel sempit. */
+  .laundry-footer{grid-template-columns:1fr 1fr;row-gap:.5rem}
+  @media(max-width:639.98px){
+    .laundry-footer{grid-template-columns:1fr}
+    .laundry-footer .btn{width:100%;padding:.9rem}
+    /* Batasi tinggi modal supaya keyboard di ponsel tidak menutupi
+       daftar rincian dan footer tetap terjangkau. */
+    #modalLaundry .pos-modal{max-height:82vh}
+    #modalLaundry .pos-modal-body{max-height:58vh}
+  }
   @keyframes posFadeIn{from{opacity:0}to{opacity:1}}
   @keyframes posSlideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   .pos-summary-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;font-size:.9rem}
@@ -87,15 +99,30 @@
   .pos-quick-cash{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.4rem}
   .pos-quick-cash button{padding:.55rem .25rem;border-radius:.65rem;background:#f4efe6;color:#57503f;border:1px solid #e7e2d9;font-weight:600;font-size:.78rem;cursor:pointer}
   .pos-quick-cash button:hover{background:#e7e2d9}
-  .pos-laundry-card{background:#fff;border:1px solid #fde68a;border-radius:.85rem;padding:.6rem .75rem;display:flex;align-items:center;gap:.6rem;min-width:0}
+  .pos-laundry-card{background:#fff;border:1px solid #fde68a;border-radius:.85rem;padding:.6rem .75rem;display:flex;align-items:center;gap:.5rem;min-width:0}
   .pos-laundry-card .ll-icon{width:2.1rem;height:2.1rem;display:grid;place-items:center;background:#fef3c7;border-radius:.6rem;font-size:1rem;flex-shrink:0}
   .pos-laundry-card .ll-name{font-size:.85rem;font-weight:600;color:#2b2320;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .pos-laundry-card .ll-step{width:1.85rem;height:1.85rem;border:0;border-radius:.55rem;font-weight:700;cursor:pointer;display:grid;place-items:center}
+  /* Target sentuh 2.5rem (40px), sama dengan tombol qty di keranjang.
+     Kasir berdiri sambil pegang barang, target 1.85rem (29.6px) mudah
+     salah tekan saat jari menekan area di antaranya. */
+  .pos-laundry-card .ll-step{width:2.5rem;height:2.5rem;border:0;border-radius:.55rem;font-weight:700;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
   .pos-laundry-card .ll-step.minus{background:#f4efe6;color:#57503f}
   .pos-laundry-card .ll-step.plus{background:#2b2320;color:#fff}
-  .pos-laundry-card input.ll-input{width:3.5rem;border:1px solid #e7e2d9;border-radius:.55rem;padding:.3rem;text-align:center;font-weight:600;font-size:.85rem;background:#fff}
-  .pos-laundry-card .ll-remove{width:1.85rem;height:1.85rem;border:0;background:transparent;color:#57503f;border-radius:.55rem;cursor:pointer;display:grid;place-items:center}
+  .pos-laundry-card .ll-qty{display:flex;align-items:center;gap:.25rem;flex-shrink:0}
+  .pos-laundry-card input.ll-input{width:3rem;height:2.5rem;border:1px solid #d4ccbf;border-radius:.5rem;padding:0;text-align:center;font-weight:700;font-size:1rem;background:#fff;color:#2b2320}
+  .pos-laundry-card input.ll-input:focus{border-color:#0f766e;outline:2px solid #ccfbf1;outline-offset:0}
+  .pos-laundry-card .ll-unit{font-size:.7rem;color:#6b6357;font-weight:600;flex-shrink:0}
+  .pos-laundry-card .ll-remove{width:2.5rem;height:2.5rem;border:0;background:transparent;color:#57503f;border-radius:.55rem;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
   .pos-laundry-card .ll-remove:hover{background:#fef2f2;color:#dc2626}
+  /* Nama jenis laundry butuh dua baris di layar sempit supaya "Sepatu Bola"
+     tidak terpotong. Baris kedua khusus untuk nama panjang saja. */
+  @media(max-width:420px){
+    .pos-laundry-card{flex-wrap:wrap}
+    .pos-laundry-card .ll-name{flex:1 1 100%;order:1;white-space:normal;line-height:1.3}
+    .pos-laundry-card .ll-icon{order:0}
+    .pos-laundry-card .ll-qty{order:2;margin-left:auto}
+    .pos-laundry-card .ll-remove{order:3}
+  }
   .pos-pay-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-top:.4rem}
   .pos-pay-method-grid button{padding:.65rem .25rem;border-radius:.7rem;background:#f4efe6;color:#57503f;border:1px solid #e7e2d9;font-weight:600;font-size:.78rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.25rem}
   .pos-pay-method-grid button.is-active{background:#f0fdfa;color:#115e59;border-color:#5eead4}
@@ -184,7 +211,7 @@
       <input type="hidden" id="customerId" value="">
     </div>
 
-    {{-- Rincian Laundry — dibuka via modal popup --}}
+    {{-- Rincian Laundry, dibuka via modal popup --}}
     <div class="mx-3 sm:mx-4 mb-3">
       <button type="button" onclick="openLaundryModal()" class="w-full flex items-center justify-between px-3 sm:px-4 py-3 text-left bg-amber-50 border border-amber-200 rounded-xl hover:bg-amber-100/60 transition">
         <span class="text-xs sm:text-sm font-bold text-amber-900 flex items-center gap-2">
@@ -196,7 +223,7 @@
           <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#b45309;width:1.2rem;height:1.2rem"><path d="m6 9 6 6 6-6"/></svg>
         </span>
       </button>
-      <p class="text-[11px] leading-relaxed text-amber-800/80 mt-1">Isi jumlah per jenis, misalnya Baju 3 pcs. Biarkan kosong kalau order ini bukan laundry. <a href="#" onclick="event.preventDefault();openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
+      <p class="text-[11px] leading-relaxed text-amber-800/80 mt-1">Jumlah per jenis untuk dicatat di struk, misalnya Baju 2 pcs. Biarkan kosong kalau order ini bukan laundry. <a href="#" onclick="event.preventDefault();openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
     </div>
 
     <div class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-2 sm:space-y-3 min-h-[18vh] lg:min-h-0" id="cartItems">
@@ -429,19 +456,19 @@
       </button>
     </div>
     <div class="pos-modal-body">
-      <p class="text-[11px] leading-relaxed text-amber-800/80 mb-3">Pilih jenis lalu tekan <b>Tambah</b>. Tekan Hapus untuk membatalkan baris. <a href="#" onclick="event.preventDefault();openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
+      <p class="text-[11px] leading-relaxed text-amber-800/80 mb-3">Pilih jenis di bawah, atur jumlahnya, lalu tekan <b>Simpan dan Tutup</b>. Kosongkan saja kalau order ini bukan laundry. <a href="#" onclick="event.preventDefault();openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
       <div id="laundryGrid" class="flex flex-col gap-2 mb-3 min-h-[0]">
         <!-- cards ditambah via dropdown -->
       </div>
       <div id="laundryEmpty" class="border border-dashed border-amber-300 rounded-xl bg-white/70 px-3 py-6 text-center">
-        <p class="text-sm text-paper-500">Belum ada rincian. Pilih jenis di bawah lalu tambah.</p>
-        <p class="text-[11px] text-paper-500 mt-1">Contoh: Baju, Celana, Sepatu, Tas — pcs akan masuk struk</p>
+        <p class="text-sm text-paper-500">Belum ada rincian.</p>
+        <p class="text-[11px] text-paper-500 mt-1">Contoh: Baju 2 pcs, Celana 1 pcs. Semuanya masuk struk.</p>
       </div>
       <div class="bg-white border border-amber-200 rounded-xl p-2.5 sm:p-3 space-y-2.5">
         <label class="text-xs font-semibold text-paper-700">Tambah jenis ke rincian</label>
         <div class="flex flex-col sm:flex-row gap-2">
           <select id="laundrySelect" class="flex-1 min-w-0 border border-paper-300 rounded-xl px-3 py-3 text-sm bg-white focus:ring-2 focus:ring-amber-400 outline-none">
-            <option value="">— Pilih jenis —</option>
+            <option value="">Pilih jenis</option>
             @foreach($laundryTypes as $t)
             <option value="{{ $t->code }}" data-name="{{ $t->name }}" data-icon="{{ $t->icon ?? '📦' }}">{{ ($t->icon ?? '📦').' '.$t->name }}</option>
             @endforeach
@@ -458,22 +485,23 @@
         </details>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-        <label class="text-xs font-medium text-paper-600">Ket. Lainnya <span class="font-normal text-paper-500">(opsional)</span><input id="laundry_lainnya_desc" type="text" placeholder="Bed cover, gorden, dll" class="mt-1 w-full border border-paper-300 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
+        <label class="text-xs font-medium text-paper-600">Keterangan lain <span class="font-normal text-paper-500">(opsional)</span><input id="laundry_lainnya_desc" type="text" placeholder="Bed cover, gorden, dll" class="mt-1 w-full border border-paper-300 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
         <label class="text-xs font-medium text-paper-600">Catatan laundry <span class="font-normal text-paper-500">(masuk struk)</span><input id="laundry_catatan" type="text" placeholder="Noda di kerah, jangan pakai pewangi" class="mt-1 w-full border border-paper-300 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
       </div>
+      <p class="text-[11px] leading-relaxed text-paper-500 bg-paper-100 border border-paper-200 rounded-lg px-2.5 py-2">Rincian ini hanya catatan untuk struk. Harga laundry tetap dari produk di keranjang, jadi isi rincian tidak menambah atau mengurangi total.</p>
       <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t">
         <span class="text-[11px] text-paper-500">Total pcs: <b id="laundryTotal" class="text-paper-800">0</b></span>
         <button type="button" onclick="clearLaundry()" class="text-xs text-paper-500 hover:text-paper-700 underline">Kosongkan rincian</button>
       </div>
     </div>
-    <div class="pos-modal-footer" style="grid-template-columns:1fr 1fr;row-gap:.5rem">
+    <div class="pos-modal-footer laundry-footer">
       <button type="button" class="btn btn-secondary" onclick="closeModal('modalLaundry')">
         <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
         Tutup
       </button>
       <button type="button" class="btn btn-success" onclick="saveLaundryAndClose()">
         <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#10b981"><path d="M5 13l4 4L19 7"/></svg>
-        Simpan & Tutup
+        Simpan dan Tutup
       </button>
     </div>
   </div>
@@ -981,7 +1009,7 @@ function refreshLaundrySelect(){
   let sel=document.getElementById('laundrySelect');
   if(!sel) return;
   let keep = sel.value;
-  sel.innerHTML='<option value="">— Pilih jenis —</option>';
+  sel.innerHTML='<option value="">Pilih jenis</option>';
   laundryTypes.forEach(t=>{
     if(selectedLaundry.has(t.code)) return;
     let opt=document.createElement('option');
@@ -1003,26 +1031,77 @@ function createLaundryCard(code, name, icon, initialValue){
   let wrap=document.createElement('div');
   wrap.id='wrap_'+code;
   wrap.className='pos-laundry-card';
+
+  // Baris ini dulu dirakit dengan innerHTML dan nama jenis disisipkan mentah.
+  // Nama berasal dari tabel laundry_item_types yang bisa diisi siapa pun lewat
+  // modal "Kelola jenis", jadi tag di dalam nama jadi elemen DOM sungguhan.
+  // Sekarang semua teks dibuat lewat textContent, yang selalu aman.
   var iconDisp = icon || '\u{1F4CC}';
-  wrap.innerHTML =
-    '<div class="ll-icon">'+iconDisp+'</div>'+
-    '<div class="ll-name">'+name+'</div>'+
-    '<button type="button" onclick="stepLaundry(\''+code+'\',-1)" class="ll-step minus" aria-label="Kurangi">'+
-      '<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M5 12h14"/></svg>'+
-    '</button> '+
-    '<input id="laundry_'+code+'" data-code="'+code+'" type="number" min="0" inputmode="numeric" placeholder="0" class="ll-input laundryInput" value="'+(initialValue||'')+'"> '+
-    '<button type="button" onclick="stepLaundry(\''+code+'\',1)" class="ll-step plus" aria-label="Tambah">'+
-      '<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem;color:#fff"><path d="M5 12h14M12 5v14"/></svg>'+
-    '</button> '+
-    '<button type="button" onclick="removeLaundryRow(\''+code+'\')" class="ll-remove" aria-label="Hapus baris" title="Hapus baris">'+
-      '<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:.95rem;height:.95rem"><path d="M18 6 6 18M6 6l12 12"/></svg>'+
-    '</button>';
+
+  var iconBox=document.createElement('div');
+  iconBox.className='ll-icon';
+  iconBox.textContent=iconDisp;
+
+  var nameBox=document.createElement('div');
+  nameBox.className='ll-name';
+  nameBox.textContent=name;
+
+  var qtyBox=document.createElement('div');
+  qtyBox.className='ll-qty';
+
+  var minus=document.createElement('button');
+  minus.type='button';
+  minus.className='ll-step minus';
+  minus.setAttribute('aria-label','Kurangi jumlah '+name);
+  minus.innerHTML='<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1rem;height:1rem"><path d="M5 12h14"/></svg>';
+  minus.addEventListener('click', function(){ stepLaundry(code, -1); });
+
+  var input=document.createElement('input');
+  input.id='laundry_'+code;
+  input.setAttribute('data-code',code);
+  input.setAttribute('type','number');
+  input.setAttribute('min','0');
+  input.setAttribute('inputmode','numeric');
+  input.setAttribute('aria-label','Jumlah '+name+' dalam pcs');
+  input.placeholder='0';
+  input.className='ll-input laundryInput';
+  input.value=(initialValue==null?'':initialValue);
+
+  var unit=document.createElement('span');
+  unit.className='ll-unit';
+  unit.textContent='pcs';
+
+  var plus=document.createElement('button');
+  plus.type='button';
+  plus.className='ll-step plus';
+  plus.setAttribute('aria-label','Tambah jumlah '+name);
+  plus.innerHTML='<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1rem;height:1rem;color:#fff"><path d="M5 12h14M12 5v14"/></svg>';
+  plus.addEventListener('click', function(){ stepLaundry(code, 1); });
+
+  var remove=document.createElement('button');
+  remove.type='button';
+  remove.className='ll-remove';
+  remove.setAttribute('aria-label','Hapus jenis '+name+' dari rincian');
+  remove.title='Hapus jenis ini';
+  remove.innerHTML='<svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1rem;height:1rem"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+  remove.addEventListener('click', function(){ removeLaundryRow(code); });
+
+  qtyBox.appendChild(minus);
+  qtyBox.appendChild(input);
+  qtyBox.appendChild(unit);
+  qtyBox.appendChild(plus);
+
+  wrap.appendChild(iconBox);
+  wrap.appendChild(nameBox);
+  wrap.appendChild(qtyBox);
+  wrap.appendChild(remove);
   grid.appendChild(wrap);
-  wrap.querySelector('.laundryInput').addEventListener('input', updateLaundryTotal);
-  wrap.querySelector('.laundryInput').addEventListener('change', saveLaundryDraft);
+
+  input.addEventListener('input', updateLaundryTotal);
+  input.addEventListener('change', saveLaundryDraft);
   refreshLaundrySelect();
   updateLaundryTotal();
-  wrap.querySelector('.laundryInput').focus();
+  input.focus();
 }
 
 function addLaundryFromSelect(){
@@ -1161,7 +1240,7 @@ async function submitEditOrder(){
 // ============ CHECKOUT MODAL ============
 function openCheckoutModal(){
   if(cart.length===0){ alert('Keranjang kosong'); return; }
-  if(!selectedCustomerId){ updateCustomerRequiredUI(); document.getElementById('customerSearch').focus(); alert('Pilih customer dulu — wajib isi customer sebelum bayar'); return; }
+  if(!selectedCustomerId){ updateCustomerRequiredUI(); document.getElementById('customerSearch').focus(); alert('Pilih customer dulu, customer wajib diisi sebelum bayar'); return; }
   let {sub,disc,tax,total}=calc();
   let custName = document.getElementById('custName').textContent;
   let itemCount = cart.reduce((s,c)=> s + (parseFloat(c.quantity)||0), 0);
@@ -1262,7 +1341,7 @@ async function confirmCheckout(){
     lastOrderId = data.id;
     lastOrderData = data;
     closeModal('modalCheckout');
-    // Laundry draft sudah terpakai — bersihkan agar transaksi baru mulai fresh
+    // Laundry draft sudah terpakai, bersihkan agar transaksi baru mulai fresh
     try { localStorage.removeItem(LAUNDRY_KEY); selectedLaundry.clear(); document.getElementById('laundryGrid').innerHTML=''; } catch(e){}
     // Reset mobile cart drawer & FAB setelah transaksi sukses (cart kosong)
     try {

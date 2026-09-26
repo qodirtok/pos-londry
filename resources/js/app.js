@@ -2,7 +2,7 @@ import './bootstrap';
 import './pwa';
 import Swal from 'sweetalert2';
 
-// Flat UI SVG icon helper — replaces emoji icons everywhere
+// Flat UI SVG icon helper, replaces emoji icons everywhere
 window.icon = function(name, opts={}) {
   const icons = {
     'dashboard':'<path d="M3 13.5V6a2 2 0 012-2h14a2 2 0 012 2v7.5M3 13.5l9 3 9-3M3 13.5V11m18 2.5l-9 3-9-3"/>',

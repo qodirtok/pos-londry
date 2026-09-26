@@ -3,7 +3,7 @@
 @section('content')
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
   <h1 class="text-xl font-bold">Jenis Rincian Laundry</h1>
-  <span class="text-xs text-paper-500">Tersimpan — otomatis muncul di POS (dinamis)</span>
+  <span class="text-xs text-paper-500">Tersimpan dan otomatis muncul di POS (dinamis)</span>
 </div>
 <div class="bg-white rounded-2xl border p-4 mb-4">
   <form method="POST" action="{{ route('laundry-types.store') }}" class="flex flex-col sm:flex-row gap-2">

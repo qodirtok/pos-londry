@@ -47,7 +47,7 @@ class CustomerController extends Controller {
         if($s) $q->where(fn($qq)=>$qq->where('name','like',"%$s%")->orWhere('phone','like',"%$s%")->orWhere('code','like',"%$s%"));
         return response()->json($q->limit(10)->get(['id','code','name','phone']));
     }
-    // API store for POS — returns JSON
+    // API store for POS, returns JSON
     public function storeApi(Request $r){
         $r->validate(['name'=>'required','phone'=>'required']);
         $branchId = session('branch_id') ?? auth()->user()->branch_id ?? \App\Models\Branch::first()->id;

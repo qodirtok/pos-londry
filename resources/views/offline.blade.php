@@ -9,7 +9,7 @@
       <button onclick="location.reload()" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-5 py-3 rounded-xl text-sm">Coba lagi</button>
       <a href="/dashboard" class="bg-white border border-paper-300 hover:bg-paper-100 text-paper-800 font-semibold px-5 py-3 rounded-xl text-sm">Ke Dashboard</a>
     </div>
-    <p class="text-xs text-paper-500 mt-4">Londry POS — akan otomatis sinkron saat online kembali.</p>
+    <p class="text-xs text-paper-500 mt-4">Londry POS akan otomatis sinkron saat online kembali.</p>
   </div>
 </div>
 @endsection
