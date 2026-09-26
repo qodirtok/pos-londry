@@ -57,6 +57,17 @@ class ComponentLayerTest extends TestCase
         $this->get('/components-preview')->assertNotFound();
     }
 
+    /**
+     * Preview sengaja di luar middleware auth supaya bisa dibuka tanpa
+     * login. Ini keputusan sadar, bukan kelalaian: kalau nanti ada yang
+     * memindahkannya ke dalam auth group, test ini yang akan menandainya
+     * dan membiarkan yang memutuskan, bukan diam-diam berubah.
+     */
+    public function test_preview_route_stays_reachable_without_login(): void
+    {
+        $this->get('/components-preview')->assertOk();
+    }
+
     public function test_buttons_render_with_all_variants_and_loading_state(): void
     {
         $html = $this->renderPreview();
