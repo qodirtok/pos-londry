@@ -30,7 +30,7 @@
         // pita apa-apa di halaman daftar (DESIGN.md section 8), jadi netral
         // dipakai kalau status memang perlu disebut, bukan untuk penanda lain.
         'neutral' => 'bg-paper-200 text-paper-700 border-paper-400',
-        // Amber = perlu diburu. Satu-satunya warna non-aksen yang说了算.
+        // Amber = perlu diburu. Satu-satunya warna non-aksen yang dipakai.
         'amber'   => 'bg-amber-50 text-amber-800 border-amber-300',
         'danger'  => 'bg-rose-50 text-rose-800 border-rose-300',
         'success' => 'bg-emerald-50 text-emerald-800 border-emerald-300',

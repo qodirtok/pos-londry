@@ -43,7 +43,7 @@
 
 @if($products->count() === 0)
   <div class="bg-white border border-dashed rounded-2xl p-10 text-center text-sm text-paper-500">
-    <svg class="pos-flat-icon mx-auto mb-2" viewBox="0 0 24 24" style="width:2.5rem;height:2.5rem;color:#cbd5e1"><path d="M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0L12 11M4 7l8 4m0 0v10"/></svg>
+    <svg class="pos-flat-icon mx-auto mb-2" viewBox="0 0 24 24" style="width:2.5rem;height:2.5rem;color:#6b6357"><path d="M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0L12 11M4 7l8 4m0 0v10"/></svg>
     <p class="font-semibold text-paper-600">Tidak ada produk ditemukan</p>
     <p class="text-xs mt-1">Coba ubah filter atau tambah produk baru</p>
   </div>

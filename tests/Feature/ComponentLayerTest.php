@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Tests\TestCase;
 
 /**
@@ -234,6 +236,136 @@ class ComponentLayerTest extends TestCase
                 '/#[0-9a-fA-F]{3,8}\b/',
                 $markup,
                 "Warna hex langsung di markup: ".basename($file)
+            );
+        }
+    }
+
+    public function test_no_banned_palette_colors_survive_anywhere_in_frontend(): void
+    {
+        // Palet lama indigo/slate pernah littered di view sebagai inline CSS.
+        // Sapuan class Tailwind tidak menangkap hex itu, jadi palet lama
+        // bertahan tanpa terlihat. Guard ini menyapu seluruh sumber depan:
+        // view, css, js, dan config Tailwind.
+        $banned = [
+            'indigo' => [
+                '#4f46e5', '#4338ca', '#818cf8', '#6366f1', '#eef2ff', '#c7d2fe',
+                'rgba(79,70,229', '79, 70, 229', '79,70,229',
+            ],
+            'slate' => [
+                '#0f172a', '#1e293b', '#334155', '#475569', '#64748b',
+                '#94a3b8', '#cbd5e1', '#e2e8f0', '#f1f5f9', '#f8fafc', '#fafbfc',
+            ],
+        ];
+
+        $sources = [];
+
+        foreach (['views', 'css', 'js'] as $dir) {
+            $root = resource_path($dir);
+            $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root));
+
+            foreach ($it as $file) {
+                // str_ends_with hanya menerima satu string, jadi ekstensi
+                // dicocokkan satu per satu di dalam loop.
+                $matched = false;
+
+                foreach (['.blade.php', '.css', '.js'] as $ext) {
+                    if (str_ends_with($file->getFilename(), $ext)) {
+                        $matched = true;
+                        break;
+                    }
+                }
+
+                if ($file->isFile() && $matched) {
+                    $sources[] = $file->getPathname();
+                }
+            }
+        }
+
+        $sources[] = base_path('tailwind.config.js');
+
+        $this->assertGreaterThan(
+            20,
+            count($sources),
+            'Jumlah sumber yang diperiksa terlalu sedikit, guard ini kemungkinan tidak lagi memindai semua view'
+        );
+
+        $offenders = [];
+
+        foreach ($sources as $file) {
+            $contents = (string) file_get_contents($file);
+
+            foreach ($banned as $family => $hexes) {
+                foreach ($hexes as $hex) {
+                    if (stripos($contents, $hex) !== false) {
+                        $offenders[] = str_replace(resource_path('').DIRECTORY_SEPARATOR, '', $file).' -> '.$hex.' ('.$family.')';
+                    }
+                }
+            }
+        }
+
+        $this->assertSame([], $offenders, "Palet lama masih ada di:\n".implode("\n", $offenders));
+    }
+
+    public function test_no_stray_cjk_characters_in_written_indonesian(): void
+    {
+        // Karakter CJK sempat bocor 3x ke kalimat Indonesia (DESIGN.md,
+        // HANDOVER.md, badge.blade.php) karena penulisan panjang kadang
+        // meleset ke huruf Mandarin/Korea di tengah-tengah kalimat. Copy
+        // proyek ini murni Indonesia, jadi ini bukan gaya, tapi kesalahan.
+        $cjk = '/[\x{4E00}-\x{9FFF}\x{3040}-\x{30FF}\x{AC00}-\x{D7AF}]/u';
+
+        $targets = [];
+
+        foreach (['HANDOVER.md', 'DESIGN.md', 'CLAUDE.md'] as $doc) {
+            $targets[] = base_path($doc);
+        }
+
+        foreach (['views', 'css', 'js'] as $dir) {
+            $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path($dir)));
+
+            foreach ($it as $file) {
+                $name = $file->getFilename();
+
+                foreach (['.blade.php', '.css', '.js'] as $ext) {
+                    if ($file->isFile() && str_ends_with($name, $ext)) {
+                        $targets[] = $file->getPathname();
+                        break;
+                    }
+                }
+            }
+        }
+
+        $this->assertGreaterThan(20, count($targets), 'Jumlah sumber yang diperiksa terlalu sedikit');
+
+        $offenders = [];
+
+        foreach ($targets as $file) {
+            if (! is_file($file)) {
+                continue;
+            }
+
+            foreach (file($file, FILE_IGNORE_NEW_LINES) as $number => $line) {
+                if (preg_match($cjk, $line)) {
+                    $offenders[] = str_replace(base_path('').DIRECTORY_SEPARATOR, '', $file).':'.($number + 1);
+                }
+            }
+        }
+
+        $this->assertSame([], $offenders, "Karakter CJK bocor ke:\n".implode("\n", $offenders));
+    }
+
+    public function test_paper_and_teal_tokens_are_defined_in_tailwind_config(): void
+    {
+        // Guard di atas hanya menolak warna yang DILARANG. Kalau token paper
+        // atau teal dihapus dari config, semua halaman akan jatuh ke warna
+        // default Tailwind tanpa error, jadi presence token ikut dikunci.
+        $config = (string) file_get_contents(base_path('tailwind.config.js'));
+
+        foreach (['paper', 'teal'] as $token) {
+            $this->assertMatchesRegularExpression(
+                '/'.preg_quote($token, '/').'\s*:/',
+                $config,
+                "Token {$token} hilang dari tailwind.config.js"
             );
         }
     }

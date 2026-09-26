@@ -130,7 +130,7 @@ Yang **bukan** motif: garis grid, dot pattern, gradient, glow, blob.
 
 ## 6. Motion
 
-MOTION 1. Hanya hover dan transisi 상태. Tidak ada loop, tidak ada pulse, tidak ada animasi berjalan sendiri.
+MOTION 1. Hanya hover dan transisi status. Tidak ada loop, tidak ada pulse, tidak ada animasi berjalan sendiri.
 
 | Aksi | Transisi |
 |---|---|
