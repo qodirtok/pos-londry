@@ -66,6 +66,55 @@ class PosPageTest extends TestCase
         );
     }
 
+    /**
+     * Modal laundry pernah terpotong di ponsel sempit karena footer memakai
+     * grid 1fr 1fr dan nama jenis laundry dipaksa satu baris. Pengukuran
+     * headless Chrome di 320 sampai 768 px menunjukkan keduanya sudah rapi
+     * karena footer jadi satu kolom di bawah 640px dan kartu laundry wrap
+     * di bawah 420px.
+     *
+     * Guard ini mengunci aturan itu di level CSS. Menghapus salah satu
+     * media query akan mengembalikan pemotongan tapi test lain tetap hijau,
+     * karena tidak ada assertion yang mengukur lebar di layar sempit.
+     */
+    public function test_laundry_modal_keeps_narrow_screen_layout_rules(): void
+    {
+        $user = User::where('username', 'admin')->first();
+        $this->assertNotNull($user);
+
+        $html = $this->actingAs($user)
+            ->withoutVite()
+            ->get('/pos')
+            ->getContent();
+
+        // Lebar modal dibatasi inline, jadi harus jauh di bawah viewport
+        // terkecil yang masih dipakai kasir (320px) setelah dikurangi padding.
+        $this->assertStringContainsString('id="modalLaundry"', $html);
+        $this->assertStringContainsString('.pos-modal{background:#fff;width:100%;max-width:480px', $html);
+
+        // Footer satu kolom di bawah 640px supaya label panjang
+        // "Simpan dan Tutup" tidak terpotong.
+        $this->assertMatchesRegularExpression(
+            '/@media\(max-width:639\.98px\)\s*\{\s*\.laundry-footer\{grid-template-columns:1fr\}/',
+            $html
+        );
+        $this->assertStringContainsString('.laundry-footer .btn{width:100%;padding:.9rem}', $html);
+
+        // Nama jenis laundry dua baris di bawah 420px, dengan urutan flex
+        // supaya ikon, nama, jumlah, dan hapus tidak saling tumpang tindih.
+        $this->assertMatchesRegularExpression(
+            '/@media\(max-width:420px\)\s*\{\s*\.pos-laundry-card\{flex-wrap:wrap\}/',
+            $html
+        );
+        $this->assertStringContainsString('.pos-laundry-card .ll-name{flex:1 1 100%;order:1;white-space:normal;line-height:1.3}', $html);
+
+        // Target sentuh minimal 2.5rem (40px) untuk tombol langkah, hapus,
+        // dan input jumlah, karena kasir berdiri sambil memegang barang.
+        foreach (['.pos-laundry-card .ll-step{width:2.5rem;height:2.5rem', '.pos-laundry-card .ll-remove{width:2.5rem;height:2.5rem', '.pos-laundry-card input.ll-input{width:3rem;height:2.5rem'] as $rule) {
+            $this->assertStringContainsString($rule, $html, "Aturan target sentuh hilang: {$rule}");
+        }
+    }
+
     public function test_pos_store_creates_order_for_kasir(): void
     {
         $kasir = User::where('username', 'kasir')->first();
