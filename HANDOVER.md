@@ -409,14 +409,77 @@ Demo terisolasi via `is_demo=1` + DEMO branch — tidak bisa cross ke prod meski
 - `BranchContext` paksa demo ke DEMO, `MerchantContext` set `session(merchant_id)`.
 
 ### Responsive — Konvensi
-- Tailwind CDN. Breakpoints `sm:640`, `lg:1024`. POS laundry `flex flex-col gap-2` list vertical. Input `py-3` (44px). Tabel `overflow-x-auto min-w-[520px]` + cards `sm:hidden`.
+- Tailwind via **Vite** (bukan CDN sejak 2026-09). Build: `npm run build`; dev: `npm run dev`. Breakpoints `sm:640`, `lg:1024`. Input `py-3` (44px min tap target). Tabel `overflow-x-auto` + cards `sm:hidden`.
 
 ### Validasi Uang & Quantity
 - DECIMAL(15,2) uang, DECIMAL(12,3) quantity. Product pcs integer.
 
+### Warna & Tipografi — Baca DESIGN.md DULU
+- **Arah desain ada di `DESIGN.md`.** Jangan mulai ubah tampilan tanpa membacanya. Semua keputusan warna/tipografi/radius ada di sana beserta alasannya.
+- **Warna lewat token, bukan hex langsung.** Aksen: `teal-600` (#0f766e). Netral: `paper-*`. Status: `emerald` (sukses/lunas), `amber` (siap diambil / belum bayar), `rose` (error / wajib diisi). Jangan pakai warna baru tanpa alasan tertulis.
+- **Aturan aksen**: teal hanya di tombol aksi utama, angka total, dan link aktif. Kalau halaman terasa terlalu banyak teal, aksennya bocor.
+- **Anti-pattern yang sudah dibuang** (jangan dikembalikan tanpa alasan): indigo sebagai warna brand, emoji sebagai icon, radius 16px seragam, Inter/Google Fonts, gradient sebagai warna utama, glow, grid/dot pattern di latar, dark mode sebagai gaya, `rounded-full` di semua elemen.
+- **Icon**: pakai `icon('nama')` dari `app/helpers.php` (SVG line-icon). Kalau butuh icon baru, tambahkan ke set PHP itu — bukan bikin SVG inline ad-hoc di view.
+- **Kontras**: WAJIB ukur sebelum dipakai. Teks kecil min 4.5:1, teks besar min 3:1. Warna netral baru harus dicek terhadap background yang benar-benar dipakai, karena abu terang di atas terang GAGAL sedangkan abu terang di atas gelap LOLOS (lihat pitfall sidebar di §9).
+- **Angka rupiah** pakai `tabular-nums` (sudah default di body). Jangan pakai font web baru — system font dipakai demi alasan kecepatan (lihat DESIGN.md §3).
+
+### UX untuk Kasir Pemula
+- Audience-nya kasir laundry, banyak yang non-teknis, berdiri, dan sering di bawah matahari. Konsekuensi: target sentuh besar, kontras tinggi, tidak ada jargon.
+- **Jujur soal langkah berikutnya.** Jangan tulis "BAYAR & CETAK" kalau yang terjadi cuma buka modal. Label tombol = apa yang benar-benar terjadi.
+- **Sembunyikan yang biasanya tidak dipakai.** Diskon/pajak/warga tidak wajib → di balik toggle, tampil hanya saat dipakai. Field kosong yang selalu tampil bikin ragu.
+- **Peringatkan sebelum, bukan sesudah.** Instruksi tampil dari awal (misal "Belum ada customer dipilih"), bukan muncul setelah gagal. Error setelah kejadian tetap ada, tapi jangan-andalkan itu saja.
+- **Hindari kata ambigu.** "Baru/Selesai" tidak jelas; pakai "Masih dicuci/Sudah selesai".
+- **Empty state** = kenapa kosong + apa yang harus dilakukan berikutnya. Bukan "No data".
+- **Hindari emoji di teks UI** dan ikon dekoratif. Emoji ≠ tidak cocok untuk UI ini, bukan karena Tren, tapi karena rendering beda per OS dan menyentuh hierarki visual.
+
 ---
 
 ## 9) Recent Changes (2026-09-02/03)
+
+### 2026-09-26 — Component layer (Blade) + halaman preview, dengan guard anti-regresi
+- **Kenapa**: tombol, badge, field input, dan tabel masih ditulis ulang di tiap view. 4 halaman punya versi "loading" dan "error" yang beda-beda, jadi tidak konsisten dan mudah salah. Sekarang ada satu sumber.
+- **`resources/views/components/`** (9 file Blade): `button`, `badge`, `field`, `table`, `th`, `td`, `table-row`, `card`, plus `components-preview.blade.php` yang merakit semuanya. Preview ada di route **`/components-preview`**, **hanya aktif di `local`**, dan butuh login (sudah di-cover test).
+- Aturan yang dipegang: komponen tidak boleh bringing own color/hex (pakai token `paper-*`/`teal-*`), tidak boleh pakai emoji, tidak boleh pakai em dash, dan label tombol = apa yang benar-benar terjadi.
+- **Bug yang ketemu & diperbaiki di sesi ini**: docblock PHP di 8 file komponen bocor ke HTML output (`/** ... */` tampil di atas markup). Test `test_component_templates_do_not_leak_php_docblocks` guardingnya sudah ditulis dan **sudah dibuktikan menangkap bug** (sengaja dirusak 1 file → test gagal, dipulihkan → test hijau lagi).
+- **Test baru `tests/Feature/ComponentLayerTest.php`** (21 test / 176 assertion total suite): variant tombol, focus ring terlihat untuk keyboard, tone badge bermakna, label field di atas input + wire error, tabel punya empty/loading/error state, `data-label` untuk mode card, `<th>/<td>` valid di dalam `<table>`, tidak ada em dash, tidak ada label bahasa Inggris di copy, komponen pakai token bukan hex, preview diblokir di production, dan tidak ada kebocoran docblock.
+- Verifikasi: `php artisan test` **21 passed (176 assertions)**, `npm run build` OK, screenshot desktop + mobile `components-preview` dicek bersih.
+
+### 2026-09-26 — Fix 6 bug yang memblokir kasir (audit anti-slop 001)
+Audit dulu: `anti-slop/audit-001-2026-09-26.md` (15 temuan, 6 di antaranya HIGH / Hard Gate). Semuanya bug fungsi nyata, bukan estetika.
+- **`saveNewLaundryType()` crash** (`pos/index.blade.php:1304`): fungsi tanpa parameter tapi manggil `e.target.querySelector(...)` → `ReferenceError` sebelum `fetch`. Tombol "Simpan" di modal *Jenis Laundry Baru* mati total. Fix: `document.getElementById('ltSaveBtn')` + guard null.
+- **Enter di form customer = data hilang** (`:438`): `<form id="newCustomerForm">` tidak punya tombol submit di dalamnya, tombolnya di footer modal → Enter = native submit = reload, input hilang. Fix: tombol jadi `type="submit" form="newCustomerForm"` (atribut `form` mengikat tombol luar form ke form, tanpa membongkar struktur modal).
+- **`addLaundryTypeToOrder()` panggil elemen mati** (`:1303`): `laundryPanel` + `toggleLaundry()` sudah dihapus dari DOM (panel pindah ke modal). Diam-diam tidak error. Fix: hapus 2 baris.
+- **`clearLaundry()` dobel** (`:849` & `:976`): definisi kedua menimpa yang pertama; yang menang **tidak** hapus localStorage → tombol "Kosongkan rincian" tidak benar-benar mengosongkan, dan draft order lama muncul lagi di order berikutnya. Fix: hapus duplikat, sisakan yang juga `localStorage.removeItem(LAUNDRY_KEY)`.
+- **Kontras gagal AA** (`pos/index.blade.php` CSS): `#94a3b8` di atas `#f1f5f9` = **2.34:1** (butuh 4.5), dipakai di `.pos-empty` (label "Keranjang kosong"), `.ci-remove`, `.ll-remove`, `.pos-search-icon`. 8 selector diganti ke `#475569` (6.92:1) / `#64748b` (4.72:1).
+- **Flash message tak pernah tampil** (`layouts/app.blade.php:40-70`): session flash + validation error dikirim ke `console.log` saja, nol markup. Kasir tidak pernah tahu "berhasil disimpan". Fix: toast sungguhan, `role="status"` + `aria-live="polite"`, auto-dismiss 6 detik untuk sukses, error/warning nunggu ditutup manual.
+- **XSS yang saya bawa sendiri lalu perbaiki**: flash sempat ditulis `{!! $m !!}`. `LaundryItemTypeController@store:37` menempelkan `$name` dari user ke flash, validasinya cuma `string|max:30` (tidak menyaring HTML). Sebelumnya aman karena hanya `json_encode` ke console; merender ke DOM = stored XSS. Fix: `{{ $m }}`. Terverifikasi: payload `<img src=x onerror=alert(1)>` → ter-render jadi `&lt;img...&gt;`, tag tidak terbentuk.
+- **Bug yang saya buat lalu perbaiki di sesi sama**: script toast sempat di `<head>` tanpa `DOMContentLoaded` → `querySelectorAll` jalan sebelum body ada, auto-dismiss tidak pernah jalan.
+- Verifikasi: `php -l` bersih 2 file, `npm run build` OK, `phpunit` **7/7 OK (26 assertions)**, `node --check` inline script POS OK, `php artisan serve` + curl → `GET /pos` 200 dan keenam fix terverifikasi di HTML render.
+
+### 2026-09-26 — Redesign visual: indigo → teal, emoji → SVG, system font, dashboard baru
+Arah desain tertulis di **`DESIGN.md`** (wajib dibaca sebelum ubah UI). R-37 mensyaratkan arah eksplisit sebelum building.
+- **Audit**: `anti-slop/audit-001-2026-09-26.md`. Temuan 7-11 (MEDIUM) dikerjakan di sini.
+- **`DESIGN.md`** (baru): identitas (POS laundry untuk kasir yang berdiri, audience non-teknis), palet (kertas `#FFFDF9` / tinta `#2B2320` / aksen teal `#0F766E` / status amber `#B45309`), tipografi, radius, motif identitas ("kartu bertanda": nomor order mono + garis putus-putus), motion, dials **ENERGY 1 / RHYTHM 2 / MOTION 1**.
+- **`tailwind.config.js`**: tambah palet `teal` (9 shade) + `paper` (9 shade + `on-dark`/`on-dark-dim`) + `borderRadius` (sm 4px, md 6px, 2xl 12px) + `fontFamily` system. **`borderRadius.DEFAULT` sengaja TIDAK diubah** — `rounded` bawaan Tailwind (8px) sudah cocok untuk kartu; mengubah DEFAULT akan diam-diam mengubah `rounded` di semua halaman.
+- **Palet**: 126 kemunculan kelas indigo (7 shade) + hex `#4f46e5/#4338ca/#818cf8/#6366f1` + rgba `79,70,229` di **34 file** diganti teal. Termasuk `theme-color` meta, SweetAlert `confirmButtonColor`, shadow rgba. Semua shade teal diuji kontrasnya sebelum dipakai (`#0f766e` di putih = 5.47:1, di `#f0fdfa` = 5.25:1).
+- **Netral slate → paper** di semua view. **Pitfall yang dihindari**: mapping awal `text-slate-400` → `paper-500` pertama = **2.47:1** (gagal AA). Palet paper ditulis ulang ke `#6b6357` (5.54:1) sebelum skrip dijalankan, jadi tidak sempat merusak apa pun. **Pitfall kedua**: sidebar berlatar gelap butuh abu terang — `paper-500` di `#1a1512` hanya 3.06:1, jadi 18 label sidebar diperbaiki ke shade baru `paper-on-dark` (`#a89e8f`, 6.86:1). Pergantian **dibatasi baris 79-142**; mobile topbar (baris 195) dan bottom nav (baris 211) berlatar putih dan tidak boleh ikut diganti.
+- **Icon**: `app/helpers.php` `icon()` ganti dari emoji (`📊🧾📋👥📦💰…`, 38× dipakai di layout) ke **SVG line-icon stroke 1.5** server-side, 30 icon. Semua nama yang dipakai terdaftar. Helper menerima `size`/`class`/`style`/`color`/`label` (backward-compat dengan `offline.blade.php` yang kirim `color`). Alasan stroke 1.5 bukan 2: supaya icon tidak terlihat lebih berat dari teksnya. `resources/js/app.js` masih punya set JS terpisah untuk sisi browser — **dua sumber icon**, belum disatukan.
+- **Tipografi**: Inter (AI default, dari Google Fonts) diganti system font stack `system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif` + `font-variant-numeric: tabular-nums`. Alasan: POS dipakai di koneksi Indonesia yang tidak selalu stabil, jadi font harus tampil tanpa menunggu unduhan; system font sudah punya angka tabular untuk kolom rupiah. Google Fonts request dihapus dari `layouts/app.blade.php` dan `layouts/guest.blade.php`.
+- **Radius**: `rounded-2xl` 16px → 12px. Pill hanya filter kategori + FAB. Kartu pakai `rounded` (8px).
+- **Dashboard dibangun ulang** (`dashboard.blade.php` + `DashboardController`): sebelumnya persis template default (4 stat card seragam → chart → tabel). Sekarang: omzet sebagai blok utama, lalu **kolom kiri 2/3 = antrian kerja (fokus)**, kolom kanan 1/3 = kas/piutang/penjualan/status. Alasan: omzet dipantau akhir hari, antrian itu pekerjaan yang sedang berjalan. Order `ready` dipisah dari `received` (aksinya berbeda: hubungi customer) → controller tambah query `readyList`, dan `queueList` limit 5 → 20. Empty state menyebut kenapa kosong + apa selanjutnya, bukan "No data".
+- Verifikasi: `npm run build` OK, `phpunit` 7/7, 13 route load 200, SVG 38-89/halaman, emoji 0, indigo 0. Scan 446 kelas: 70 "missing" adalah class kustom inline (`pos-cart-item`, `ll-name`, `nav-link`, dll) yang memang begitu sejak awal, bukan bug.
+
+### 2026-09-26 — Cart drawer POS dirombak untuk kasir pemula
+- **Kontrol kartu**: `.pos-cart-item` dari 1 baris inline jadi **dua tingkat** (`.ci-top` nama+harga / `.ci-bottom` kontrol). Tombol ± 30px → **40px** (2.5rem), tombol hapus ikon tong sampah 30px → **bertulis "Hapus"** dengan border. Alasan: kasir sambil berdiri, target sentuh kecil + ikon easy-to-miss adalah sumber salah ketuk.
+- **Tombol bayar tidak berbohong**: "BAYAR & CETAK" → **"Lanjut ke pembayaran"**, karena yang terjadi cuma buka modal checkout, tidak mencetak. Ditambah keterangan "Struk dan pilihan cetak muncul di layar berikutnya." (Jujur soal langkah berikutnya lebih baik daripada janji yang tidak ditepati.)
+- **Diskon & pajak disembunyikan** di balik baris "Tambah diskon atau pajak" (`toggleOptionalFields()`), tombolnya **hanya muncul saat cart berisi barang** (`syncOptionalVisibility()`). Begitu ada isinya, baris `#discountLine`/`#taxLine` muncul di area total supaya hasil langsung terlihat tanpa menggulir. Alasan: field kosong yang selalu tampil bikin pemula ragu "isi atau nggak?".
+- **Kembalian kondisional**: `#changeRow` tampil hanya kalau `change > 0`. "Rp 0" yang selalu tampil cuma noise.
+- **Status dihafalkan**: "Baru"/"Selesai" → **"Masih dicuci"/"Sudah selesai"** + helper "Pilih saat laundry sudah selesai". "Baru" ambigu: status cucian atau status order?
+- **Customer tidak reaktif**: kotak "Belum ada customer dipilih" (rose) tampil dari awal, bukan muncul setelah gagal bayar. Tombol hapus (`clearCustomer`) disembunyikan saat belum ada pilihan. Emoji `⚠️` dibuang dari teks UI.
+- **Teks yang salah arah**: "Tap produk di atas" → "Ketuk produk untuk menambah" (salah di mobile, drawer menutupi produk). "Expand untuk isi pcs" → "Isi jumlah per jenis, misalnya Baju 3 pcs" (itu modal, bukan expand).
+- **`javascript:void(0)` dihapus** (temuan audit #13) → `href="#" onclick="event.preventDefault();..."`.
+- **Pitfall JS**: `MutationObserver` dengan `attributeFilter:['value']` **tidak pernah memicu** — `value` bukan DOM attribute untuk input. Diganti `input` event listener yang sudah ada.
+- ID yang dipakai `PosPageTest` (`cartDrawer`, `cartFab`, `cartDrawerOverlay`, `cartCount`, `toggleCartDrawer`, `updateCartUI`) **tidak disentuh** → 7/7 test tetap lulus. Kontras tombol baru: 5.47:1, rose 7.3:1, teal muda 7.27:1.
 
 ### 2026-09-14 — Tombol "Tandai Lunas" (Paid) di detail order + fix bug "Sesi anda telah habis" palsu
 - **`resources/views/orders/show.blade.php`**: tombol emerald **"Tandai Lunas — Bayar Rp {sisa}"** di section Pembayaran untuk order belum `paid` & tidak `cancelled` — sekali klik submit hidden form `amount` = sisa total + `payment_method=cash` ke `orders.payment`, `OrderService::addPayment` otomatis cap → status `paid`. Form "Tambah Bayar" manual tetap ada di bawahnya.
@@ -486,15 +549,18 @@ php artisan db:seed --class=DemoSeeder --force        # idempotent
 
 ## 11) File Penting untuk Dibaca Dulu
 
-1. `pos-laundry.md` — spec
-2. `routes/web.php` — peta fitur (+ merchants, switch-merchant; + PWA /offline, /manifest.webmanifest, /sw.js)
-3. `app/Services/OrderService.php` — inti transaksi (laundry_details + order_status + merchant_id)
-4. `app/Models/Merchant.php` + `Order.php` + `LaundryItemType.php` + `Category.php` + `Product.php`
-5. `resources/views/pos/index.blade.php` — POS (list vertical + Baru/Selesai button + dropdown rincian per merchant)
-6. `resources/views/auth/login.blade.php` — form login bersih (tanpa card demo) + guest layout `@vite`
-7. `resources/views/orders/receipt.blade.php` — struk tanpa cabang + RINCIAN LAUNDRY dinamis
-8. `app/Services/WhatsappService.php` + `OrderController@sendWhatsapp` — direk web.whatsapp.com
-9. `public/manifest.webmanifest` + `public/sw.js` + `public/icons/` + `resources/js/pwa.js` — PWA
+1. **`DESIGN.md`** — arah desain (wajib dibaca sebelum ubah UI/Tampilan). Palet, tipografi, radius, motif, motion, dials. Lihat §8 "Guideline untuk Penerus" untuk aturan main.
+2. `pos-laundry.md` — spec
+3. `routes/web.php` — peta fitur (+ merchants, switch-merchant; + PWA /offline, /manifest.webmanifest, /sw.js)
+4. `app/Services/OrderService.php` — inti transaksi (laundry_details + order_status + merchant_id)
+5. `app/Models/Merchant.php` + `Order.php` + `LaundryItemType.php` + `Category.php` + `Product.php`
+6. `resources/views/pos/index.blade.php` — POS (list vertical + Baru/Selesai button + dropdown rincian per merchant)
+7. `app/helpers.php` — `setting()`, `money()`, `current_branch()`, `icon()` (SVG line-icon server-side, 30 icon)
+8. `resources/views/auth/login.blade.php` — form login bersih (tanpa card demo) + guest layout `@vite`
+9. `resources/views/orders/receipt.blade.php` — struk tanpa cabang + RINCIAN LAUNDRY dinamis
+10. `app/Services/WhatsappService.php` + `OrderController@sendWhatsapp` — direk web.whatsapp.com
+11. `public/manifest.webmanifest` + `public/sw.js` + `public/icons/` + `resources/js/pwa.js` — PWA
+12. `tailwind.config.js` — token desain: palet `teal`/`paper`, `borderRadius`, `fontFamily` system. Single source of truth untuk warna.
 10. `database/seeders/ProductionSeeder.php` + `DemoSeeder.php` + `MerchantSeeder.php`
 11. `database/migrations/2024_01_01_000020_create_merchants_and_add_merchant_id.php` + `000021` + `000022` + `000023`
 12. `app/Http/Controllers/MerchantController.php` + `app/Http/Middleware/MerchantContext.php`
