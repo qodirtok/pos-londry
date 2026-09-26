@@ -1,3 +1,139 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+ * Lapisan komponen x-*.
+ *
+ * Kenapa file ini terpisah dan bukan @apply semua: @apply butuh nama kelas
+ * yang sudah ada di Tailwind, dan pola mode kartu di bawah mengubah
+ * display, border, dan padding per breakpoint. Itu terlalu banyak rules
+ * conditional untuk ditulis inline di 44 view, dan kalau ditulis inline
+ * setiap tabel akan punya style sendiri yang tidak pernah sama.
+ *
+ * Semua nilai warna memakai token paper/teal dari tailwind.config.js, bukan
+ * hex langsung, supaya DESIGN.md section 2 jadi satu sumber warna.
+ */
+
+/* ------------------------------------------------------------------
+ * x-table, mode kartu.
+ *
+ * Breakpoint 1024px, sama dengan sidebar layout (lg). Di bawah itu, tiap
+ * <tr> jadi kartu penuh dengan border, dan tiap <td> jadi baris label: nilai.
+ * Label diambil dari atribut data-label supaya tidak ada kolom yang kehilangan
+ * konteks, misalnya "Rp 15.000" tanpa tahu itu kolom harga.
+ *
+ * Kenapa kartu, bukan scroll, jadi bawaan: kasir berdiri dengan satu tangan
+ * memegang HP, dan tabel yang digeser samping gampang terlewat. Itu bisa
+ * dibalik per halaman lewat atribut mobile="scroll" tanpa mengubah CSS ini.
+ * ------------------------------------------------------------------ */
+@media (max-width: 1023.98px) {
+  .x-table-card table,
+  .x-table-card thead,
+  .x-table-card tbody,
+  .x-table-card tr,
+  .x-table-card td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Header jadi tidak tampil: nama kolom sudah pindah jadi label tiap sel,
+   * jadi menyisakannya hanya mengulang informasi yang sama. */
+  .x-table-card thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .x-table-card tbody {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .x-table-card tr {
+    border: 1px solid theme('colors.paper.300');
+    border-radius: 8px;
+    background: theme('colors.paper.50');
+    padding: 0.25rem 0.25rem 0.25rem 0;
+  }
+
+  .x-table-card td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.75rem;
+    text-align: right;
+  }
+
+  /* Label kolom dari data-label. Kalau atributnya kosong, sel tetap tampil
+   * tanpa label daripada disembunyikan, karena isinya mungkin tetap penting
+   * dan pemanggil yang salah label lebih mudah diperbaiki daripada data hilang. */
+  .x-table-card td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: theme('colors.paper.500');
+    text-align: left;
+  }
+
+  /* Kolom sekunder tetap tampil tapi dilemahkan, bukan disembunyikan. Kasir
+   * mungkin butuh kolom ini, tapi tidak jadi hal pertama yang dilihat. */
+  .x-table-card td.x-td--secondary {
+    color: theme('colors.paper.500');
+  }
+
+  /* Garis kiri penanda baris yang perlu tindakan. Dipakai di halaman daftar
+   * supaya mata kasir tertahan di baris yang dia harus kerjakan, tanpa harus
+   * membaca semua teks di layar (DESIGN.md section 8). */
+  .x-table-card tr.x-tr--flagged {
+    border-left: 3px solid theme('colors.teal.600');
+  }
+
+  .x-table-card tr.x-tr--quiet {
+    background: transparent;
+    border-color: theme('colors.paper.300');
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Baris yang perlu tindakan.
+ *
+ * Garis kiri 2px, bukan badge. Alasannya: baris sudah punya pita status dari
+ * x-badge, dan menambah warna lagi di baris yang sama bikin halaman ramai.
+ * Garis tipis cukup untuk membuat mata berhenti sebentar, lalu kasir baca
+ * pitanya kalau memang butuh tahu statusnya.
+ * ------------------------------------------------------------------ */
+@media (min-width: 1024px) {
+  .x-tr--flagged td:first-child {
+    box-shadow: inset 2px 0 0 theme('colors.teal.600');
+  }
+  .x-tr--quiet td {
+    color: theme('colors.paper.500');
+  }
+}
+
+/* ------------------------------------------------------------------
+ * x-table-scrollbox.
+ *
+ * Border tipis di area geser, bukan hanya overflow-x-auto, karena kasir perlu
+ * melihat bahwa tabel masih ada isinya di sebelah kanan. overflow-x-auto
+ * tanpa petunjuk visual sering disalahartikan sebagai tabel yang memang
+ * sudah habis.
+ * ------------------------------------------------------------------ */
+.x-table-scrollbox {
+  /* Geser pakai native scroll, momentumnya sudah benar di iOS dan Android. */
+  -webkit-overflow-scrolling: touch;
+  /* Sembunyikan scrollbar supaya tidak memakan tinggi baris, tapi tetap bisa
+   * digeser. Kasir di HP tidak butuh thumb, dia cuma geser. */
+  scrollbar-width: none;
+}
+.x-table-scrollbox::-webkit-scrollbar {
+  display: none;
+}

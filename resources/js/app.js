@@ -46,7 +46,7 @@ window.modal = {
   alert(title, html, type='info') {
     return Swal.fire({
       title, html, icon: type, width: typeof html==='string' && html.length>200 ? 520 : 420,
-      confirmButtonText: 'OK', confirmButtonColor: '#4f46e5',
+      confirmButtonText: 'OK', confirmButtonColor: '#0f766e',
       customClass: { popup: 'rounded-2xl' }
     });
   },
@@ -55,7 +55,7 @@ window.modal = {
       title, html,
       icon: 'warning', showCancelButton: true,
       confirmButtonText: confirmText, cancelButtonText: cancelText,
-      confirmButtonColor: '#4f46e5', cancelButtonColor: '#6474a5',
+      confirmButtonColor: '#0f766e', cancelButtonColor: '#6b6357',
       customClass: { popup: 'rounded-2xl' }
     });
   },
@@ -65,7 +65,7 @@ window.modal = {
       inputLabel: typeof html==='string' ? undefined : html.inputLabel,
       showCancelButton: true,
       confirmButtonText: 'Simpan', cancelButtonText: 'Batal',
-      confirmButtonColor: '#4f46e5', cancelButtonColor: '#6474a5',
+      confirmButtonColor: '#0f766e', cancelButtonColor: '#6b6357',
       customClass: { popup: 'rounded-2xl' },
       didOpen: () => { if(input==='number') Swal.getInput()?.focus(); }
     });

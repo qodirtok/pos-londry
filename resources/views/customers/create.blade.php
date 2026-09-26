@@ -7,6 +7,6 @@
 <div class="grid grid-cols-2 gap-4"><div><label class="text-sm">Phone</label><input name="phone" class="mt-1 w-full border rounded-xl px-3 py-2"></div><div><label class="text-sm">Email</label><input name="email" class="mt-1 w-full border rounded-xl px-3 py-2"></div></div>
 <div><label class="text-sm">Alamat</label><textarea name="address" class="mt-1 w-full border rounded-xl px-3 py-2"></textarea></div>
 <div><label class="text-sm">Catatan</label><textarea name="notes" class="mt-1 w-full border rounded-xl px-3 py-2"></textarea></div>
-<button class="bg-indigo-600 text-white px-6 py-2 rounded-xl">Simpan</button>
+<button class="bg-teal-600 text-white px-6 py-2 rounded-xl">Simpan</button>
 </form>
 @endsection

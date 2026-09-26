@@ -7,6 +7,6 @@
 <div><label class="text-sm">Nominal *</label><input name="amount" type="number" required class="mt-1 w-full border rounded-xl px-3 py-2"></div>
 <div><label class="text-sm">Tanggal</label><input name="transaction_date" type="date" value="{{ date('Y-m-d') }}" class="mt-1 w-full border rounded-xl px-3 py-2"></div>
 <div><label class="text-sm">Keterangan</label><textarea name="description" class="mt-1 w-full border rounded-xl px-3 py-2"></textarea></div>
-<button class="bg-indigo-600 text-white px-6 py-2 rounded-xl">Simpan</button>
+<button class="bg-teal-600 text-white px-6 py-2 rounded-xl">Simpan</button>
 </form>
 @endsection

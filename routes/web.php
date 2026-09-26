@@ -19,6 +19,13 @@ use App\Http\Controllers\MerchantController;
 
 Route::get('/', fn()=> redirect('/dashboard'));
 Route::view('/offline', 'offline')->name('offline');
+// Preview komponen x-*. Development saja, sengaja di luar middleware auth
+// supaya bisa dibuka tanpa login, tapi di environment production diblokir
+// supaya tidak pernah tampil ke kasir.
+Route::get('/components-preview', function () {
+    abort_if(app()->environment('production'), 404);
+    return view('components-preview');
+});
 Route::get('/manifest.webmanifest', fn() => response()->file(public_path('manifest.webmanifest'), ['Content-Type'=>'application/manifest+json']))->name('pwa.manifest');
 Route::get('/sw.js', fn() => response()->file(public_path('sw.js'), ['Content-Type'=>'application/javascript','Cache-Control'=>'no-cache']))->name('pwa.sw');
 Route::get('/login', [AuthController::class,'showLogin'])->name('login');

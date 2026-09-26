@@ -36,8 +36,18 @@ class DashboardController extends Controller {
             ->with(['customer'])
             ->where('order_status', 'received')
             ->orderBy('order_date', 'asc')
-            ->limit(5)
+            ->limit(20)
             ->get();
-        return view('dashboard', compact('stats','sales7','byStatus','recent','queueList'));
+        // Order yang siap diambil dipisah dari antrian: ini action yang beda
+        // (tukang harus menghubungi customer), jadi tidak boleh dicampur.
+        $readyList = Order::where('is_demo',$isDemo)
+            ->when($mid, fn($qq)=>$qq->where('merchant_id',$mid))
+            ->when($branchId, fn($qq)=>$qq->where('branch_id',$branchId))
+            ->with(['customer'])
+            ->where('order_status', 'ready')
+            ->orderBy('order_date', 'asc')
+            ->limit(20)
+            ->get();
+        return view('dashboard', compact('stats','sales7','byStatus','recent','queueList','readyList'));
     }
 }

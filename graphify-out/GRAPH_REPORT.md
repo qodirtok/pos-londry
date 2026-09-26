@@ -1,16 +1,16 @@
-# Graph Report - londry  (2026-09-14)
+# Graph Report - londry  (2026-09-26)
 
 ## Corpus Check
-- 204 files · ~60,043 words
+- 206 files · ~66,282 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 860 nodes · 1185 edges · 166 communities (134 shown, 32 thin omitted)
+- 907 nodes · 1230 edges · 173 communities (142 shown, 31 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 71 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6a2ea4f4`
+- Built from commit: `ec3772fd`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,6 +29,8 @@
 - Product
 - Branch
 - Closure
+- DESIGN.md
+- CashierShift
 - 54. AI Agent Development Rules
 - Illuminate\Support\ServiceProvider
 - composer.json
@@ -37,6 +39,7 @@
 - README.md
 - require-dev
 - 46. Important Business Rules
+- CashTransaction
 - config
 - psr-4
 - TestCase
@@ -77,7 +80,10 @@
 - 4. User Management
 - 6. Customer Management
 - 7. Category Management
+- Controller
 - deploy.sh
+- UserFactory
+- PosController
 
 ## God Nodes (most connected - your core abstractions)
 1. `Order` - 45 edges
@@ -96,37 +102,37 @@
   verify_merchant_all.php → app/Models/User.php
 - `canAccessCategory()` --references--> `Category`  [EXTRACTED]
   verify_merchant_all.php → app/Models/Category.php
+- `AuthController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/AuthController.php → app/Http/Controllers/Controller.php
 - `BranchController` --inherits--> `Controller`  [EXTRACTED]
   app/Http/Controllers/BranchController.php → app/Http/Controllers/Controller.php
-- `CategoryController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/CategoryController.php → app/Http/Controllers/Controller.php
-- `CustomerController` --inherits--> `Controller`  [EXTRACTED]
-  app/Http/Controllers/CustomerController.php → app/Http/Controllers/Controller.php
+- `CashController` --inherits--> `Controller`  [EXTRACTED]
+  app/Http/Controllers/CashController.php → app/Http/Controllers/Controller.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (166 total, 32 thin omitted)
+## Communities (173 total, 31 thin omitted)
 
 ### Community 0 - "Merchant"
-Cohesion: 0.10
-Nodes (8): MerchantController, Merchant, BranchSeeder, MerchantSeeder, UserSeeder, Illuminate\Database\Eloquent\Relations\BelongsTo, Illuminate\Database\Eloquent\Relations\BelongsToMany, Illuminate\Database\Eloquent\Relations\HasMany
+Cohesion: 0.06
+Nodes (18): MerchantController, Merchant, Permission, Role, BranchSeeder, CatalogSeeder, CustomerSeeder, DatabaseSeeder (+10 more)
 
 ### Community 1 - "Order"
-Cohesion: 0.07
-Nodes (11): OrderController, PosController, QueueController, Order, OrderItem, ProductStock, StockMovement, WhatsappLog (+3 more)
+Cohesion: 0.11
+Nodes (6): OrderController, QueueController, Order, WhatsappLog, OrderService, WhatsappService
 
 ### Community 2 - "Illuminate\Database\Eloquent\Model"
 Cohesion: 0.06
-Nodes (13): money(), setting(), SettingController, ShiftController, AuditLog, CashCategory, CashierShift, PaymentMethod (+5 more)
+Nodes (13): setting(), SettingController, AuditLog, CashCategory, OrderItem, Payment, PaymentMethod, ProductStock (+5 more)
 
 ### Community 3 - "pos-laundry.md"
 Cohesion: 0.06
 Nodes (34): 11. Price & Money, 13. Order Number, 14. Order Status, 17. Discount, 19. Partial Payment / Debt, 22. Receipt / Struk, 23. WhatsApp Receipt, 24. Receipt Template (+26 more)
 
 ### Community 4 - "Handover — Londry POS Laundry (Laravel 10, PHP 8.1)"
-Cohesion: 0.05
-Nodes (40): 10) Responsive — Konvensi, 11) File Penting untuk Dibaca Dulu, 12) Troubleshooting, 13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare), 1) Cara Jalan Cepat (5 menit), 2026-09-03 — Edit item & qty lewat POS (full edit mode), 2026-09-03 — Fitur Backup Database (Settings → Backup Database (Admin)), 2026-09-14 — Mobile cart drawer di POS (responsive mobile mode) (+32 more)
+Cohesion: 0.04
+Nodes (45): 10) Responsive — Konvensi, 11) File Penting untuk Dibaca Dulu, 12) Troubleshooting, 13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare), 1) Cara Jalan Cepat (5 menit), 2026-09-03 — Edit item & qty lewat POS (full edit mode), 2026-09-03 — Fitur Backup Database (Settings → Backup Database (Admin)), 2026-09-14 — Mobile cart drawer di POS (responsive mobile mode) (+37 more)
 
 ### Community 5 - "Product"
 Cohesion: 0.19
@@ -136,25 +142,45 @@ Nodes (3): CategoryController, Category, canAccessCategory()
 Cohesion: 0.06
 Nodes (32): autoprefixer, axios, laravel-vite-plugin, author, dependencies, sweetalert2, @vitejs/plugin-vue, description (+24 more)
 
+### Community 7 - "Customer"
+Cohesion: 0.13
+Nodes (3): CustomerController, Customer, NumberGenerator
+
 ### Community 8 - "Controller"
-Cohesion: 0.09
-Nodes (9): LaundryItemTypeController, LaundryItemType, Permission, CustomerSeeder, DatabaseSeeder, LaundryItemTypeSeeder, ProductionSeeder, RolePermissionSeeder (+1 more)
+Cohesion: 0.17
+Nodes (3): LaundryItemTypeController, LaundryItemType, LaundryItemTypeSeeder
 
 ### Community 9 - "User"
-Cohesion: 0.08
-Nodes (10): BranchController, UserController, Branch, Role, User, DemoSeeder, Illuminate\Database\Eloquent\Factories\HasFactory, Illuminate\Foundation\Auth\User (+2 more)
+Cohesion: 0.10
+Nodes (8): BranchController, UserController, Branch, User, Illuminate\Database\Eloquent\Factories\HasFactory, Illuminate\Foundation\Auth\User, Illuminate\Notifications\Notifiable, Laravel\Sanctum\HasApiTokens
 
 ### Community 10 - "Illuminate\Http\Request"
-Cohesion: 0.05
-Nodes (21): AuthController, CashController, Controller, DashboardController, ReportController, Authenticate, BlockDemoFromUserManagement, BranchContext (+13 more)
+Cohesion: 0.12
+Nodes (9): BlockDemoFromUserManagement, BranchContext, CheckPermission, MerchantContext, RedirectIfAuthenticated, RouteServiceProvider, Closure, Illuminate\Foundation\Support\Providers\RouteServiceProvider (+1 more)
+
+### Community 12 - "Branch"
+Cohesion: 0.08
+Nodes (24): 10. Font Inter dipilih tanpa alasan, 11. Dashboard adalah template default, bukan keputusan, 12. Em dash di teks UI, 13. Tombol "Kelola jenis" pakai `href="javascript:void(0)"`, 14. SweetAlert masih indigo + radius 16px, 15. Empty state tanpa aksi berikutnya, 1. `saveNewLaundryType()` crash: `e is not defined`, 2. Tekan Enter di form customer baru = data hilang (+16 more)
+
+### Community 13 - "Closure"
+Cohesion: 0.16
+Nodes (5): AuthController, ReportController, Authenticate, Illuminate\Auth\Middleware\Authenticate, Illuminate\Http\Request
+
+### Community 14 - "DESIGN.md"
+Cohesion: 0.12
+Nodes (15): 10. Angka, 1. Identitas, 2. Palet, 3. Tipografi, 4. Bentuk, 5. Motif Identitas, 6. Motion, 7. Tiga Dials (+7 more)
+
+### Community 15 - "CashierShift"
+Cohesion: 0.21
+Nodes (4): money(), ShiftController, CashierShift, CashService
 
 ### Community 16 - "54. AI Agent Development Rules"
 Cohesion: 0.18
 Nodes (11): 10. Selalu perhatikan multi-branch, 1. Jangan langsung membuat kode besar, 2. Jangan mengubah requirement tanpa alasan, 3. Jangan menaruh business logic kompleks di Controller, 4. Semua perubahan database harus melalui Migration, 54. AI Agent Development Rules, 5. Semua data penting harus memiliki timestamp, 6. Gunakan database transaction (+3 more)
 
 ### Community 17 - "Illuminate\Support\ServiceProvider"
-Cohesion: 0.14
-Nodes (7): current_branch(), AppServiceProvider, BroadcastServiceProvider, UserFactory, Illuminate\Database\Eloquent\Factories\Factory, Illuminate\Support\ServiceProvider, static
+Cohesion: 0.24
+Nodes (4): current_branch(), AppServiceProvider, BroadcastServiceProvider, Illuminate\Support\ServiceProvider
 
 ### Community 18 - "composer.json"
 Cohesion: 0.20
@@ -232,25 +258,33 @@ Nodes (3): extra, laravel, dont-discover
 Cohesion: 0.67
 Nodes (3): 10. Quantity, Product biasa, Service laundry
 
+### Community 169 - "Controller"
+Cohesion: 0.38
+Nodes (5): Controller, DashboardController, Illuminate\Foundation\Auth\Access\AuthorizesRequests, Illuminate\Foundation\Validation\ValidatesRequests, Illuminate\Routing\Controller
+
+### Community 171 - "UserFactory"
+Cohesion: 0.38
+Nodes (3): UserFactory, Illuminate\Database\Eloquent\Factories\Factory, static
+
 ## Knowledge Gaps
-- **194 isolated node(s):** `name`, `type`, `description`, `laravel`, `framework` (+189 more)
+- **232 isolated node(s):** `name`, `type`, `description`, `laravel`, `framework` (+227 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **32 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **31 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Order` connect `Order` to `Illuminate\Database\Eloquent\Model`, `Controller`, `Illuminate\Http\Request`, `Branch`, `Closure`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `Order` connect `Order` to `Illuminate\Database\Eloquent\Model`, `web.php`, `Customer`, `Controller`, `Controller`, `PosController`, `Closure`, `CashTransaction`?**
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
 - **Why does `User` connect `User` to `Product`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
-- **Why does `Customer` connect `Customer` to `Order`, `Illuminate\Database\Eloquent\Model`, `Product`, `Controller`, `User`, `Illuminate\Http\Request`, `Branch`, `Closure`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `Customer` connect `Customer` to `Merchant`, `Illuminate\Database\Eloquent\Model`, `web.php`, `Product`, `Controller`, `PosController`, `Closure`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **Are the 4 inferred relationships involving `Order` (e.g. with `.index()` and `.laundry()`) actually correct?**
   _`Order` has 4 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `type`, `description` to the rest of the system?**
-  _194 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _232 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Merchant` be split into smaller, more focused modules?**
-  _Cohesion score 0.09982174688057041 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05505952380952381 - nodes in this community are weakly interconnected._
 - **Should `Order` be split into smaller, more focused modules?**
-  _Cohesion score 0.06721311475409836 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1126984126984127 - nodes in this community are weakly interconnected._

@@ -4,37 +4,46 @@
 <style>
   /* Flat UI POS overrides */
   .pos-flat-icon{width:1.1em;height:1.1em;display:inline-block;vertical-align:-0.18em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .pos-search-icon{position:absolute;left:.875rem;top:50%;transform:translateY(-50%);color:#94a3b8;width:1.1rem;height:1.1rem}
+  .pos-search-icon{position:absolute;left:.875rem;top:50%;transform:translateY(-50%);color:#57503f;width:1.1rem;height:1.1rem}
   .pos-cat-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .9rem;border-radius:9999px;font-size:.85rem;font-weight:600;line-height:1;border:1px solid transparent;white-space:nowrap;flex-shrink:0;transition:all .15s ease}
-  .pos-cat-pill.is-active{background:#0f172a;color:#fff;border-color:#0f172a}
-  .pos-cat-pill:not(.is-active){background:#f1f5f9;color:#334155;border-color:#e2e8f0}
-  .pos-cat-pill:not(.is-active):hover{background:#e2e8f0}
-  .pos-product-card{text-align:left;background:#fff;border:1px solid #e2e8f0;border-radius:1rem;padding:.75rem;display:flex;flex-direction:column;gap:.4rem;transition:all .15s ease;min-height:0}
-  .pos-product-card:hover{border-color:#818cf8;box-shadow:0 1px 2px rgba(15,23,42,.06)}
+  .pos-cat-pill.is-active{background:#2b2320;color:#fff;border-color:#2b2320}
+  .pos-cat-pill:not(.is-active){background:#f4efe6;color:#57503f;border-color:#e7e2d9}
+  .pos-cat-pill:not(.is-active):hover{background:#e7e2d9}
+  .pos-product-card{text-align:left;background:#fff;border:1px solid #e7e2d9;border-radius:1rem;padding:.75rem;display:flex;flex-direction:column;gap:.4rem;transition:all .15s ease;min-height:0}
+  .pos-product-card:hover{border-color:#5eead4;box-shadow:0 1px 2px rgba(15,23,42,.06)}
   .pos-product-card:active{transform:scale(.98)}
-  .pos-product-card .pc-sku{font-size:.7rem;font-family:ui-monospace,SFMono-Regular,monospace;background:#f1f5f9;padding:.2rem .5rem;border-radius:9999px;color:#475569;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pos-product-card .pc-sku{font-size:.7rem;font-family:ui-monospace,SFMono-Regular,monospace;background:#f4efe6;padding:.2rem .5rem;border-radius:9999px;color:#6b6357;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .pos-product-card .pc-unit{font-size:.7rem;padding:.2rem .5rem;border-radius:9999px;font-weight:600}
-  .pos-product-card .pc-name{font-size:.82rem;font-weight:600;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.4em;color:#0f172a}
-  .pos-product-card .pc-cat{font-size:.7rem;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .pos-product-card .pc-price{margin-top:auto;font-size:.85rem;font-weight:700;color:#4f46e5}
-  .pos-action-bar{position:sticky;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e2e8f0;padding:.65rem .75rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;z-index:10}
+  .pos-product-card .pc-name{font-size:.82rem;font-weight:600;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.4em;color:#2b2320}
+  .pos-product-card .pc-cat{font-size:.7rem;color:#6b6357;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pos-product-card .pc-price{margin-top:auto;font-size:.85rem;font-weight:700;color:#0f766e}
+  .pos-action-bar{position:sticky;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e7e2d9;padding:.65rem .75rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;z-index:10}
   .pos-action-bar .btn{padding:.7rem .5rem;border-radius:.85rem;font-weight:600;font-size:.85rem;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border:0;cursor:pointer;transition:all .15s ease}
   .pos-action-bar .btn:active{transform:scale(.98)}
-  .pos-action-bar .btn-primary{background:#4f46e5;color:#fff;box-shadow:0 4px 12px rgba(79,70,229,.25)}
-  .pos-action-bar .btn-secondary{background:#f1f5f9;color:#334155}
-  .pos-action-bar .btn-ghost{background:#fff;color:#475569;border:1px solid #e2e8f0}
+  .pos-action-bar .btn-primary{background:#0f766e;color:#fff;box-shadow:0 4px 12px rgba(15,118,110,.25)}
+  .pos-action-bar .btn-secondary{background:#f4efe6;color:#57503f}
+  .pos-action-bar .btn-ghost{background:#fff;color:#6b6357;border:1px solid #e7e2d9}
   .pos-action-bar .btn-danger{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
   .pos-action-bar .btn-success{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
-  .pos-cart-item{display:flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #e2e8f0;border-radius:.85rem;padding:.55rem .6rem}
-  .pos-cart-item .ci-name{font-size:.82rem;font-weight:600;line-height:1.2;color:#0f172a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .pos-cart-item .ci-meta{font-size:.7rem;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .pos-cart-item .ci-qty{display:flex;align-items:center;gap:.25rem;flex-shrink:0}
-  .pos-cart-item .ci-qty button{width:1.85rem;height:1.85rem;border:0;border-radius:.55rem;background:#f1f5f9;color:#334155;font-weight:700;cursor:pointer;display:grid;place-items:center}
-  .pos-cart-item .ci-qty button:active{background:#cbd5e1}
-  .pos-cart-item .ci-qty input{width:3.25rem;border:1px solid #e2e8f0;border-radius:.55rem;padding:.25rem .25rem;text-align:center;font-size:.82rem;font-weight:600;background:#fff}
-  .pos-cart-item .ci-subtotal{font-size:.82rem;font-weight:700;color:#0f172a;width:4.5rem;text-align:right;flex-shrink:0}
-  .pos-cart-item .ci-remove{width:1.85rem;height:1.85rem;border:0;background:transparent;color:#94a3b8;border-radius:.55rem;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
-  .pos-cart-item .ci-remove:hover{background:#fef2f2;color:#dc2626}
+  /* Cart item: target sentuh besar untuk kasir yang sambil berdiri.
+     Baris ditata dua tingkat: nama + harga di atas, kontrol di bawah.
+     Kontrol penuh lebar lebih mudah ditebak dan diteken daripada ikon kecil. */
+  .pos-cart-item{display:flex;flex-direction:column;gap:.55rem;background:#fff;border:1px solid #e7e2d9;border-radius:.5rem;padding:.7rem .75rem}
+  .pos-cart-item:hover{border-color:#d4ccbf}
+  .pos-cart-item .ci-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem}
+  .pos-cart-item .ci-name{font-size:.85rem;font-weight:600;line-height:1.25;color:#2b2320;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pos-cart-item .ci-meta{font-size:.7rem;color:#6b6357;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;margin-top:.1rem}
+  .pos-cart-item .ci-subtotal{font-size:.9rem;font-weight:700;color:#2b2320;flex-shrink:0;white-space:nowrap}
+  /* Baris kontrol: tombol lebar penuh, bukan ikon 30px yang mudah salah ketuk */
+  .pos-cart-item .ci-bottom{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .pos-cart-item .ci-qty{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
+  .pos-cart-item .ci-qty button{width:2.5rem;height:2.5rem;border:1px solid #d4ccbf;border-radius:.4rem;background:#faf7f1;color:#3b352e;font-weight:700;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;line-height:1}
+  .pos-cart-item .ci-qty button:hover{background:#f4efe6;border-color:#a89e8f}
+  .pos-cart-item .ci-qty button:active{background:#e7e2d9;transform:scale(.96)}
+  .pos-cart-item .ci-qty input{width:3.5rem;height:2.5rem;border:1px solid #d4ccbf;border-radius:.4rem;padding:0 .25rem;text-align:center;font-size:1rem;font-weight:700;background:#fff;color:#2b2320}
+  .pos-cart-item .ci-qty input:focus{border-color:#0f766e;outline:2px solid #ccfbf1;outline-offset:0}
+  .pos-cart-item .ci-remove{height:2.5rem;padding:0 .85rem;border:1px solid #e7e2d9;border-radius:.4rem;background:#fff;color:#57503f;font-size:.8rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem;flex-shrink:0}
+  .pos-cart-item .ci-remove:hover{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
   .pos-modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);z-index:80;display:none;align-items:flex-end;justify-content:center;padding:0;animation:posFadeIn .15s ease}
   .pos-modal-backdrop.is-open{display:flex}
   .pos-modal-backdrop.is-center{align-items:center;padding:1rem}
@@ -45,64 +54,63 @@
     #cartDrawer.cart-open{transform:translateY(0)}
     #cartDrawerOverlay{position:fixed;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(2px);z-index:55;display:none}
     #cartDrawerOverlay.show{display:block}
-    #cartFab{position:fixed;right:1rem;bottom:1rem;z-index:50;display:flex;align-items:center;gap:.5rem;background:#4f46e5;color:#fff;border:0;border-radius:9999px;padding:.8rem 1.1rem;font-weight:700;font-size:.9rem;box-shadow:0 8px 20px rgba(79,70,229,.4);cursor:pointer}
+    #cartFab{position:fixed;right:1rem;bottom:1rem;z-index:50;display:flex;align-items:center;gap:.5rem;background:#0f766e;color:#fff;border:0;border-radius:9999px;padding:.8rem 1.1rem;font-weight:700;font-size:.9rem;box-shadow:0 8px 20px rgba(15,118,110,.4);cursor:pointer}
     #cartFab.hidden{display:none}
     #cartFab:active{transform:scale(.96)}
-    #cartFab .fab-count{background:#fff;color:#4f46e5;font-size:.75rem;font-weight:800;min-width:1.5rem;height:1.5rem;border-radius:9999px;display:grid;place-items:center;padding:0 .35rem}
+    #cartFab .fab-count{background:#fff;color:#0f766e;font-size:.75rem;font-weight:800;min-width:1.5rem;height:1.5rem;border-radius:9999px;display:grid;place-items:center;padding:0 .35rem}
     body.cart-open{overflow:hidden}
   }
   @media(min-width:1024px){#cartFab,#cartDrawerOverlay{display:none!important} #cartDrawer{position:relative!important;transform:none!important;width:400px!important;max-width:420px!important;height:auto!important;max-height:none!important;border-radius:1rem!important;box-shadow:none!important;z-index:auto!important;overflow:hidden!important}}
   .pos-modal{background:#fff;width:100%;max-width:480px;max-height:90vh;border-radius:1.25rem 1.25rem 0 0;display:flex;flex-direction:column;overflow:hidden;animation:posSlideUp .25s cubic-bezier(.22,1,.36,1)}
   @media(min-width:640px){.pos-modal{border-radius:1.25rem}}
-  .pos-modal-header{padding:1rem 1.1rem .75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f1f5f9;flex-shrink:0}
-  .pos-modal-header h3{font-weight:700;font-size:1rem;color:#0f172a;margin:0;display:flex;align-items:center;gap:.5rem}
-  .pos-modal-header .close-btn{width:2rem;height:2rem;border:0;background:#f1f5f9;border-radius:.6rem;color:#475569;cursor:pointer;display:grid;place-items:center}
+  .pos-modal-header{padding:1rem 1.1rem .75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f4efe6;flex-shrink:0}
+  .pos-modal-header h3{font-weight:700;font-size:1rem;color:#2b2320;margin:0;display:flex;align-items:center;gap:.5rem}
+  .pos-modal-header .close-btn{width:2rem;height:2rem;border:0;background:#f4efe6;border-radius:.6rem;color:#6b6357;cursor:pointer;display:grid;place-items:center}
   .pos-modal-body{padding:1rem 1.1rem;overflow-y:auto;flex:1}
-  .pos-modal-footer{padding:.75rem 1.1rem;border-top:1px solid #f1f5f9;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;flex-shrink:0;background:#fafbfc}
+  .pos-modal-footer{padding:.75rem 1.1rem;border-top:1px solid #f4efe6;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;flex-shrink:0;background:#faf7f1}
   .pos-modal-footer.single{grid-template-columns:1fr}
   .pos-modal-footer .btn{padding:.75rem;border-radius:.75rem;font-weight:600;font-size:.9rem;border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
-  .pos-modal-footer .btn-primary{background:#4f46e5;color:#fff}
-  .pos-modal-footer .btn-secondary{background:#f1f5f9;color:#334155}
-  .pos-modal-footer .btn-ghost{background:#fff;color:#475569;border:1px solid #e2e8f0}
+  .pos-modal-footer .btn-primary{background:#0f766e;color:#fff}
+  .pos-modal-footer .btn-secondary{background:#f4efe6;color:#57503f}
+  .pos-modal-footer .btn-ghost{background:#fff;color:#6b6357;border:1px solid #e7e2d9}
   @keyframes posFadeIn{from{opacity:0}to{opacity:1}}
   @keyframes posSlideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   .pos-summary-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;font-size:.9rem}
-  .pos-summary-row .label{color:#64748b}
-  .pos-summary-row .value{font-weight:600;color:#0f172a}
-  .pos-summary-row.total{border-top:1px solid #e2e8f0;padding-top:.65rem;margin-top:.4rem;font-size:1.05rem;font-weight:700}
-  .pos-summary-row.total .value{color:#4f46e5;font-size:1.2rem}
+  .pos-summary-row .label{color:#6b6357}
+  .pos-summary-row .value{font-weight:600;color:#2b2320}
+  .pos-summary-row.total{border-top:1px solid #e7e2d9;padding-top:.65rem;margin-top:.4rem;font-size:1.05rem;font-weight:700}
+  .pos-summary-row.total .value{color:#0f766e;font-size:1.2rem}
   .pos-chip{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .7rem;border-radius:9999px;font-size:.78rem;font-weight:600}
   .pos-chip-emerald{background:#ecfdf5;color:#047857}
-  .pos-chip-indigo{background:#eef2ff;color:#4338ca}
   .pos-chip-amber{background:#fffbeb;color:#b45309}
-  .pos-chip-slate{background:#f1f5f9;color:#334155}
+  .pos-chip-slate{background:#f4efe6;color:#57503f}
   .pos-quick-cash{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.4rem}
-  .pos-quick-cash button{padding:.55rem .25rem;border-radius:.65rem;background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;font-weight:600;font-size:.78rem;cursor:pointer}
-  .pos-quick-cash button:hover{background:#e2e8f0}
+  .pos-quick-cash button{padding:.55rem .25rem;border-radius:.65rem;background:#f4efe6;color:#57503f;border:1px solid #e7e2d9;font-weight:600;font-size:.78rem;cursor:pointer}
+  .pos-quick-cash button:hover{background:#e7e2d9}
   .pos-laundry-card{background:#fff;border:1px solid #fde68a;border-radius:.85rem;padding:.6rem .75rem;display:flex;align-items:center;gap:.6rem;min-width:0}
   .pos-laundry-card .ll-icon{width:2.1rem;height:2.1rem;display:grid;place-items:center;background:#fef3c7;border-radius:.6rem;font-size:1rem;flex-shrink:0}
-  .pos-laundry-card .ll-name{font-size:.85rem;font-weight:600;color:#0f172a;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pos-laundry-card .ll-name{font-size:.85rem;font-weight:600;color:#2b2320;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .pos-laundry-card .ll-step{width:1.85rem;height:1.85rem;border:0;border-radius:.55rem;font-weight:700;cursor:pointer;display:grid;place-items:center}
-  .pos-laundry-card .ll-step.minus{background:#f1f5f9;color:#334155}
-  .pos-laundry-card .ll-step.plus{background:#0f172a;color:#fff}
-  .pos-laundry-card input.ll-input{width:3.5rem;border:1px solid #e2e8f0;border-radius:.55rem;padding:.3rem;text-align:center;font-weight:600;font-size:.85rem;background:#fff}
-  .pos-laundry-card .ll-remove{width:1.85rem;height:1.85rem;border:0;background:transparent;color:#94a3b8;border-radius:.55rem;cursor:pointer;display:grid;place-items:center}
+  .pos-laundry-card .ll-step.minus{background:#f4efe6;color:#57503f}
+  .pos-laundry-card .ll-step.plus{background:#2b2320;color:#fff}
+  .pos-laundry-card input.ll-input{width:3.5rem;border:1px solid #e7e2d9;border-radius:.55rem;padding:.3rem;text-align:center;font-weight:600;font-size:.85rem;background:#fff}
+  .pos-laundry-card .ll-remove{width:1.85rem;height:1.85rem;border:0;background:transparent;color:#57503f;border-radius:.55rem;cursor:pointer;display:grid;place-items:center}
   .pos-laundry-card .ll-remove:hover{background:#fef2f2;color:#dc2626}
   .pos-pay-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-top:.4rem}
-  .pos-pay-method-grid button{padding:.65rem .25rem;border-radius:.7rem;background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;font-weight:600;font-size:.78rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.25rem}
-  .pos-pay-method-grid button.is-active{background:#eef2ff;color:#4338ca;border-color:#818cf8}
-  .pos-pay-method-grid button:hover:not(.is-active){background:#e2e8f0}
+  .pos-pay-method-grid button{padding:.65rem .25rem;border-radius:.7rem;background:#f4efe6;color:#57503f;border:1px solid #e7e2d9;font-weight:600;font-size:.78rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.25rem}
+  .pos-pay-method-grid button.is-active{background:#f0fdfa;color:#115e59;border-color:#5eead4}
+  .pos-pay-method-grid button:hover:not(.is-active){background:#e7e2d9}
   /* Empty cart friendly */
-  .pos-empty{padding:1.5rem .75rem;text-align:center;color:#94a3b8}
+  .pos-empty{padding:1.5rem .75rem;text-align:center;color:#6b6357}
   .pos-empty .empty-icon{width:3rem;height:3rem;margin:0 auto .5rem;opacity:.5}
   /* Section card */
-  .pos-section{background:#fff;border:1px solid #e2e8f0;border-radius:1.1rem;padding:.85rem 1rem}
-  .pos-section-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:.5rem;display:flex;align-items:center;justify-content:space-between}
+  .pos-section{background:#fff;border:1px solid #e7e2d9;border-radius:1.1rem;padding:.85rem 1rem}
+  .pos-section-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#6b6357;margin-bottom:.5rem;display:flex;align-items:center;justify-content:space-between}
   /* Hide number input spinners */
   input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
   input[type=number]{-moz-appearance:textfield}
   /* Status buttons */
-  .pos-status-btn{padding:.65rem .5rem;border-radius:.75rem;font-size:.85rem;font-weight:600;border:1px solid #e2e8f0;background:#fff;color:#334155;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.35rem;flex:1}
+  .pos-status-btn{padding:.65rem .5rem;border-radius:.75rem;font-size:.85rem;font-weight:600;border:1px solid #e7e2d9;background:#fff;color:#57503f;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.35rem;flex:1}
   .pos-status-btn.is-active.received{background:#fef3c7;color:#92400e;border-color:#fbbf24}
   .pos-status-btn.is-active.ready{background:#d1fae5;color:#065f46;border-color:#10b981}
   /* Scroll lock helper */
@@ -112,8 +120,8 @@
 @section('content')
 @if(isset($order))
 <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-2 mb-3">
-  <div class="text-sm"><span class="text-amber-800 font-semibold">✏️ Mode Edit</span> <span class="font-mono font-bold">{{ $order->order_number }}</span> <span class="text-slate-500">• {{ $order->customer->name ?? 'Walk-in' }} • {{ $order->order_status }}</span></div>
-  <div class="flex gap-2"><a href="{{ route('orders.show',$order) }}" class="px-3 py-1.5 bg-white border rounded-full text-xs font-semibold">← Kembali</a><a href="{{ route('pos.index') }}" class="px-3 py-1.5 bg-slate-900 text-white rounded-full text-xs font-semibold">POS Baru</a></div>
+  <div class="text-sm"><span class="text-amber-800 font-semibold">✏️ Mode Edit</span> <span class="font-mono font-bold">{{ $order->order_number }}</span> <span class="text-paper-500">• {{ $order->customer->name ?? 'Walk-in' }} • {{ $order->order_status }}</span></div>
+  <div class="flex gap-2"><a href="{{ route('orders.show',$order) }}" class="px-3 py-1.5 bg-white border rounded-full text-xs font-semibold">← Kembali</a><a href="{{ route('pos.index') }}" class="px-3 py-1.5 bg-paper-900 text-white rounded-full text-xs font-semibold">POS Baru</a></div>
 </div>
 @endif
 <div class="flex flex-col lg:flex-row gap-3 lg:gap-4 lg:h-[calc(100vh-88px)]">
@@ -121,7 +129,7 @@
   <div class="flex-1 bg-white rounded-2xl border flex flex-col overflow-hidden min-h-[42vh] lg:min-h-0">
     <div class="p-3 sm:p-4 border-b space-y-3">
       <div class="relative">
-        <input id="productSearch" type="text" inputmode="search" placeholder="Cari produk / SKU / scan barcode" class="w-full border border-slate-200 rounded-xl sm:rounded-2xl pl-10 pr-4 py-3 sm:py-3 text-[15px] focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" autofocus>
+        <input id="productSearch" type="text" inputmode="search" placeholder="Cari produk / SKU / scan barcode" class="w-full border border-paper-300 rounded-xl sm:rounded-2xl pl-10 pr-4 py-3 sm:py-3 text-[15px] focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none" autofocus>
         <svg class="pos-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </div>
       <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-1 px-1 snap-x">
@@ -134,7 +142,7 @@
       <button onclick="addToCart({{ $p->id }})" data-cat="{{ $p->category_id }}" data-name="{{ strtolower($p->name) }}" data-sku="{{ strtolower($p->sku) }}" data-barcode="{{ strtolower($p->barcode ?? '') }}" class="pos-product-card productCard">
         <div class="flex items-start justify-between gap-1">
           <span class="pc-sku">{{ $p->sku }}</span>
-          <span class="pc-unit {{ $p->type=='service'?'bg-indigo-100 text-indigo-700':'bg-emerald-100 text-emerald-700' }}">{{ $p->unit }}</span>
+          <span class="pc-unit {{ $p->type=='service'?'bg-teal-100 text-teal-700':'bg-emerald-100 text-emerald-700' }}">{{ $p->unit }}</span>
         </div>
         <div class="pc-name">{{ $p->name }}</div>
         <div class="pc-cat">{{ $p->category->name }}</div>
@@ -142,30 +150,37 @@
       </button>
       @endforeach
     </div>
-    <div class="lg:hidden px-3 py-2 border-t bg-slate-50 text-xs text-slate-500 text-center">Tap produk untuk tambah ke keranjang</div>
+    <div class="lg:hidden px-3 py-2 border-t bg-paper-100 text-xs text-paper-500 text-center">Tap produk untuk tambah ke keranjang</div>
   </div>
 
   {{-- Keranjang kanan: di desktop fixed width, di mobile jadi bottom-sheet drawer (#cartDrawer) --}}
   <div id="cartDrawer" class="w-full lg:w-[400px] xl:w-[420px] bg-white rounded-2xl border flex flex-col overflow-hidden shrink-0">
     <div class="p-3 sm:p-4 border-b space-y-3">
-      <label class="text-[11px] font-bold uppercase tracking-widest text-slate-500">Customer <span class="text-rose-600">*</span></label>
+      <div class="flex items-baseline justify-between gap-2">
+        <label for="customerSearch" class="text-xs font-semibold text-paper-600">Pilih customer</label>
+        <span class="text-[11px] text-paper-500">Wajib diisi sebelum bayar</span>
+      </div>
       <div class="flex gap-2">
         <div class="flex-1 relative min-w-0">
-          <input id="customerSearch" type="text" placeholder="Cari nama / HP (wajib pilih) *" required class="w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-          <div id="customerResults" class="absolute z-10 w-full bg-white border border-slate-200 rounded-xl shadow-xl mt-1.5 hidden max-h-52 overflow-y-auto"></div>
+          <input id="customerSearch" type="text" placeholder="Ketik nama atau nomor HP" required
+                 class="w-full border border-paper-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+          <div id="customerResults" class="absolute z-10 w-full bg-white border border-paper-300 rounded-lg shadow-lg mt-1.5 hidden max-h-52 overflow-y-auto"></div>
         </div>
-        <button type="button" onclick="openNewCustomerModal()" class="shrink-0 px-3 sm:px-4 py-3 bg-slate-900 text-white rounded-xl text-sm font-semibold flex items-center gap-1">
+        <button type="button" onclick="openNewCustomerModal()" class="shrink-0 px-3 sm:px-4 py-3 bg-paper-900 text-white rounded-lg text-sm font-semibold flex items-center gap-1">
           <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
-          Baru
+          Customer baru
         </button>
       </div>
-      <div id="selectedCustomer" class="bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2">
-        <span class="min-w-0 truncate"><b id="custName">— Belum pilih customer —</b> <span id="custPhone" class="text-slate-500"></span></span>
-        <button type="button" onclick="clearCustomer()" class="shrink-0 w-7 h-7 grid place-items-center rounded-full hover:bg-white text-slate-500">
+      <div id="selectedCustomer" class="bg-rose-50 border border-rose-200 rounded-lg px-3 py-2.5 text-sm flex justify-between items-center gap-2">
+        <span class="min-w-0 truncate">
+          <b id="custName" class="text-rose-800">Belum ada customer dipilih</b>
+          <span id="custPhone" class="text-rose-700"></span>
+        </span>
+        <button type="button" onclick="clearCustomer()" class="shrink-0 w-7 h-7 grid place-items-center rounded-full hover:bg-white text-rose-600 hidden" aria-label="Hapus pilihan customer">
           <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
       </div>
-      <p id="customerRequiredHint" class="text-xs text-rose-600 hidden">⚠️ Pilih customer dulu sebelum bayar.</p>
+      <p id="customerRequiredHint" class="text-xs text-rose-700 hidden">Pilih customer dulu sebelum membayar.</p>
       <input type="hidden" id="customerId" value="">
     </div>
 
@@ -181,7 +196,7 @@
           <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#b45309;width:1.2rem;height:1.2rem"><path d="m6 9 6 6 6-6"/></svg>
         </span>
       </button>
-      <p class="text-[11px] leading-relaxed text-amber-800/80 mt-1">Expand untuk isi pcs. Kosong default — pilih jenis dari dropdown lalu <b>+ Tambah</b>. Tap ✕ di card untuk hapus baris. <a href="javascript:void(0)" onclick="openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
+      <p class="text-[11px] leading-relaxed text-amber-800/80 mt-1">Isi jumlah per jenis, misalnya Baju 3 pcs. Biarkan kosong kalau order ini bukan laundry. <a href="#" onclick="event.preventDefault();openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
     </div>
 
     <div class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-2 sm:space-y-3 min-h-[18vh] lg:min-h-0" id="cartItems">
@@ -192,42 +207,94 @@
       </div>
     </div>
 
-    <div class="border-t p-3 sm:p-4 space-y-3 bg-slate-50">
+    <div class="border-t p-3 sm:p-4 space-y-3 bg-paper-100">
       <div class="space-y-2 text-sm">
-        <div class="flex justify-between"><span class="text-slate-500">Subtotal</span><span id="subtotal" class="font-medium">Rp 0</span></div>
-        <div class="flex justify-between items-center gap-2">
-          <span class="text-slate-500 shrink-0">Diskon</span>
-          <div class="flex items-center gap-1.5">
-            <input id="discount" type="number" value="0" min="0" inputmode="numeric" class="w-20 sm:w-24 border border-slate-200 rounded-xl px-2.5 py-2 text-right text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-            <select id="discountType" class="border border-slate-200 rounded-xl px-2 py-2 text-xs bg-white"><option value="fixed">Rp</option><option value="percent">%</option></select>
+        <div class="flex justify-between"><span class="text-paper-500">Subtotal</span><span id="subtotal" class="font-medium">Rp 0</span></div>
+
+        {{-- Diskon dan pajak disembunyikan di balik satu tombol. Untuk transaksi
+             biasa (kebanyakan orders) tidak ada diskon, jadi field kosong hanya
+             menambah beban visual dan membuat pemula ragu apakah harus diisi.
+             Yang baru dipakai tetap kelihatan, jadi kasir tahu itu bukan opsional. --}}
+        <div id="optionalToggleRow" class="hidden">
+          <button type="button" id="optionalToggle" onclick="toggleOptionalFields()"
+                  class="text-sm text-teal-700 hover:underline flex items-center gap-1.5 py-1">
+            <span id="optionalToggleIcon" style="display:inline-block;transition:transform .15s ease">&#9656;</span>
+            <span id="optionalToggleText">Tambah diskon atau pajak</span>
+          </button>
+        </div>
+
+        <div id="optionalFields" class="hidden space-y-2 pt-1">
+          <div class="flex justify-between items-center gap-2">
+            <label for="discount" class="text-paper-500 shrink-0">Diskon</label>
+            <div class="flex items-center gap-1.5">
+              <input id="discount" type="number" value="0" min="0" inputmode="numeric" class="w-20 sm:w-24 border border-paper-300 rounded-lg px-2.5 py-2 text-right text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+              <select id="discountType" class="border border-paper-300 rounded-lg px-2 py-2 text-xs bg-white"><option value="fixed">Rp</option><option value="percent">%</option></select>
+            </div>
+          </div>
+          <div class="flex justify-between items-center gap-2">
+            <label for="tax" class="text-paper-500 shrink-0">Pajak</label>
+            <input id="tax" type="number" value="0" min="0" inputmode="numeric" class="w-24 sm:w-28 border border-paper-300 rounded-lg px-2.5 py-2 text-right text-sm focus:ring-2 focus:ring-teal-500 outline-none">
           </div>
         </div>
-        <div class="flex justify-between items-center"><span class="text-slate-500">Pajak</span><input id="tax" type="number" value="0" min="0" inputmode="numeric" class="w-24 sm:w-28 border border-slate-200 rounded-xl px-2.5 py-2 text-right text-sm focus:ring-2 focus:ring-indigo-500 outline-none"></div>
-        <div class="flex justify-between font-bold text-base sm:text-lg pt-2 border-t border-slate-200"><span>TOTAL</span><span id="grandTotal" class="text-indigo-600">Rp 0</span></div>
+
+        <div id="discountLine" class="hidden flex justify-between text-sm">
+          <span class="text-paper-500">Diskon</span>
+          <span id="discountLineValue" class="font-medium text-rose-700">-Rp 0</span>
+        </div>
+        <div id="taxLine" class="hidden flex justify-between text-sm">
+          <span class="text-paper-500">Pajak</span>
+          <span id="taxLineValue" class="font-medium">Rp 0</span>
+        </div>
+
+        <div class="flex justify-between items-baseline font-bold text-lg pt-2 border-t border-paper-300">
+          <span>Total</span>
+          <span id="grandTotal" class="text-teal-700 text-xl">Rp 0</span>
+        </div>
       </div>
+
       <div class="space-y-2">
-        <label class="text-xs font-semibold text-slate-600">Status laundry</label>
+        <div class="flex items-baseline justify-between gap-2">
+          <label class="text-xs font-semibold text-paper-600">Status cucian</label>
+          <span class="text-[11px] text-paper-500">Pilih saat laundry sudah selesai</span>
+        </div>
         <div class="grid grid-cols-2 gap-2">
           <button type="button" id="btnBaru" onclick="setLaundryStatus('received')" class="pos-status-btn is-active received">
-            <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#f59e0b"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg>
-            Baru
+            <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#b45309"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg>
+            Masih dicuci
           </button>
           <button type="button" id="btnSelesai" onclick="setLaundryStatus('ready')" class="pos-status-btn ready">
-            <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#10b981"><path d="m20 6-11 11-5-5"/></svg>
-            Selesai
+            <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#0f766e"><path d="m20 6-11 11-5-5"/></svg>
+            Sudah selesai
           </button>
         </div>
         <input type="hidden" id="orderStatus" value="received">
       </div>
+
       <div class="grid grid-cols-2 gap-2">
-        <select id="paymentMethod" class="border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white focus:ring-2 focus:ring-indigo-500 outline-none"><option value="cash">Cash</option><option value="transfer">Transfer</option><option value="qris">QRIS</option><option value="debit">Debit</option><option value="e_wallet">E-Wallet</option></select>
-        <input id="paidAmount" type="number" inputmode="numeric" placeholder="Bayar" class="border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+        <label for="paymentMethod" class="sr-only">Metode pembayaran</label>
+        <select id="paymentMethod" class="border border-paper-300 rounded-lg px-3 py-3 text-sm bg-white focus:ring-2 focus:ring-teal-500 outline-none"><option value="cash">Cash</option><option value="transfer">Transfer</option><option value="qris">QRIS</option><option value="debit">Debit</option><option value="e_wallet">E-Wallet</option></select>
+        <label for="paidAmount" class="sr-only">Jumlah uang diterima</label>
+        <input id="paidAmount" type="number" inputmode="numeric" placeholder="Uang diterima" class="border border-paper-300 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none">
       </div>
-      <div class="flex justify-between text-sm"><span class="text-slate-500">Kembalian</span><span id="change" class="font-semibold">Rp 0</span></div>
-            <button onclick="isEditMode ? submitEditOrder() : openCheckoutModal()" id="payBtn" class="w-full font-bold py-3.5 sm:py-3 rounded-xl text-[15px] shadow flex items-center justify-center gap-2" :class="isEditMode?'bg-amber-500 hover:bg-amber-600 text-white':'bg-indigo-600 hover:bg-indigo-700 text-white'">
+
+      {{-- Kembalian hanya muncul kalau ada kembalian. "Rp 0" yang selalu
+           tampil cuma noise dan membuat kasir wonders apakah sudah benar. --}}
+      <div id="changeRow" class="hidden flex justify-between text-sm">
+        <span class="text-paper-500">Kembalian</span>
+        <span id="change" class="font-semibold text-paper-800">Rp 0</span>
+      </div>
+
+      <button onclick="isEditMode ? submitEditOrder() : openCheckoutModal()" id="payBtn"
+              class="w-full font-semibold py-4 text-base rounded-lg flex items-center justify-center gap-2
+                     bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white transition-colors duration-120
+                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-600 focus-visible:outline-offset-2"
+              :class="isEditMode?'bg-amber-600 hover:bg-amber-700 active:bg-amber-800':''">
         <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
-        <span id="payBtnText">BAYAR & CETAK</span>
+        <span id="payBtnText">Lanjut ke pembayaran</span>
       </button>
+      <p class="text-[11px] text-paper-500 text-center leading-relaxed">
+        Struk dan pilihan cetak muncul di layar berikutnya.
+      </p>
     </div>
   </div>
 </div>
@@ -244,7 +311,7 @@
   <div class="pos-modal">
     <div class="pos-modal-header">
       <h3>
-        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#4f46e5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#0f766e"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
         Konfirmasi Pembayaran
       </h3>
       <button type="button" onclick="closeModal('modalCheckout')" class="close-btn" aria-label="Tutup">
@@ -253,7 +320,7 @@
     </div>
     <div class="pos-modal-body">
       <div id="checkoutSummary"></div>
-      <label class="text-xs font-semibold text-slate-600 mt-3 block">Metode Pembayaran</label>
+      <label class="text-xs font-semibold text-paper-600 mt-3 block">Metode Pembayaran</label>
       <div class="pos-pay-method-grid" id="checkoutPayMethods">
         <button type="button" data-method="cash" class="is-active" onclick="selectPayMethod(this,'cash')">
           <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1.3rem;height:1.3rem"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
@@ -276,8 +343,8 @@
           <span>E-Wallet</span>
         </button>
       </div>
-      <label class="text-xs font-semibold text-slate-600 mt-3 block">Nominal Bayar</label>
-      <input id="modalPaidAmount" type="number" inputmode="numeric" placeholder="0" class="w-full mt-1 border border-slate-200 rounded-xl px-3 py-3 text-base font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
+      <label class="text-xs font-semibold text-paper-600 mt-3 block">Nominal Bayar</label>
+      <input id="modalPaidAmount" type="number" inputmode="numeric" placeholder="0" class="w-full mt-1 border border-paper-300 rounded-xl px-3 py-3 text-base font-semibold focus:ring-2 focus:ring-teal-500 outline-none">
       <div class="pos-quick-cash" id="quickCashButtons">
         <button type="button" onclick="quickCash('exact')">Pas</button>
         <button type="button" data-amt="50000">50K</button>
@@ -318,14 +385,14 @@
         <div class="mx-auto w-14 h-14 rounded-full grid place-items-center mb-2" style="background:#d1fae5">
           <svg viewBox="0 0 24 24" style="width:1.8rem;height:1.8rem;color:#047857;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="m20 6-11 11-5-5"/></svg>
         </div>
-        <p class="text-xs text-slate-500" id="receiptOrderNumber">Order #</p>
-        <p class="text-2xl font-bold text-slate-800 mt-1" id="receiptTotal">Rp 0</p>
-        <p class="text-xs text-slate-500 mt-1">Kembalian: <b id="receiptChange" class="text-emerald-600">Rp 0</b></p>
+        <p class="text-xs text-paper-500" id="receiptOrderNumber">Order #</p>
+        <p class="text-2xl font-bold text-paper-800 mt-1" id="receiptTotal">Rp 0</p>
+        <p class="text-xs text-paper-500 mt-1">Kembalian: <b id="receiptChange" class="text-emerald-600">Rp 0</b></p>
       </div>
-      <div class="mt-3 bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm space-y-1.5" id="receiptSummaryBox">
-        <div class="flex justify-between"><span class="text-slate-500">Customer</span><span class="font-semibold truncate ml-2" id="receiptCust">-</span></div>
-        <div class="flex justify-between"><span class="text-slate-500">Metode</span><span class="font-semibold" id="receiptMethod">-</span></div>
-        <div class="flex justify-between"><span class="text-slate-500">Item</span><span class="font-semibold" id="receiptItems">0</span></div>
+      <div class="mt-3 bg-paper-100 border border-paper-300 rounded-xl p-3 text-sm space-y-1.5" id="receiptSummaryBox">
+        <div class="flex justify-between"><span class="text-paper-500">Customer</span><span class="font-semibold truncate ml-2" id="receiptCust">-</span></div>
+        <div class="flex justify-between"><span class="text-paper-500">Metode</span><span class="font-semibold" id="receiptMethod">-</span></div>
+        <div class="flex justify-between"><span class="text-paper-500">Item</span><span class="font-semibold" id="receiptItems">0</span></div>
       </div>
     </div>
     <div class="pos-modal-footer" style="grid-template-columns:1fr 1fr;row-gap:.5rem">
@@ -362,41 +429,41 @@
       </button>
     </div>
     <div class="pos-modal-body">
-      <p class="text-[11px] leading-relaxed text-amber-800/80 mb-3">Pilih jenis dari dropdown lalu <b>+ Tambah</b>. Tap ✕ di card untuk hapus baris. <a href="javascript:void(0)" onclick="openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
+      <p class="text-[11px] leading-relaxed text-amber-800/80 mb-3">Pilih jenis lalu tekan <b>Tambah</b>. Tekan Hapus untuk membatalkan baris. <a href="#" onclick="event.preventDefault();openLaundryTypesModal()" class="underline font-semibold">Kelola jenis</a></p>
       <div id="laundryGrid" class="flex flex-col gap-2 mb-3 min-h-[0]">
         <!-- cards ditambah via dropdown -->
       </div>
       <div id="laundryEmpty" class="border border-dashed border-amber-300 rounded-xl bg-white/70 px-3 py-6 text-center">
-        <p class="text-sm text-slate-500">Belum ada rincian. Pilih jenis di bawah lalu tambah.</p>
-        <p class="text-[11px] text-slate-400 mt-1">Contoh: Baju, Celana, Sepatu, Tas — pcs akan masuk struk</p>
+        <p class="text-sm text-paper-500">Belum ada rincian. Pilih jenis di bawah lalu tambah.</p>
+        <p class="text-[11px] text-paper-500 mt-1">Contoh: Baju, Celana, Sepatu, Tas — pcs akan masuk struk</p>
       </div>
       <div class="bg-white border border-amber-200 rounded-xl p-2.5 sm:p-3 space-y-2.5">
-        <label class="text-xs font-semibold text-slate-700">Tambah jenis ke rincian</label>
+        <label class="text-xs font-semibold text-paper-700">Tambah jenis ke rincian</label>
         <div class="flex flex-col sm:flex-row gap-2">
-          <select id="laundrySelect" class="flex-1 min-w-0 border border-slate-200 rounded-xl px-3 py-3 text-sm bg-white focus:ring-2 focus:ring-amber-400 outline-none">
+          <select id="laundrySelect" class="flex-1 min-w-0 border border-paper-300 rounded-xl px-3 py-3 text-sm bg-white focus:ring-2 focus:ring-amber-400 outline-none">
             <option value="">— Pilih jenis —</option>
             @foreach($laundryTypes as $t)
             <option value="{{ $t->code }}" data-name="{{ $t->name }}" data-icon="{{ $t->icon ?? '📦' }}">{{ ($t->icon ?? '📦').' '.$t->name }}</option>
             @endforeach
           </select>
-          <button type="button" onclick="addLaundryFromSelect()" class="shrink-0 bg-slate-900 active:bg-black text-white px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">+ Tambah</button>
+          <button type="button" onclick="addLaundryFromSelect()" class="shrink-0 bg-paper-900 active:bg-black text-white px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">+ Tambah</button>
         </div>
         <details class="group">
-          <summary class="text-xs text-slate-500 cursor-pointer list-none flex items-center gap-1"><span class="group-open:rotate-90 transition">▶</span> Jenis belum ada? Buat baru</summary>
+          <summary class="text-xs text-paper-500 cursor-pointer list-none flex items-center gap-1"><span class="group-open:rotate-90 transition">▶</span> Jenis belum ada? Buat baru</summary>
           <div class="mt-2 flex flex-col sm:flex-row gap-2">
-            <input id="newLaundryName" type="text" placeholder="Nama jenis baru, cth: Gorden" class="flex-1 min-w-0 border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none">
-            <input id="newLaundryIcon" type="text" placeholder="Icon 🧹" class="w-full sm:w-24 border border-slate-200 rounded-xl px-3 py-3 text-sm text-center sm:text-left">
-            <button type="button" onclick="createLaundryType()" class="shrink-0 bg-white border border-slate-200 active:bg-slate-50 text-slate-800 px-4 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">Buat</button>
+            <input id="newLaundryName" type="text" placeholder="Nama jenis baru, cth: Gorden" class="flex-1 min-w-0 border border-paper-300 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none">
+            <input id="newLaundryIcon" type="text" placeholder="Icon 🧹" class="w-full sm:w-24 border border-paper-300 rounded-xl px-3 py-3 text-sm text-center sm:text-left">
+            <button type="button" onclick="createLaundryType()" class="shrink-0 bg-white border border-paper-300 active:bg-paper-100 text-paper-800 px-4 py-3 rounded-xl text-sm font-semibold whitespace-nowrap">Buat</button>
           </div>
         </details>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-        <label class="text-xs font-medium text-slate-600">Ket. Lainnya <span class="font-normal text-slate-400">(opsional)</span><input id="laundry_lainnya_desc" type="text" placeholder="Bed cover, gorden, dll" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
-        <label class="text-xs font-medium text-slate-600">Catatan laundry <span class="font-normal text-slate-400">(masuk struk)</span><input id="laundry_catatan" type="text" placeholder="Noda di kerah, jangan pakai pewangi" class="mt-1 w-full border border-slate-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
+        <label class="text-xs font-medium text-paper-600">Ket. Lainnya <span class="font-normal text-paper-500">(opsional)</span><input id="laundry_lainnya_desc" type="text" placeholder="Bed cover, gorden, dll" class="mt-1 w-full border border-paper-300 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
+        <label class="text-xs font-medium text-paper-600">Catatan laundry <span class="font-normal text-paper-500">(masuk struk)</span><input id="laundry_catatan" type="text" placeholder="Noda di kerah, jangan pakai pewangi" class="mt-1 w-full border border-paper-300 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-amber-400 outline-none"></label>
       </div>
       <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t">
-        <span class="text-[11px] text-slate-500">Total pcs: <b id="laundryTotal" class="text-slate-800">0</b></span>
-        <button type="button" onclick="clearLaundry()" class="text-xs text-slate-500 hover:text-slate-700 underline">Kosongkan rincian</button>
+        <span class="text-[11px] text-paper-500">Total pcs: <b id="laundryTotal" class="text-paper-800">0</b></span>
+        <button type="button" onclick="clearLaundry()" class="text-xs text-paper-500 hover:text-paper-700 underline">Kosongkan rincian</button>
       </div>
     </div>
     <div class="pos-modal-footer" style="grid-template-columns:1fr 1fr;row-gap:.5rem">
@@ -415,7 +482,7 @@
   <div class="pos-modal">
     <div class="pos-modal-header">
       <h3>
-        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#4f46e5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#0f766e"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
         Customer Baru
       </h3>
       <button type="button" onclick="closeModal('modalNewCustomer')" class="close-btn" aria-label="Tutup">
@@ -424,18 +491,18 @@
     </div>
     <div class="pos-modal-body">
       <form id="newCustomerForm" onsubmit="return submitNewCustomer(event)">
-        <label class="text-xs font-semibold text-slate-600">Nama <span class="text-rose-600">*</span></label>
-        <input name="name" required class="w-full mt-1 mb-3 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-        <label class="text-xs font-semibold text-slate-600">No. HP <span class="text-rose-600">*</span></label>
-        <input name="phone" required inputmode="tel" class="w-full mt-1 mb-3 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-        <label class="text-xs font-semibold text-slate-600">Alamat <span class="text-slate-400 font-normal">(opsional)</span></label>
-        <textarea name="address" rows="2" class="w-full mt-1 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+        <label class="text-xs font-semibold text-paper-600">Nama <span class="text-rose-600">*</span></label>
+        <input name="name" required class="w-full mt-1 mb-3 border border-paper-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+        <label class="text-xs font-semibold text-paper-600">No. HP <span class="text-rose-600">*</span></label>
+        <input name="phone" required inputmode="tel" class="w-full mt-1 mb-3 border border-paper-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+        <label class="text-xs font-semibold text-paper-600">Alamat <span class="text-paper-500 font-normal">(opsional)</span></label>
+        <textarea name="address" rows="2" class="w-full mt-1 border border-paper-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-teal-500 outline-none"></textarea>
         <p id="newCustomerError" class="text-xs text-rose-600 mt-2 hidden"></p>
       </form>
     </div>
     <div class="pos-modal-footer">
       <button type="button" class="btn btn-secondary" onclick="closeModal('modalNewCustomer')">Batal</button>
-      <button type="button" class="btn btn-primary" id="saveNewCustomerBtn" onclick="submitNewCustomer(event)">
+      <button type="submit" form="newCustomerForm" class="btn btn-primary" id="saveNewCustomerBtn">
         <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
         Simpan
       </button>
@@ -448,7 +515,7 @@
   <div class="pos-modal" style="max-width:340px">
     <div class="pos-modal-header">
       <h3>
-        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#4f46e5"><path d="M3 6h18M3 12h12M3 18h6"/></svg>
+        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="color:#0f766e"><path d="M3 6h18M3 12h12M3 18h6"/></svg>
         Ubah Quantity
       </h3>
       <button type="button" onclick="closeModal('modalEditQty')" class="close-btn" aria-label="Tutup">
@@ -457,13 +524,13 @@
     </div>
     <div class="pos-modal-body">
       <p class="text-sm font-semibold" id="editQtyName">-</p>
-      <p class="text-xs text-slate-500" id="editQtyMeta">-</p>
+      <p class="text-xs text-paper-500" id="editQtyMeta">-</p>
       <div class="flex items-center justify-center gap-3 mt-4">
-        <button type="button" class="pos-laundry-card" style="border:0;background:#f1f5f9;border-radius:.6rem;width:3rem;height:3rem;display:grid;place-items:center" onclick="qtyModalStep(-1)">
+        <button type="button" class="pos-laundry-card" style="border:0;background:#f4efe6;border-radius:.6rem;width:3rem;height:3rem;display:grid;place-items:center" onclick="qtyModalStep(-1)">
           <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1.2rem;height:1.2rem"><path d="M5 12h14"/></svg>
         </button>
-        <input id="editQtyInput" type="number" step="0.1" min="0" class="w-28 border border-slate-200 rounded-xl px-3 py-3 text-center text-xl font-bold focus:ring-2 focus:ring-indigo-500 outline-none">
-        <button type="button" class="pos-laundry-card" style="border:0;background:#0f172a;color:#fff;border-radius:.6rem;width:3rem;height:3rem;display:grid;place-items:center" onclick="qtyModalStep(1)">
+        <input id="editQtyInput" type="number" step="0.1" min="0" class="w-28 border border-paper-300 rounded-xl px-3 py-3 text-center text-xl font-bold focus:ring-2 focus:ring-teal-500 outline-none">
+        <button type="button" class="pos-laundry-card" style="border:0;background:#2b2320;color:#fff;border-radius:.6rem;width:3rem;height:3rem;display:grid;place-items:center" onclick="qtyModalStep(1)">
           <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1.2rem;height:1.2rem;color:#fff"><path d="M5 12h14M12 5v14"/></svg>
         </button>
       </div>
@@ -489,8 +556,8 @@
     </div>
     <div class="pos-modal-body">
       <div class="flex gap-2 mb-3">
-        <input id="ltSearch" type="text" placeholder="Cari jenis…" class="flex-1 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 outline-none">
-        <button type="button" onclick="openCreateLaundryTypeModal()" class="bg-slate-900 text-white px-3 rounded-xl text-sm font-semibold flex items-center gap-1">
+        <input id="ltSearch" type="text" placeholder="Cari jenis…" class="flex-1 border border-paper-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 outline-none">
+        <button type="button" onclick="openCreateLaundryTypeModal()" class="bg-paper-900 text-white px-3 rounded-xl text-sm font-semibold flex items-center gap-1">
           <svg class="pos-flat-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
           Tambah
         </button>
@@ -516,10 +583,10 @@
       </button>
     </div>
     <div class="pos-modal-body">
-      <label class="text-xs font-semibold text-slate-600">Nama <span class="text-rose-600">*</span></label>
-      <input id="ltName" type="text" class="w-full mt-1 mb-3 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 outline-none" placeholder="Cth: Gorden">
-      <label class="text-xs font-semibold text-slate-600">Icon (emoji)</label>
-      <input id="ltIcon" type="text" maxlength="2" class="w-full mt-1 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 outline-none" placeholder="🧹">
+      <label class="text-xs font-semibold text-paper-600">Nama <span class="text-rose-600">*</span></label>
+      <input id="ltName" type="text" class="w-full mt-1 mb-3 border border-paper-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 outline-none" placeholder="Cth: Gorden">
+      <label class="text-xs font-semibold text-paper-600">Icon (emoji)</label>
+      <input id="ltIcon" type="text" maxlength="2" class="w-full mt-1 border border-paper-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-amber-400 outline-none" placeholder="🧹">
     </div>
     <div class="pos-modal-footer">
       <button type="button" class="btn btn-secondary" onclick="closeModal('modalCreateLaundryType')">Batal</button>
@@ -564,7 +631,13 @@ function updateCustomerRequiredUI(){
   let has = !!selectedCustomerId;
   if(hint) hint.classList.toggle('hidden', has);
   let box=document.getElementById('selectedCustomer');
-  if(box) box.className = has ? 'bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2' : 'bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
+  if(box) box.className = has
+    ? 'bg-teal-50 border border-teal-300 rounded-lg px-3 py-2.5 text-sm flex justify-between items-center gap-2'
+    : 'bg-rose-50 border border-rose-300 rounded-lg px-3 py-2.5 text-sm flex justify-between items-center gap-2';
+  let name=document.getElementById('custName');
+  if(name) name.className = has ? 'text-teal-900' : 'text-rose-800';
+  let clear=box? box.querySelector('button[onclick="clearCustomer()"]') : null;
+  if(clear) clear.classList.toggle('hidden', !has);
 }
 updateCustomerRequiredUI();
 if(isEditMode){
@@ -572,7 +645,7 @@ if(isEditMode){
   try{
     selectedCustomerId = editOrder.customer_id || null;
     document.getElementById('customerId').value = selectedCustomerId||'';
-    document.getElementById('custName').textContent = editOrder.customer_name||'— Belum pilih customer —';
+    document.getElementById('custName').textContent = editOrder.customer_name||'Belum ada customer dipilih';
     document.getElementById('custPhone').textContent = editOrder.customer_phone||'';
     updateCustomerRequiredUI();
     cart = (editOrder.items||[]).map(function(x){return {product_id:x.product_id, name:x.name||x.sku, sku:x.sku, unit:x.unit||'pcs', price:parseFloat(x.price)||0, type:x.type||'product', quantity:parseFloat(x.quantity)||1, discount:parseFloat(x.discount)||0};});
@@ -640,34 +713,39 @@ if(drawerOverlayEl) drawerOverlayEl.addEventListener('click', toggleCartDrawer);
 function renderCart(){
   let wrap = document.getElementById('cartItems');
   if(cart.length===0){
-    wrap.innerHTML='<div class="pos-empty"><svg class="empty-icon pos-flat-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><p class="text-sm">Keranjang kosong</p><p class="text-xs">Tap produk untuk menambah</p></div>';
-    calc(); updateCartUI(); return;
+    wrap.innerHTML='<div class="pos-empty"><svg class="empty-icon pos-flat-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><p class="text-paper-700">Keranjang masih kosong</p><p class="text-paper-500 mt-1">Ketuk produk untuk menambah</p></div>';
+    calc(); updateCartUI(); syncOptionalVisibility(); return;
   }
   let html='';
   cart.forEach((c,i)=>{
     html+= `<div class="pos-cart-item">
-      <div class="flex-1 min-w-0">
-        <div class="ci-name">${c.name}</div>
-        <div class="ci-meta">${c.sku} • ${money(c.price)}/${c.unit}</div>
+      <div class="ci-top">
+        <div class="min-w-0">
+          <div class="ci-name">${c.name}</div>
+          <div class="ci-meta">${money(c.price)} / ${c.unit}</div>
+        </div>
+        <div class="ci-subtotal">${money(c.quantity*c.price - c.discount)}</div>
       </div>
-      <div class="ci-qty">
-        <button onclick="changeQty(${i},-1)" aria-label="Kurangi">
-          <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1rem;height:1rem"><path d="M5 12h14"/></svg>
-        </button>
-        <input type="number" value="${c.quantity}" step="${c.type==='service'?0.1:1}" min="0.001" onchange="updQty(${i},this.value)" onclick="openQtyModal(${i})" readonly>
-        <button onclick="changeQty(${i},1)" aria-label="Tambah">
-          <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1rem;height:1rem"><path d="M5 12h14M12 5v14"/></svg>
-        </button>
+      <div class="ci-bottom">
+        <div class="ci-qty">
+          <button onclick="changeQty(${i},-1)" aria-label="Kurangi jumlah ${c.name}">
+            <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1.25rem;height:1.25rem"><path d="M5 12h14"/></svg>
+          </button>
+          <input type="number" value="${c.quantity}" step="${c.type==='service'?0.1:1}" min="0.001"
+                 onchange="updQty(${i},this.value)" onclick="openQtyModal(${i})" readonly
+                 aria-label="Jumlah ${c.name}">
+          <button onclick="changeQty(${i},1)" aria-label="Tambah jumlah ${c.name}">
+            <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1.25rem;height:1.25rem"><path d="M5 12h14M12 5v14"/></svg>
+          </button>
+        </div>
+        <button onclick="removeItem(${i})" class="ci-remove" aria-label="Hapus ${c.name} dari keranjang">Hapus</button>
       </div>
-      <div class="ci-subtotal">${money(c.quantity*c.price - c.discount)}</div>
-      <button onclick="removeItem(${i})" class="ci-remove" aria-label="Hapus">
-        <svg class="pos-flat-icon" viewBox="0 0 24 24" style="width:1rem;height:1rem"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-      </button>
     </div>`;
   });
   wrap.innerHTML=html;
   calc();
   updateCartUI();
+  syncOptionalVisibility();
 }
 function changeQty(i,delta){
   let c=cart[i]; let v=parseFloat((parseFloat(c.quantity)+delta*(c.type==='service'?0.5:1)).toFixed(3));
@@ -696,9 +774,53 @@ function calc(){
   document.getElementById('subtotal').textContent=money(sub);
   document.getElementById('grandTotal').textContent=money(total);
   document.getElementById('change').textContent=money(change);
+  // Kembalian hanya tampil kalau memang ada kembalian.
+  let row = document.getElementById('changeRow');
+  if(row) row.classList.toggle('hidden', change <= 0);
+  // Diskon yang aktif harus terlihat di baris total, kalau tidak kasir
+  // mengira diskon tidak berlaku karena tidak ada di mana pun.
+  let discEl = document.getElementById('discountLine');
+  if(discEl){
+    let hasDisc = disc > 0;
+    discEl.classList.toggle('hidden', !hasDisc);
+    if(hasDisc) document.getElementById('discountLineValue').textContent = '-'+money(disc);
+  }
+  let taxEl = document.getElementById('taxLine');
+  if(taxEl){
+    let hasTax = tax > 0;
+    taxEl.classList.toggle('hidden', !hasTax);
+    if(hasTax) document.getElementById('taxLineValue').textContent = money(tax);
+  }
   return {sub,disc,tax,total,paid,change};
 }
-['discount','discountType','tax','paidAmount'].forEach(id=> document.getElementById(id).addEventListener('input', calc));
+let optionalFieldsOpen = false;
+function toggleOptionalFields(){
+  optionalFieldsOpen = !optionalFieldsOpen;
+  let box = document.getElementById('optionalFields');
+  let icon = document.getElementById('optionalToggleIcon');
+  let text = document.getElementById('optionalToggleText');
+  if(box) box.classList.toggle('hidden', !optionalFieldsOpen);
+  if(icon) icon.style.transform = optionalFieldsOpen ? 'rotate(90deg)' : '';
+  if(text) text.textContent = optionalFieldsOpen ? 'Sembunyikan diskon dan pajak' : 'Tambah diskon atau pajak';
+}
+// Begitu ada isinya, baris diskon dan pajak ikut tampil di area total,
+// supaya kasir bisa langsung cek hasilnya tanpa menggulir ke panel atas.
+// Tombol buka panel disembunyikan selama tidak ada yang perlu diisi.
+function syncOptionalVisibility(){
+  let disc = parseFloat(document.getElementById('discount').value)||0;
+  let tax  = parseFloat(document.getElementById('tax').value)||0;
+  let any  = disc > 0 || tax > 0;
+  let toggleRow = document.getElementById('optionalToggleRow');
+  if(!toggleRow) return;
+  // Botolnya hanya relevan kalau sudah ada barang. Kalau cart kosong,
+  // tombol diskon hanya menambah sesuatu yang tidak ada gunanya.
+  if(any || cart.length === 0) toggleRow.classList.add('hidden');
+  else toggleRow.classList.remove('hidden');
+}
+['discount','discountType','tax','paidAmount'].forEach(id=> document.getElementById(id).addEventListener('input', function(){
+  calc();
+  syncOptionalVisibility();
+}));
 ['laundry_lainnya_desc','laundry_catatan'].forEach(id=>{
   let el=document.getElementById(id);
   if(el) el.addEventListener('change', saveLaundryDraft);
@@ -738,8 +860,8 @@ document.getElementById('customerSearch').addEventListener('input', function(){
   clearTimeout(cTimer);
   cTimer=setTimeout(()=>{
     fetch('/customers-search?q='+encodeURIComponent(q)).then(r=>r.json()).then(data=>{
-      if(!data.length){ box.innerHTML='<div class="p-3 text-sm text-slate-400">Tidak ditemukan</div>'; box.classList.remove('hidden'); return; }
-      box.innerHTML = data.map(c=> `<button type="button" onclick="selectCustomer(${c.id},'${c.name.replace(/'/g, "&apos;")}', '${c.phone}')" class="w-full text-left px-3 py-2.5 hover:bg-slate-50 text-sm border-b last:border-0 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-indigo-100 text-indigo-700 grid place-items-center font-semibold text-xs shrink-0">${(c.name||'?').charAt(0).toUpperCase()}</span><span class="min-w-0 flex-1"><b class="block truncate">${c.name}</b><span class="text-slate-500 text-xs">${c.phone} • ${c.code}</span></span></button>`).join('');
+      if(!data.length){ box.innerHTML='<div class="p-3 text-sm text-paper-500">Tidak ditemukan</div>'; box.classList.remove('hidden'); return; }
+      box.innerHTML = data.map(c=> `<button type="button" onclick="selectCustomer(${c.id},'${c.name.replace(/'/g, "&apos;")}', '${c.phone}')" class="w-full text-left px-3 py-2.5 hover:bg-paper-100 text-sm border-b last:border-0 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-teal-100 text-teal-700 grid place-items-center font-semibold text-xs shrink-0">${(c.name||'?').charAt(0).toUpperCase()}</span><span class="min-w-0 flex-1"><b class="block truncate">${c.name}</b><span class="text-paper-500 text-xs">${c.phone} • ${c.code}</span></span></button>`).join('');
       box.classList.remove('hidden');
     });
   },250);
@@ -749,16 +871,14 @@ function selectCustomer(id,name,phone){
   document.getElementById('custName').textContent=name; document.getElementById('custPhone').textContent=phone;
   document.getElementById('customerResults').classList.add('hidden');
   document.getElementById('customerSearch').value='';
-  let hint=document.getElementById('customerRequiredHint'); if(hint) hint.classList.add('hidden');
-  document.getElementById('selectedCustomer').className='bg-indigo-50 border border-indigo-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
+  updateCustomerRequiredUI();
 }
 function clearCustomer(){
   selectedCustomerId=null;
   document.getElementById('customerId').value='';
-  document.getElementById('custName').textContent='— Belum pilih customer —';
+  document.getElementById('custName').textContent='Belum ada customer dipilih';
   document.getElementById('custPhone').textContent='';
-  document.getElementById('customerRequiredHint').classList.remove('hidden');
-  document.getElementById('selectedCustomer').className='bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5 text-sm flex justify-between items-center gap-2';
+  updateCustomerRequiredUI();
 }
 
 // --- Rincian Laundry: open via modal popup, persist via localStorage ---
@@ -973,15 +1093,6 @@ function setLaundryStatus(v){
     a.classList.remove('is-active','received','ready');
   }
 }
-function clearLaundry(){
-  document.getElementById('laundryGrid').innerHTML='';
-  selectedLaundry.clear();
-  ['laundry_lainnya_desc','laundry_catatan'].forEach(id=>{
-    let el=document.getElementById(id); if(el) el.value='';
-  });
-  refreshLaundrySelect();
-  updateLaundryTotal();
-}
 function updateLaundryTotal(){
   let tot=0;
   document.querySelectorAll('.laundryInput').forEach(el=>{ tot += parseInt(el.value||'0',10)||0; });
@@ -1055,7 +1166,7 @@ function openCheckoutModal(){
   let custName = document.getElementById('custName').textContent;
   let itemCount = cart.reduce((s,c)=> s + (parseFloat(c.quantity)||0), 0);
   let html = `
-    <div class="pos-section" style="background:#f8fafc;padding:.75rem">
+    <div class="pos-section" style="background:#faf7f1;padding:.75rem">
       <div class="pos-summary-row"><span class="label">Customer</span><span class="value">${custName}</span></div>
       <div class="pos-summary-row"><span class="label">Item</span><span class="value">${itemCount} item</span></div>
       <div class="pos-summary-row"><span class="label">Subtotal</span><span class="value">${money(sub)}</span></div>
@@ -1281,15 +1392,15 @@ function renderLaundryTypeList(q){
   q = (q||'').toLowerCase();
   let list = document.getElementById('ltList');
   let filtered = laundryTypes.filter(t=> !q || (t.name||'').toLowerCase().includes(q));
-  if(!filtered.length){ list.innerHTML='<p class="text-sm text-slate-400 text-center py-6">Belum ada jenis laundry</p>'; return; }
+  if(!filtered.length){ list.innerHTML='<p class="text-sm text-paper-500 text-center py-6">Belum ada jenis laundry</p>'; return; }
   list.innerHTML = filtered.map(t=>`
-    <div class="flex items-center gap-3 p-2.5 border border-slate-200 rounded-xl bg-white">
+    <div class="flex items-center gap-3 p-2.5 border border-paper-300 rounded-xl bg-white">
       <span class="w-9 h-9 grid place-items-center rounded-lg bg-amber-100 text-base shrink-0">${t.icon||'📦'}</span>
       <div class="flex-1 min-w-0">
         <div class="font-semibold text-sm truncate">${t.name}</div>
-        <div class="text-[11px] text-slate-500 font-mono">${t.code}</div>
+        <div class="text-[11px] text-paper-500 font-mono">${t.code}</div>
       </div>
-      <button type="button" onclick="addLaundryTypeToOrder('${t.code}')" class="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-xs font-semibold">+ Pakai</button>
+      <button type="button" onclick="addLaundryTypeToOrder('${t.code}')" class="px-3 py-1.5 bg-paper-900 text-white rounded-lg text-xs font-semibold">+ Pakai</button>
     </div>
   `).join('');
 }
@@ -1299,9 +1410,6 @@ function addLaundryTypeToOrder(code){
   if(!t) return;
   createLaundryCard(t.code, t.name, t.icon||'📦');
   closeModal('modalLaundryTypes');
-  // open the laundry panel if collapsed
-  let p = document.getElementById('laundryPanel');
-  if(p && p.classList.contains('hidden')) toggleLaundry();
 }
 function openCreateLaundryTypeModal(){
   document.getElementById('ltName').value='';
@@ -1313,7 +1421,8 @@ async function saveNewLaundryType(){
   let name = (document.getElementById('ltName').value||'').trim();
   let icon = (document.getElementById('ltIcon').value||'').trim() || '📦';
   if(!name){ alert('Isi nama jenis'); return; }
-  let btn = e.target.querySelector('button[type=submit]');
+  let btn = document.getElementById('ltSaveBtn');
+  if(!btn){ alert('Tombol simpan tidak ditemukan'); return; }
   if(btn.disabled) return false;
   btn.disabled = true;
   try{

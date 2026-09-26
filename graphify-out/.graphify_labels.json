@@ -13,6 +13,8 @@
   "11": "Product",
   "12": "Branch",
   "13": "Closure",
+  "14": "DESIGN.md",
+  "15": "CashierShift",
   "16": "54. AI Agent Development Rules",
   "17": "Illuminate\\Support\\ServiceProvider",
   "18": "composer.json",
@@ -21,6 +23,7 @@
   "21": "README.md",
   "22": "require-dev",
   "23": "46. Important Business Rules",
+  "24": "CashTransaction",
   "25": "config",
   "26": "psr-4",
   "27": "TestCase",
@@ -33,6 +36,7 @@
   "34": "EventServiceProvider",
   "35": "sw.js",
   "36": "Handler",
+  "37": "web.php",
   "38": "TrustHosts",
   "39": "AuthServiceProvider",
   "40": "ExampleTest",
@@ -164,5 +168,8 @@
   "166": "channels.php",
   "167": "tailwind.config.js",
   "168": "vite.config.js",
-  "170": "deploy.sh"
+  "169": "Controller",
+  "170": "deploy.sh",
+  "171": "UserFactory",
+  "172": "PosController"
 }

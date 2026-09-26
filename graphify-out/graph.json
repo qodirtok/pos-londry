@@ -208,8 +208,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "authcontroller.php"
     },
     {
@@ -219,8 +219,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller_authcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "authcontroller"
     },
     {
@@ -230,8 +230,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller_authcontroller_showlogin",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".showlogin()"
     },
     {
@@ -241,8 +241,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller_authcontroller_login",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".login()"
     },
     {
@@ -252,8 +252,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller_authcontroller_logout",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".logout()"
     },
     {
@@ -263,8 +263,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller_authcontroller_switchbranch",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".switchbranch()"
     },
     {
@@ -274,8 +274,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "app_http_controllers_authcontroller_authcontroller_switchmerchant",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".switchmerchant()"
     },
     {
@@ -406,8 +406,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": "cashcontroller.php"
     },
     {
@@ -417,8 +417,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": "cashcontroller"
     },
     {
@@ -428,8 +428,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_index",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": ".index()"
     },
     {
@@ -439,8 +439,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_create",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".create()"
     },
     {
@@ -450,8 +450,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_http_controllers_cashcontroller_cashcontroller_store",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": ".store()"
     },
     {
@@ -549,8 +549,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_controller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 169,
+      "community_name": "Controller",
       "norm_label": "controller.php"
     },
     {
@@ -560,8 +560,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_http_controllers_controller_controller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 169,
+      "community_name": "Controller",
       "norm_label": "controller"
     },
     {
@@ -692,8 +692,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_dashboardcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "dashboardcontroller.php"
     },
     {
@@ -703,8 +703,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_http_controllers_dashboardcontroller_dashboardcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 169,
+      "community_name": "Controller",
       "norm_label": "dashboardcontroller"
     },
     {
@@ -714,8 +714,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_http_controllers_dashboardcontroller_dashboardcontroller_index",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 169,
+      "community_name": "Controller",
       "norm_label": ".index()"
     },
     {
@@ -1066,8 +1066,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller",
-      "community": 1,
-      "community_name": "Order",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "poscontroller.php"
     },
     {
@@ -1077,8 +1077,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller",
-      "community": 1,
-      "community_name": "Order",
+      "community": 172,
+      "community_name": "PosController",
       "norm_label": "poscontroller"
     },
     {
@@ -1088,8 +1088,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller_index",
-      "community": 1,
-      "community_name": "Order",
+      "community": 172,
+      "community_name": "PosController",
       "norm_label": ".index()"
     },
     {
@@ -1099,8 +1099,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller_edit",
-      "community": 1,
-      "community_name": "Order",
+      "community": 172,
+      "community_name": "PosController",
       "norm_label": ".edit()"
     },
     {
@@ -1110,8 +1110,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller_store",
-      "community": 1,
-      "community_name": "Order",
+      "community": 172,
+      "community_name": "PosController",
       "norm_label": ".store()"
     },
     {
@@ -1121,8 +1121,8 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "app_http_controllers_poscontroller_poscontroller_update",
-      "community": 1,
-      "community_name": "Order",
+      "community": 172,
+      "community_name": "PosController",
       "norm_label": ".update()"
     },
     {
@@ -1132,8 +1132,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 11,
+      "community_name": "Product",
       "norm_label": "productcontroller.php"
     },
     {
@@ -1176,8 +1176,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_http_controllers_productcontroller_productcontroller_store",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 7,
+      "community_name": "Customer",
       "norm_label": ".store()"
     },
     {
@@ -1297,8 +1297,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "reportcontroller.php"
     },
     {
@@ -1308,8 +1308,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "reportcontroller"
     },
     {
@@ -1319,8 +1319,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller_index",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".index()"
     },
     {
@@ -1330,8 +1330,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller_sales",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".sales()"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller_payments",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".payments()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller_cash",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": ".cash()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller_products",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".products()"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller_customers",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".customers()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "app_http_controllers_reportcontroller_reportcontroller_laundry",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".laundry()"
     },
     {
@@ -1451,8 +1451,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": "shiftcontroller.php"
     },
     {
@@ -1462,8 +1462,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": "shiftcontroller"
     },
     {
@@ -1473,8 +1473,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller_index",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".index()"
     },
     {
@@ -1484,8 +1484,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller_open",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".open()"
     },
     {
@@ -1495,8 +1495,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_http_controllers_shiftcontroller_shiftcontroller_close",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".close()"
     },
     {
@@ -1539,8 +1539,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_http_controllers_usercontroller_usercontroller_create",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".create()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_http_middleware_authenticate",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "authenticate.php"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_http_middleware_authenticate_authenticate",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "authenticate"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_http_middleware_authenticate_authenticate_redirectto",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": ".redirectto()"
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_cashtransaction",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "cashtransaction.php"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": "cashtransaction"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_branch",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": ".branch()"
     },
     {
@@ -2177,8 +2177,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_merchant",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": ".merchant()"
     },
     {
@@ -2188,8 +2188,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_models_cashtransaction_cashtransaction_user",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": ".user()"
     },
     {
@@ -2199,8 +2199,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_cashiershift",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": "cashiershift.php"
     },
     {
@@ -2210,8 +2210,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": "cashiershift"
     },
     {
@@ -2221,8 +2221,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift_branch",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".branch()"
     },
     {
@@ -2232,8 +2232,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift_merchant",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".merchant()"
     },
     {
@@ -2243,8 +2243,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_models_cashiershift_cashiershift_cashier",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".cashier()"
     },
     {
@@ -2254,8 +2254,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_category",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 11,
+      "community_name": "Product",
       "norm_label": "category.php"
     },
     {
@@ -2496,8 +2496,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_order",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "order.php"
     },
     {
@@ -2628,8 +2628,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_orderitem",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "orderitem.php"
     },
     {
@@ -2639,8 +2639,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_orderitem_orderitem",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "orderitem"
     },
     {
@@ -2650,8 +2650,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_orderitem_orderitem_order",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".order()"
     },
     {
@@ -2661,8 +2661,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_orderitem_orderitem_product",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".product()"
     },
     {
@@ -2672,8 +2672,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_payment",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "payment.php"
     },
     {
@@ -2683,8 +2683,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_payment_payment",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "payment"
     },
     {
@@ -2694,8 +2694,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_payment_payment_order",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".order()"
     },
     {
@@ -2705,8 +2705,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_payment_payment_cashier",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".cashier()"
     },
     {
@@ -2738,8 +2738,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_permission",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "permission.php"
     },
     {
@@ -2749,8 +2749,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_permission_permission",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "permission"
     },
     {
@@ -2760,8 +2760,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_models_permission_permission_roles",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".roles()"
     },
     {
@@ -2848,8 +2848,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_productstock",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "productstock.php"
     },
     {
@@ -2859,8 +2859,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_productstock_productstock",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "productstock"
     },
     {
@@ -2870,8 +2870,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_productstock_productstock_product",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".product()"
     },
     {
@@ -2881,8 +2881,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_productstock_productstock_branch",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".branch()"
     },
     {
@@ -2936,8 +2936,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_role",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "role.php"
     },
     {
@@ -2947,8 +2947,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_role_role",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "role"
     },
     {
@@ -2958,8 +2958,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_models_role_role_users",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".users()"
     },
     {
@@ -2969,8 +2969,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_role_role_permissions",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".permissions()"
     },
     {
@@ -3024,8 +3024,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_setting_setting_get",
-      "community": 17,
-      "community_name": "Illuminate\\Support\\ServiceProvider",
+      "community": 171,
+      "community_name": "UserFactory",
       "norm_label": ".get()"
     },
     {
@@ -3035,8 +3035,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_models_stockmovement",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "stockmovement.php"
     },
     {
@@ -3046,8 +3046,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_models_stockmovement_stockmovement",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "stockmovement"
     },
     {
@@ -3057,8 +3057,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_models_stockmovement_stockmovement_product",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".product()"
     },
     {
@@ -3068,8 +3068,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_models_stockmovement_stockmovement_branch",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".branch()"
     },
     {
@@ -3079,8 +3079,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_models_stockmovement_stockmovement_user",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".user()"
     },
     {
@@ -3431,8 +3431,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_services_cashservice",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "cashservice.php"
     },
     {
@@ -3442,8 +3442,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_services_cashservice_cashservice",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": "cashservice"
     },
     {
@@ -3453,8 +3453,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_services_cashservice_cashservice_openshift",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".openshift()"
     },
     {
@@ -3464,8 +3464,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_services_cashservice_cashservice_closeshift",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": ".closeshift()"
     },
     {
@@ -3475,8 +3475,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_services_orderservice",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "orderservice.php"
     },
     {
@@ -3497,8 +3497,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_services_orderservice_orderservice_create",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".create()"
     },
     {
@@ -3508,8 +3508,8 @@
       "source_location": "L163",
       "_origin": "ast",
       "id": "app_services_orderservice_orderservice_updatestatus",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".updatestatus()"
     },
     {
@@ -3519,8 +3519,8 @@
       "source_location": "L188",
       "_origin": "ast",
       "id": "app_services_orderservice_orderservice_updateitems",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".updateitems()"
     },
     {
@@ -3530,8 +3530,8 @@
       "source_location": "L241",
       "_origin": "ast",
       "id": "app_services_orderservice_orderservice_updatefrompos",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".updatefrompos()"
     },
     {
@@ -3541,8 +3541,8 @@
       "source_location": "L382",
       "_origin": "ast",
       "id": "app_services_orderservice_orderservice_cancel",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".cancel()"
     },
     {
@@ -3552,8 +3552,8 @@
       "source_location": "L410",
       "_origin": "ast",
       "id": "app_services_orderservice_orderservice_addpayment",
-      "community": 1,
-      "community_name": "Order",
+      "community": 24,
+      "community_name": "CashTransaction",
       "norm_label": ".addpayment()"
     },
     {
@@ -3607,8 +3607,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_support_auditlogger",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "auditlogger.php"
     },
     {
@@ -3618,8 +3618,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_support_auditlogger_auditlogger",
-      "community": 1,
-      "community_name": "Order",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "auditlogger"
     },
     {
@@ -3640,8 +3640,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_support_numbergenerator",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 7,
+      "community_name": "Customer",
       "norm_label": "numbergenerator.php"
     },
     {
@@ -3651,8 +3651,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 7,
+      "community_name": "Customer",
       "norm_label": "numbergenerator"
     },
     {
@@ -3662,8 +3662,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_ordernumber",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 7,
+      "community_name": "Customer",
       "norm_label": ".ordernumber()"
     },
     {
@@ -3673,8 +3673,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_paymentnumber",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": ".paymentnumber()"
     },
     {
@@ -3684,8 +3684,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_customercode",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 7,
+      "community_name": "Customer",
       "norm_label": ".customercode()"
     },
     {
@@ -3695,8 +3695,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_sku",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 7,
+      "community_name": "Customer",
       "norm_label": ".sku()"
     },
     {
@@ -3706,8 +3706,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_support_numbergenerator_numbergenerator_refundnumber",
-      "community": 13,
-      "community_name": "Closure",
+      "community": 7,
+      "community_name": "Customer",
       "norm_label": ".refundnumber()"
     },
     {
@@ -3739,8 +3739,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_helpers_money",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 15,
+      "community_name": "CashierShift",
       "norm_label": "money()"
     },
     {
@@ -3758,7 +3758,7 @@
       "label": "icon()",
       "file_type": "code",
       "source_file": "app/helpers.php",
-      "source_location": "L19",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "app_helpers_icon",
       "community": 2,
@@ -4399,8 +4399,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "config_auth",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "auth.php"
     },
     {
@@ -4553,8 +4553,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_factories_userfactory",
-      "community": 17,
-      "community_name": "Illuminate\\Support\\ServiceProvider",
+      "community": 171,
+      "community_name": "UserFactory",
       "norm_label": "userfactory.php"
     },
     {
@@ -4564,8 +4564,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "database_factories_userfactory_userfactory",
-      "community": 17,
-      "community_name": "Illuminate\\Support\\ServiceProvider",
+      "community": 171,
+      "community_name": "UserFactory",
       "norm_label": "userfactory"
     },
     {
@@ -4575,8 +4575,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "database_factories_userfactory_userfactory_definition",
-      "community": 17,
-      "community_name": "Illuminate\\Support\\ServiceProvider",
+      "community": 171,
+      "community_name": "UserFactory",
       "norm_label": ".definition()"
     },
     {
@@ -4586,8 +4586,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "database_factories_userfactory_userfactory_unverified",
-      "community": 17,
-      "community_name": "Illuminate\\Support\\ServiceProvider",
+      "community": 171,
+      "community_name": "UserFactory",
       "norm_label": ".unverified()"
     },
     {
@@ -4597,8 +4597,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "static",
-      "community": 17,
-      "community_name": "Illuminate\\Support\\ServiceProvider",
+      "community": 171,
+      "community_name": "UserFactory",
       "norm_label": "static"
     },
     {
@@ -5532,8 +5532,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "catalogseeder.php"
     },
     {
@@ -5543,8 +5543,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder_catalogseeder",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "catalogseeder"
     },
     {
@@ -5554,8 +5554,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "database_seeders_catalogseeder_catalogseeder_run",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5565,8 +5565,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_customerseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "customerseeder.php"
     },
     {
@@ -5576,8 +5576,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "database_seeders_customerseeder_customerseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "customerseeder"
     },
     {
@@ -5587,8 +5587,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "database_seeders_customerseeder_customerseeder_run",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5598,8 +5598,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_databaseseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "databaseseeder.php"
     },
     {
@@ -5609,8 +5609,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "database_seeders_databaseseeder_databaseseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "databaseseeder"
     },
     {
@@ -5620,8 +5620,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "database_seeders_databaseseeder_databaseseeder_run",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5631,8 +5631,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_demoseeder",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "demoseeder.php"
     },
     {
@@ -5642,8 +5642,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "database_seeders_demoseeder_demoseeder",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "demoseeder"
     },
     {
@@ -5653,8 +5653,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "database_seeders_demoseeder_demoseeder_run",
-      "community": 9,
-      "community_name": "User",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5730,8 +5730,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_productionseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "productionseeder.php"
     },
     {
@@ -5741,8 +5741,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "database_seeders_productionseeder_productionseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "productionseeder"
     },
     {
@@ -5752,8 +5752,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "database_seeders_productionseeder_productionseeder_run",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5763,8 +5763,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "rolepermissionseeder.php"
     },
     {
@@ -5774,8 +5774,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder_rolepermissionseeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "rolepermissionseeder"
     },
     {
@@ -5785,8 +5785,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "database_seeders_rolepermissionseeder_rolepermissionseeder_run",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": ".run()"
     },
     {
@@ -5796,8 +5796,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "database_seeders_settingsseeder",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "settingsseeder.php"
     },
     {
@@ -5807,8 +5807,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "database_seeders_settingsseeder_settingsseeder",
-      "community": 2,
-      "community_name": "Illuminate\\Database\\Eloquent\\Model",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "settingsseeder"
     },
     {
@@ -6915,8 +6915,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "routes_web",
-      "community": 1,
-      "community_name": "Order",
+      "community": 37,
+      "community_name": "web.php",
       "norm_label": "web.php"
     },
     {
@@ -6937,8 +6937,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_order",
-      "community": 12,
-      "community_name": "Branch",
+      "community": 2,
+      "community_name": "Illuminate\\Database\\Eloquent\\Model",
       "norm_label": "test_order.php"
     },
     {
@@ -7226,6 +7226,193 @@
       "community": 83,
       "community_name": "CLAUDE.md",
       "norm_label": "graphify"
+    },
+    {
+      "label": "DESIGN.md",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "design",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "design.md"
+    },
+    {
+      "label": "DESIGN.md",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "design_design_md",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "design.md"
+    },
+    {
+      "label": "1. Identitas",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "design_1_identitas",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "1. identitas"
+    },
+    {
+      "label": "2. Palet",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "design_2_palet",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "2. palet"
+    },
+    {
+      "label": "Kenapa warna-warna ini",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "design_kenapa_warna_warna_ini",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "kenapa warna-warna ini"
+    },
+    {
+      "label": "Aturan aksen (penting)",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "design_aturan_aksen_penting",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "aturan aksen (penting)"
+    },
+    {
+      "label": "3. Tipografi",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "design_3_tipografi",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "3. tipografi"
+    },
+    {
+      "label": "4. Bentuk",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "design_4_bentuk",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "4. bentuk"
+    },
+    {
+      "label": "Radius",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "design_radius",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "radius"
+    },
+    {
+      "label": "Garis",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L94",
+      "_origin": "ast",
+      "id": "design_garis",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "garis"
+    },
+    {
+      "label": "Bayangan",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L98",
+      "_origin": "ast",
+      "id": "design_bayangan",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "bayangan"
+    },
+    {
+      "label": "5. Motif Identitas",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L113",
+      "_origin": "ast",
+      "id": "design_5_motif_identitas",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "5. motif identitas"
+    },
+    {
+      "label": "6. Motion",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L131",
+      "_origin": "ast",
+      "id": "design_6_motion",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "6. motion"
+    },
+    {
+      "label": "7. Tiga Dials",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "design_7_tiga_dials",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "7. tiga dials"
+    },
+    {
+      "label": "8. Aturan per layar",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L162",
+      "_origin": "ast",
+      "id": "design_8_aturan_per_layar",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "8. aturan per layar"
+    },
+    {
+      "label": "9. Yang Dilarang",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L174",
+      "_origin": "ast",
+      "id": "design_9_yang_dilarang",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "9. yang dilarang"
+    },
+    {
+      "label": "10. Angka",
+      "file_type": "document",
+      "source_file": "DESIGN.md",
+      "source_location": "L190",
+      "_origin": "ast",
+      "id": "design_10_angka",
+      "community": 14,
+      "community_name": "DESIGN.md",
+      "norm_label": "10. angka"
     },
     {
       "label": "HANDOVER.md",
@@ -7558,10 +7745,32 @@
       "norm_label": "validasi uang & quantity"
     },
     {
+      "label": "Warna & Tipografi \u2014 Baca DESIGN.md DULU",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L417",
+      "_origin": "ast",
+      "id": "handover_warna_tipografi_baca_design_md_dulu",
+      "community": 4,
+      "community_name": "Handover \u2014 Londry POS Laundry (Laravel 10, PHP 8.1)",
+      "norm_label": "warna & tipografi \u2014 baca design.md dulu"
+    },
+    {
+      "label": "UX untuk Kasir Pemula",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L426",
+      "_origin": "ast",
+      "id": "handover_ux_untuk_kasir_pemula",
+      "community": 4,
+      "community_name": "Handover \u2014 Londry POS Laundry (Laravel 10, PHP 8.1)",
+      "norm_label": "ux untuk kasir pemula"
+    },
+    {
       "label": "9) Recent Changes (2026-09-02/03)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L419",
+      "source_location": "L437",
       "_origin": "ast",
       "id": "handover_9_recent_changes_2026_09_02_03",
       "community": 4,
@@ -7569,10 +7778,43 @@
       "norm_label": "9) recent changes (2026-09-02/03)"
     },
     {
+      "label": "2026-09-26 \u2014 Fix 6 bug yang memblokir kasir (audit anti-slop 001)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L439",
+      "_origin": "ast",
+      "id": "handover_2026_09_26_fix_6_bug_yang_memblokir_kasir_audit_anti_slop_001",
+      "community": 4,
+      "community_name": "Handover \u2014 Londry POS Laundry (Laravel 10, PHP 8.1)",
+      "norm_label": "2026-09-26 \u2014 fix 6 bug yang memblokir kasir (audit anti-slop 001)"
+    },
+    {
+      "label": "2026-09-26 \u2014 Redesign visual: indigo \u2192 teal, emoji \u2192 SVG, system font, dashboard baru",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L451",
+      "_origin": "ast",
+      "id": "handover_2026_09_26_redesign_visual_indigo_teal_emoji_svg_system_font_dashboard_baru",
+      "community": 4,
+      "community_name": "Handover \u2014 Londry POS Laundry (Laravel 10, PHP 8.1)",
+      "norm_label": "2026-09-26 \u2014 redesign visual: indigo \u2192 teal, emoji \u2192 svg, system font, dashboard baru"
+    },
+    {
+      "label": "2026-09-26 \u2014 Cart drawer POS dirombak untuk kasir pemula",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L464",
+      "_origin": "ast",
+      "id": "handover_2026_09_26_cart_drawer_pos_dirombak_untuk_kasir_pemula",
+      "community": 4,
+      "community_name": "Handover \u2014 Londry POS Laundry (Laravel 10, PHP 8.1)",
+      "norm_label": "2026-09-26 \u2014 cart drawer pos dirombak untuk kasir pemula"
+    },
+    {
       "label": "2026-09-14 \u2014 Tombol \"Tandai Lunas\" (Paid) di detail order + fix bug \"Sesi anda telah habis\" palsu",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L421",
+      "source_location": "L476",
       "_origin": "ast",
       "id": "handover_2026_09_14_tombol_tandai_lunas_paid_di_detail_order_fix_bug_sesi_anda_telah_habis_palsu",
       "community": 4,
@@ -7583,7 +7825,7 @@
       "label": "2026-09-14 \u2014 Unit test + UI/UX test POS (mobile cart drawer)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L426",
+      "source_location": "L481",
       "_origin": "ast",
       "id": "handover_2026_09_14_unit_test_ui_ux_test_pos_mobile_cart_drawer",
       "community": 4,
@@ -7594,7 +7836,7 @@
       "label": "2026-09-14 \u2014 Mobile cart drawer di POS (responsive mobile mode)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L434",
+      "source_location": "L489",
       "_origin": "ast",
       "id": "handover_2026_09_14_mobile_cart_drawer_di_pos_responsive_mobile_mode",
       "community": 4,
@@ -7605,7 +7847,7 @@
       "label": "2026-09-03 \u2014 Edit item & qty lewat POS (full edit mode)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L441",
+      "source_location": "L496",
       "_origin": "ast",
       "id": "handover_2026_09_03_edit_item_qty_lewat_pos_full_edit_mode",
       "community": 4,
@@ -7616,7 +7858,7 @@
       "label": "2026-09-03 \u2014 Fitur Backup Database (Settings \u2192 Backup Database (Admin))",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L450",
+      "source_location": "L505",
       "_origin": "ast",
       "id": "handover_2026_09_03_fitur_backup_database_settings_backup_database_admin",
       "community": 4,
@@ -7627,7 +7869,7 @@
       "label": "10) Responsive \u2014 Konvensi",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L458",
+      "source_location": "L513",
       "_origin": "ast",
       "id": "handover_10_responsive_konvensi",
       "community": 4,
@@ -7638,7 +7880,7 @@
       "label": "11) File Penting untuk Dibaca Dulu",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L487",
+      "source_location": "L542",
       "_origin": "ast",
       "id": "handover_11_file_penting_untuk_dibaca_dulu",
       "community": 4,
@@ -7649,7 +7891,7 @@
       "label": "12) Troubleshooting",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L504",
+      "source_location": "L562",
       "_origin": "ast",
       "id": "handover_12_troubleshooting",
       "community": 4,
@@ -7660,7 +7902,7 @@
       "label": "13) Deploy (production VPS, nginx + PHP-FPM + Cloudflare)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L530",
+      "source_location": "L588",
       "_origin": "ast",
       "id": "handover_13_deploy_production_vps_nginx_php_fpm_cloudflare",
       "community": 4,
@@ -7671,7 +7913,7 @@
       "label": "Troubleshooting deploy khas (lihat juga \u00a712)",
       "file_type": "document",
       "source_file": "HANDOVER.md",
-      "source_location": "L541",
+      "source_location": "L599",
       "_origin": "ast",
       "id": "handover_troubleshooting_deploy_khas_lihat_juga_12",
       "community": 4,
@@ -7776,6 +8018,281 @@
       "community": 21,
       "community_name": "README.md",
       "norm_label": "license"
+    },
+    {
+      "label": "audit-001-2026-09-26.md",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "audit-001-2026-09-26.md"
+    },
+    {
+      "label": "Anti-slop audit 001",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "anti-slop audit 001"
+    },
+    {
+      "label": "Ringkasan",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_ringkasan",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "ringkasan"
+    },
+    {
+      "label": "HIGH (Hard Gate)",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "high (hard gate)"
+    },
+    {
+      "label": "1. `saveNewLaundryType()` crash: `e is not defined`",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_1_savenewlaundrytype_crash_e_is_not_defined",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "1. `savenewlaundrytype()` crash: `e is not defined`"
+    },
+    {
+      "label": "2. Tekan Enter di form customer baru = data hilang",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_2_tekan_enter_di_form_customer_baru_data_hilang",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "2. tekan enter di form customer baru = data hilang"
+    },
+    {
+      "label": "3. `addLaundryTypeToOrder()` memanggil elemen yang sudah dihapus",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_3_addlaundrytypetoorder_memanggil_elemen_yang_sudah_dihapus",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "3. `addlaundrytypetoorder()` memanggil elemen yang sudah dihapus"
+    },
+    {
+      "label": "4. Fungsi `clearLaundry()` didefinisikan dua kali",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L41",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_4_fungsi_clearlaundry_didefinisikan_dua_kali",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "4. fungsi `clearlaundry()` didefinisikan dua kali"
+    },
+    {
+      "label": "5. Kontras teks gagal WCAG AA di 6 titik",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_5_kontras_teks_gagal_wcag_aa_di_6_titik",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "5. kontras teks gagal wcag aa di 6 titik"
+    },
+    {
+      "label": "6. Flash message dan error validasi tidak pernah terlihat user",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_6_flash_message_dan_error_validasi_tidak_pernah_terlihat_user",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "6. flash message dan error validasi tidak pernah terlihat user"
+    },
+    {
+      "label": "MEDIUM (Purpose-Gate)",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L67",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_medium_purpose_gate",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "medium (purpose-gate)"
+    },
+    {
+      "label": "7. Indigo bukan warna brand, itu warna default",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_7_indigo_bukan_warna_brand_itu_warna_default",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "7. indigo bukan warna brand, itu warna default"
+    },
+    {
+      "label": "8. 38 emoji dipakai sebagai sistem icon, padahal SVG sudah ada",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_8_38_emoji_dipakai_sebagai_sistem_icon_padahal_svg_sudah_ada",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "8. 38 emoji dipakai sebagai sistem icon, padahal svg sudah ada"
+    },
+    {
+      "label": "9. `rounded-2xl` dipakai seragam di semua elemen",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L81",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_9_rounded_2xl_dipakai_seragam_di_semua_elemen",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "9. `rounded-2xl` dipakai seragam di semua elemen"
+    },
+    {
+      "label": "10. Font Inter dipilih tanpa alasan",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L86",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_10_font_inter_dipilih_tanpa_alasan",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "10. font inter dipilih tanpa alasan"
+    },
+    {
+      "label": "11. Dashboard adalah template default, bukan keputusan",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_11_dashboard_adalah_template_default_bukan_keputusan",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "11. dashboard adalah template default, bukan keputusan"
+    },
+    {
+      "label": "LOW (Quality Locks)",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L98",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_low_quality_locks",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "low (quality locks)"
+    },
+    {
+      "label": "12. Em dash di teks UI",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L100",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_12_em_dash_di_teks_ui",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "12. em dash di teks ui"
+    },
+    {
+      "label": "13. Tombol \"Kelola jenis\" pakai `href=\"javascript:void(0)\"`",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L105",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_13_tombol_kelola_jenis_pakai_href_javascript_void_0",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "13. tombol \"kelola jenis\" pakai `href=\"javascript:void(0)\"`"
+    },
+    {
+      "label": "14. SweetAlert masih indigo + radius 16px",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L109",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_14_sweetalert_masih_indigo_radius_16px",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "14. sweetalert masih indigo + radius 16px"
+    },
+    {
+      "label": "15. Empty state tanpa aksi berikutnya",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L113",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_15_empty_state_tanpa_aksi_berikutnya",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "15. empty state tanpa aksi berikutnya"
+    },
+    {
+      "label": "Yang sengaja TIDAK saya tandai",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L119",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_yang_sengaja_tidak_saya_tandai",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "yang sengaja tidak saya tandai"
+    },
+    {
+      "label": "Ringkasan prioritas",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L130",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_ringkasan_prioritas",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "ringkasan prioritas"
+    },
+    {
+      "label": "Catatan prioritas",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L152",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_catatan_prioritas",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "catatan prioritas"
+    },
+    {
+      "label": "Keputusan yang belum diambil",
+      "file_type": "document",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L160",
+      "_origin": "ast",
+      "id": "anti_slop_audit_001_2026_09_26_keputusan_yang_belum_diambil",
+      "community": 12,
+      "community_name": "Branch",
+      "norm_label": "keputusan yang belum diambil"
     },
     {
       "label": "pos-laundry.md",
@@ -9115,8 +9632,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_http_request",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "illuminate\\http\\request"
     },
     {
@@ -9126,8 +9643,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_foundation_auth_access_authorizesrequests",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 169,
+      "community_name": "Controller",
       "norm_label": "illuminate\\foundation\\auth\\access\\authorizesrequests"
     },
     {
@@ -9137,8 +9654,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_foundation_validation_validatesrequests",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 169,
+      "community_name": "Controller",
       "norm_label": "illuminate\\foundation\\validation\\validatesrequests"
     },
     {
@@ -9148,8 +9665,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_routing_controller",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 169,
+      "community_name": "Controller",
       "norm_label": "illuminate\\routing\\controller"
     },
     {
@@ -9170,8 +9687,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_auth_middleware_authenticate",
-      "community": 10,
-      "community_name": "Illuminate\\Http\\Request",
+      "community": 13,
+      "community_name": "Closure",
       "norm_label": "illuminate\\auth\\middleware\\authenticate"
     },
     {
@@ -9412,8 +9929,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_database_eloquent_factories_factory",
-      "community": 17,
-      "community_name": "Illuminate\\Support\\ServiceProvider",
+      "community": 171,
+      "community_name": "UserFactory",
       "norm_label": "illuminate\\database\\eloquent\\factories\\factory"
     },
     {
@@ -9423,8 +9940,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "illuminate_database_seeder",
-      "community": 8,
-      "community_name": "Controller",
+      "community": 0,
+      "community_name": "Merchant",
       "norm_label": "illuminate\\database\\seeder"
     },
     {
@@ -18574,7 +19091,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/helpers.php",
-      "source_location": "L19",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_helpers",
@@ -21199,6 +21716,182 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design",
+      "target": "design_design_md",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L190",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_10_angka",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_1_identitas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_2_palet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_3_tipografi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_4_bentuk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_5_motif_identitas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L131",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_6_motion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L148",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_7_tiga_dials",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_8_aturan_per_layar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L174",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_design_md",
+      "target": "design_9_yang_dilarang",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_2_palet",
+      "target": "design_aturan_aksen_penting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_2_palet",
+      "target": "design_kenapa_warna_warna_ini",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_4_bentuk",
+      "target": "design_bayangan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_4_bentuk",
+      "target": "design_garis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "DESIGN.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "design_4_bentuk",
+      "target": "design_radius",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -21211,7 +21904,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L458",
+      "source_location": "L513",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21222,7 +21915,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L487",
+      "source_location": "L542",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21233,7 +21926,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L504",
+      "source_location": "L562",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21244,7 +21937,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L530",
+      "source_location": "L588",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21343,7 +22036,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L419",
+      "source_location": "L437",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_handover_londry_pos_laundry_laravel_10_php_8_1",
@@ -21563,6 +22256,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
+      "source_location": "L426",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "handover_8_guideline_untuk_penerus",
+      "target": "handover_ux_untuk_kasir_pemula",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
       "source_location": "L414",
       "weight": 1.0,
       "_origin": "ast",
@@ -21574,7 +22278,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L441",
+      "source_location": "L417",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "handover_8_guideline_untuk_penerus",
+      "target": "handover_warna_tipografi_baca_design_md_dulu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L496",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21585,7 +22300,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L450",
+      "source_location": "L505",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21596,7 +22311,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L434",
+      "source_location": "L489",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21607,7 +22322,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L421",
+      "source_location": "L476",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21618,7 +22333,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L426",
+      "source_location": "L481",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_9_recent_changes_2026_09_02_03",
@@ -21629,7 +22344,40 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": "L541",
+      "source_location": "L464",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "handover_9_recent_changes_2026_09_02_03",
+      "target": "handover_2026_09_26_cart_drawer_pos_dirombak_untuk_kasir_pemula",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L439",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "handover_9_recent_changes_2026_09_02_03",
+      "target": "handover_2026_09_26_fix_6_bug_yang_memblokir_kasir_audit_anti_slop_001",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L451",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "handover_9_recent_changes_2026_09_02_03",
+      "target": "handover_2026_09_26_redesign_visual_indigo_teal_emoji_svg_system_font_dashboard_baru",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L599",
       "weight": 1.0,
       "_origin": "ast",
       "source": "handover_13_deploy_production_vps_nginx_php_fpm_cloudflare",
@@ -21722,6 +22470,270 @@
       "_origin": "ast",
       "source": "readme_laravel_sponsors",
       "target": "readme_premium_partners",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26",
+      "target": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L152",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_catatan_prioritas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_keputusan_yang_belum_diambil",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_low_quality_locks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_medium_purpose_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_ringkasan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L130",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_ringkasan_prioritas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_anti_slop_audit_001",
+      "target": "anti_slop_audit_001_2026_09_26_yang_sengaja_tidak_saya_tandai",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "target": "anti_slop_audit_001_2026_09_26_1_savenewlaundrytype_crash_e_is_not_defined",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "target": "anti_slop_audit_001_2026_09_26_2_tekan_enter_di_form_customer_baru_data_hilang",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "target": "anti_slop_audit_001_2026_09_26_3_addlaundrytypetoorder_memanggil_elemen_yang_sudah_dihapus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "target": "anti_slop_audit_001_2026_09_26_4_fungsi_clearlaundry_didefinisikan_dua_kali",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "target": "anti_slop_audit_001_2026_09_26_5_kontras_teks_gagal_wcag_aa_di_6_titik",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_high_hard_gate",
+      "target": "anti_slop_audit_001_2026_09_26_6_flash_message_dan_error_validasi_tidak_pernah_terlihat_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_medium_purpose_gate",
+      "target": "anti_slop_audit_001_2026_09_26_10_font_inter_dipilih_tanpa_alasan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_medium_purpose_gate",
+      "target": "anti_slop_audit_001_2026_09_26_11_dashboard_adalah_template_default_bukan_keputusan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_medium_purpose_gate",
+      "target": "anti_slop_audit_001_2026_09_26_7_indigo_bukan_warna_brand_itu_warna_default",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_medium_purpose_gate",
+      "target": "anti_slop_audit_001_2026_09_26_8_38_emoji_dipakai_sebagai_sistem_icon_padahal_svg_sudah_ada",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_medium_purpose_gate",
+      "target": "anti_slop_audit_001_2026_09_26_9_rounded_2xl_dipakai_seragam_di_semua_elemen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_low_quality_locks",
+      "target": "anti_slop_audit_001_2026_09_26_12_em_dash_di_teks_ui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_low_quality_locks",
+      "target": "anti_slop_audit_001_2026_09_26_13_tombol_kelola_jenis_pakai_href_javascript_void_0",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_low_quality_locks",
+      "target": "anti_slop_audit_001_2026_09_26_14_sweetalert_masih_indigo_radius_16px",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "anti-slop/audit-001-2026-09-26.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "anti_slop_audit_001_2026_09_26_low_quality_locks",
+      "target": "anti_slop_audit_001_2026_09_26_15_empty_state_tanpa_aksi_berikutnya",
       "confidence_score": 1.0
     },
     {
@@ -23013,5 +24025,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6a2ea4f4f93a9e9c43445ce747e6fa38f3358bda"
+  "built_at_commit": "ec3772fd1e6e17754ac9a72f93057fc62b3782ef"
 }
